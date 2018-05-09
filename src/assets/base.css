@@ -1,0 +1,112 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover,
+button:hover {
+  cursor: pointer
+}
+
+ul {
+  list-style: none;
+}
+
+h1,
+h2 {
+  text-align: center;
+}
+
+img {
+  border: none;
+}
+
+html,
+body {
+  background-color: #0C2659;
+}
+
+#app {
+  font: normal 12px "微软雅黑", "Arial", "Verdana", "sans-serif";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #fff;
+}
+
+input,
+button {
+  outline: none;
+}
+
+button {
+  padding: 3px 10px;
+  border-radius: 5px;
+}
+
+header button {
+  background-color: #228E9A;
+  border-radius: 3px;
+  border: 1px solid #84CCDA;
+  color: #fff;
+}
+
+
+/*基本盒子格式，定义为宽度包含边框内边距*/
+
+.box {
+  position: relative;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
+.wrapper-box {
+  position: absolute;
+  top: 80px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+button[type="text"] {
+  background-color: transparent;
+  border: none;
+  color: #409EFF;
+  padding: 0 3px;
+  outline: none;
+}
+
+button[type="text"]:hover {
+  opacity: 0.5;
+}
+
+.good {
+  color: #28A646;
+  font-size: 14px;
+}
+
+.bad {
+  color: #C55C60;
+  font-size: 14px;
+}
+
+.warn {
+  color: #FEE179;
+  font-size: 14px;
+}
+
+
+
+/*去掉百度地图logo*/
+
+.BMap_cpyCtrl {
+  display: none;
+}
+
+.anchorBL {
+  display: none;
+}
