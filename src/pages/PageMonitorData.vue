@@ -13,8 +13,11 @@
         </ul>
       </header>
       <section>
-        <TunnelState :data="tunnelState" v-if="level == 0">
+        <TunnelState :data="currentNode.children" v-if="!currentNode.isLeaf">
         </TunnelState>
+        <template v-else>
+          <WireState v-show="currentPage == 0"></WireState>
+        </template>
       </section>
     </section>
   </div>
@@ -22,34 +25,72 @@
 <script>
 import ZlTree from '../components/ZlTree'
 import TunnelState from '../components/monitordata/TunnelState'
+import WireState from '../components/monitordata/WireState'
+import { MONITOR_TYPES, MONITOR_PARAMS } from '../json/json_base_info'
+import { TUNNELS, WIRES, SECTIONS, MONITOR_DEVICE } from '../json/json_device_info'
 import { DATA_THREE } from '../json/json_monitor_data'
 export default {
-  components: { ZlTree, TunnelState },
+  components: { ZlTree, TunnelState, WireState },
   data() {
     return {
       tabs: ['状态总览', '实时数据', '历史数据'],
       currentPage: 0,
       nav: [],
       level: 0,
-      showTabs: ['状态总览'],
-      tunnelState:[]
+      showTabs: [],
+      currentNode: []
     }
   },
   computed: {},
   mounted() {
-    this.nav = DATA_THREE
+    /*计算左侧树形结构*/
+    TUNNELS.map(tunnel => {
+      let node = {
+        name: tunnel.name,
+        type: 'tunnel',
+        label: tunnel.name_cn,
+        children: []
+      }
+      this.nav.push(node)
+      MONITOR_TYPES.map(monitor_type => {
+        let subnode = {
+          icon: monitor_type.icon,
+          name: monitor_type.name,
+          label: monitor_type.name_cn,
+          type: 'monitorType',
+          children: []
+        }
+        node.children.push(subnode)
+        if (monitor_type.type == 'WIRE_MONITOR') {
+          WIRES.map(wire => {
+            subnode.children.push({
+              name: wire.name,
+              label: wire.name_cn,
+              type: 'wire'
+            })
+          })
+        } else {
+          SECTIONS.map(section => {
+            subnode.children.push({
+              name: section.name,
+              label: section.name_cn,
+              type: 'section'
+            })
+          })
+        }
+      })
+    })
+    this.showTabs = [this.tabs[0]]
+    this.currentNode = this.nav[0]
   },
   methods: {
     onNodeClick(item) {
-      console.log(item)
-      this.level = item.level
+      this.currentPage = 0
+      this.currentNode = item
       if (item.isLeaf) {
-        this.showTabs = this.tabs.filter((tab, index) => index > 0)
+        this.showTabs = this.tabs
       } else {
         this.showTabs = [this.tabs[0]]
-      }
-      if(this.level == 0){
-        this.tunnelState = item.children
       }
     }
   }

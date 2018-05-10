@@ -2,7 +2,7 @@
   <section>
     <div v-for="item in data" class="content-box">
       <div>
-        <i class="iconfont" :class="item.icon"></i>
+        <i class="iconfont" :class="item.icon" v-if="item.icon"></i>
         <span>{{item.label}}</span>
       </div>
       <ul>
@@ -35,7 +35,7 @@ section {
   background-color: #38648D;
   margin-bottom: 5px;
   margin-right: 5px;
-  width: 300px;
+  width: 280px;
   height: 80px;
   padding-bottom: 10px;
   border-radius: 5px;
@@ -44,9 +44,10 @@ section {
 }
 
 .content-box>div {
-  width: 180px;
+  width: 160px;
   display: flex;
   align-items: center;
+  justify-content: flex-start; 
 }
 
 .content-box>div i {
