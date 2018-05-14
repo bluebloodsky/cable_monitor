@@ -20,7 +20,7 @@ export default {
     this.chart = echarts.init(this.$refs['wrapper'])
     this.option = {
       tooltip: {
-        formatter: "{a} <br/>{b} : {c}%"
+        formatter: "{c}"
       },
       toolbox: {
         feature: {
@@ -29,10 +29,10 @@ export default {
         }
       },
       series: [{
-        name: '业务指标',
+        name: this.param.name_cn,
         type: 'gauge',
-        detail: { formatter: '{value}%' },
-        data: [{ value: 50, name: '完成率' }]
+        detail: { formatter: '{value}' },
+        data: [{ value: 50 }]
       }]
     }
     this.chart.setOption(this.option)
@@ -42,8 +42,12 @@ export default {
 </script>
 <style scoped>
 div {
-  width: 100%;
+  width: 200px;
   height: 200px;
+}
+
+section {
+  text-align: center;
 }
 
 </style>

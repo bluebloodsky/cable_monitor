@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="wrapper">
     <div class="content-box" v-for="device in devices">
       <header>
         {{device.name_cn}}
@@ -62,7 +62,7 @@ export default {
 
 </script>
 <style scoped>
-section {
+.wrapper {
   padding-left: 20px;
   display: flex;
   justify-content: flex-start;
@@ -76,7 +76,6 @@ section {
   background-color: #38648D;
   margin-bottom: 5px;
   margin-right: 5px;
-  width: 230px;
   padding-bottom: 10px;
   border-radius: 5px;
 }
@@ -93,21 +92,6 @@ section {
   display: block;
   padding: 5px;
   font-size: 14px;
+  float: left;
 }
-
-.content-box li span:first-child {
-  color: #ccc;
-  display: inline-block;
-  width: 60%;
-  text-align: right;
-}
-
-.content-box li span:last-child {
-  color: #90DFE4;
-}
-
-.content-box li strong {
-  font-size: 18px;
-}
-
 </style>
