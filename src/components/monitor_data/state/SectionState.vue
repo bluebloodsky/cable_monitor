@@ -1,21 +1,12 @@
 <template>
   <section>
-    <div v-for="i in 3" class="state-box">
-      <ul>
-        <li v-for="i in 6">
-          <span>{{i}}号防区</span>
-          <a v-for="i in 4" href="#">
-            <i class="iconfont icon-circle good"></i>
-          </a>
-        </li>
-      </ul>
-    </div>
+    <img :src="node.img_url">
   </section>
 </template>
 <script>
 export default {
   props: {
-    data: Array
+    node: Object
   }
 }
 
@@ -71,6 +62,7 @@ section {
 .state-box:nth-child(3n) {
   margin-bottom: 100px;
 }
+
 
 
 

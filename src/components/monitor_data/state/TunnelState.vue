@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div v-for="item in data" class="content-box">
+    <div v-for="item in node.children" class="content-box">
       <div>
         <i class="iconfont" :class="item.icon" v-if="item.icon"></i>
         <span>{{item.label}}</span>
@@ -15,7 +15,7 @@
 <script>
 export default {
   props: {
-    data: Array
+    node: Object
   }
 }
 
@@ -47,7 +47,7 @@ section {
   width: 160px;
   display: flex;
   align-items: center;
-  justify-content: flex-start; 
+  justify-content: flex-start;
 }
 
 .content-box>div i {
@@ -57,7 +57,6 @@ section {
 .content-box>ul {
   width: 100px;
   padding: 10px 0;
-
 }
 
 .content-box li {

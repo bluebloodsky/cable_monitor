@@ -13,10 +13,23 @@
         </ul>
       </header>
       <section>
-        <TunnelState :data="currentNode.children" v-if="!currentNode.isLeaf">
+        <CameraState :node="currentNode" v-if="currentNode.type == 'CAMR_MONITOR'">
+        </CameraState>
+        <TunnelState :node="currentNode" v-else-if="!currentNode.isLeaf">
         </TunnelState>
-        <template v-else>
+        <template v-else-if="currentNode.type == 'GIL'">
+          <GILState :node="currentNode" v-show="currentPage == 0"></GILState>
+          <TxtRealData :node="currentNode" v-show="currentPage == 1"></TxtRealData>
+        </template>
+        <template v-else-if="currentNode.type == 'WIRE'">
           <WireState v-show="currentPage == 0"></WireState>
+          <GaugeRealData :node="currentNode" v-show="currentPage == 1" v-if="currentNode.monitor_type_name == 'SPDC'">
+          </GaugeRealData>
+          <TxtRealData :node="currentNode" v-show="currentPage == 1" v-else>
+          </TxtRealData>
+        </template>
+        <template v-else-if="currentNode.type == 'SECTION'">
+          <SectionState :node="currentNode" v-show="currentPage == 0"></SectionState>
         </template>
       </section>
     </section>
@@ -24,32 +37,47 @@
 </template>
 <script>
 import ZlTree from '../components/ZlTree'
-import TunnelState from '../components/monitordata/TunnelState'
-import WireState from '../components/monitordata/WireState'
+import TunnelState from '../components/monitor_data/state/TunnelState'
+import GILState from '../components/monitor_data/state/GILState'
+import WireState from '../components/monitor_data/state/WireState'
+import SectionState from '../components/monitor_data/state/SectionState'
+import CameraState from '../components/monitor_data/state/CameraState'
+import TxtRealData from '../components/monitor_data/real_data/TxtRealData'
+import GaugeRealData from '../components/monitor_data/real_data/GaugeRealData'
 import { MONITOR_TYPES, MONITOR_PARAMS } from '../json/json_base_info'
-import { TUNNELS, WIRES, SECTIONS, MONITOR_DEVICE } from '../json/json_device_info'
+import { TUNNELS, WIRES, SECTIONS, MONITOR_DEVICES, MONITOR_CAMERAS } from '../json/json_device_info'
 import { DATA_THREE } from '../json/json_monitor_data'
 export default {
-  components: { ZlTree, TunnelState, WireState },
+  components: { ZlTree, TunnelState, GILState, WireState, SectionState, CameraState, TxtRealData, GaugeRealData },
   data() {
     return {
       tabs: ['状态总览', '实时数据', '历史数据'],
       currentPage: 0,
       nav: [],
-      level: 0,
-      showTabs: [],
-      currentNode: []
+      currentNode: {}
     }
   },
-  computed: {},
+  computed: {
+    showTabs() {
+      if (this.currentNode.isLeaf) {
+        return this.tabs
+      } else {
+        return [this.tabs[0]]
+      }
+    }
+  },
   mounted() {
     /*计算左侧树形结构*/
-    TUNNELS.map(tunnel => {
+    TUNNELS.map((tunnel, index) => {
       let node = {
         name: tunnel.name,
         type: 'tunnel',
         label: tunnel.name_cn,
         children: []
+      }
+      if (index == 0) {
+        node.defaultSelected = true
+        this.currentNode = node
       }
       this.nav.push(node)
       MONITOR_TYPES.map(monitor_type => {
@@ -57,41 +85,60 @@ export default {
           icon: monitor_type.icon,
           name: monitor_type.name,
           label: monitor_type.name_cn,
-          type: 'monitorType',
+          type: monitor_type.type,
           children: []
         }
-        node.children.push(subnode)
         if (monitor_type.type == 'WIRE_MONITOR') {
           WIRES.map(wire => {
-            subnode.children.push({
-              name: wire.name,
-              label: wire.name_cn,
-              type: 'wire'
-            })
+            if (wire.type == "WIRE") {
+              subnode.children.push({
+                name: wire.name,
+                label: wire.name_cn,
+                type: wire.type,
+                monitor_type_name: monitor_type.name
+              })
+            }
           })
-        } else {
+        } else if (monitor_type.type == 'GIL_MONITOR') {
+          WIRES.map(wire => {
+            if (wire.type == "GIL") {
+              subnode.children.push({
+                name: wire.name,
+                label: wire.name_cn,
+                type: wire.type,
+                monitor_type_name: monitor_type.name
+              })
+            }
+          })
+        } else if (monitor_type.type == 'SECTION_MONITOR') {
           SECTIONS.map(section => {
             subnode.children.push({
               name: section.name,
               label: section.name_cn,
-              type: 'section'
+              type: 'SECTION',
+              img_url: section.img_url
+            })
+          })
+        } else if (monitor_type.type == 'CAMR_MONITOR') {
+          MONITOR_CAMERAS.map(camera => {
+            subnode.children.push({
+              name: camera.name,
+              label: camera.name_cn,
+              type: 'CAMERA',
+              location: camera.location
             })
           })
         }
+        if (subnode.children && subnode.children.length > 0) {
+          node.children.push(subnode)
+        }
       })
     })
-    this.showTabs = [this.tabs[0]]
-    this.currentNode = this.nav[0]
   },
   methods: {
     onNodeClick(item) {
       this.currentPage = 0
       this.currentNode = item
-      if (item.isLeaf) {
-        this.showTabs = this.tabs
-      } else {
-        this.showTabs = [this.tabs[0]]
-      }
     }
   }
 
