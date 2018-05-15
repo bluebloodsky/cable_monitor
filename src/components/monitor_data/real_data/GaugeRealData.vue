@@ -45,6 +45,7 @@ export default {
               name: param.name,
               name_cn: param.name_cn,
               unit: param.unit,
+              show_type: param.show_type,
               val: '/ '
             }
             if (device_data && device_data[param.name]) {

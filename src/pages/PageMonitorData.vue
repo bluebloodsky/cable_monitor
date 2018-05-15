@@ -23,10 +23,8 @@
         </template>
         <template v-else-if="currentNode.type == 'WIRE'">
           <WireState v-show="currentPage == 0"></WireState>
-          <GaugeRealData :node="currentNode" v-show="currentPage == 1" v-if="currentNode.monitor_type_name == 'SPDC'">
+          <GaugeRealData :node="currentNode" v-show="currentPage == 1">
           </GaugeRealData>
-          <TxtRealData :node="currentNode" v-show="currentPage == 1" v-else>
-          </TxtRealData>
         </template>
         <template v-else-if="currentNode.type == 'SECTION'">
           <SectionState :node="currentNode" v-show="currentPage == 0"></SectionState>
