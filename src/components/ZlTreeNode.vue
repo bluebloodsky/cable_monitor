@@ -1,6 +1,6 @@
 <template>
   <ul>
-    <li v-for="item in data">
+    <li v-for="item in data" :key="item.id">
       <a @click="onNodeClick(item)" :class="{selected:item==currentNode}">
         <button type='text' @click.stop="onExpandChage(item)">
           <i class="iconfont" :class="item.children?item.expand?'icon-nodeexpand':'icon-nodecollapse':'icon-document'"></i>

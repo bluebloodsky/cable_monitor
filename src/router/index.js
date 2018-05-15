@@ -4,6 +4,7 @@ import PageHome from '../pages/PageHome'
 import PageNotFind from '../pages/PageNotFind'
 import PageDeskTop from '../pages/PageDeskTop'
 import PageMonitorData from '../pages/PageMonitorData'
+import PageConfig from '../pages/PageConfig'
 Vue.use(Router)
 
 const router = new Router({
@@ -24,6 +25,9 @@ const router = new Router({
     }, {
       path: 'data',
       component: PageMonitorData
+    }, {
+      path: 'config',
+      component: PageConfig
     }]
   }]
 })
