@@ -1,6 +1,6 @@
 <template>
   <section>
-    <img :src="child.location" @dblclick="fullScreen" v-for="child in data.children">
+    <img :src="child.location" @dblclick="fullScreen" v-for="child in node.children">
   </section>
 </template>
 <script>
@@ -23,14 +23,16 @@ export default {
 section {
   display: flex;
   justify-content: space-around;
-  align-items: center;
   flex-wrap: wrap;
+  align-content: flex-start;
 }
 
 img {
-  height: calc(50% - 5px);
   width: calc(50% - 5px);
+  height: 400px;
+  margin-bottom: 5px;
 }
+
 
 img:hover {
   cursor: pointer;

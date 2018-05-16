@@ -75,7 +75,6 @@ header button {
 button[type="text"] {
   background-color: transparent;
   border: none;
-  color: #409EFF;
   padding: 0 3px;
   outline: none;
 }
@@ -99,7 +98,17 @@ button[type="text"]:hover {
   font-size: 14px;
 }
 
+.right-btn {
+ position: absolute;
+ right: 5px;
+ top: 0;
+ bottom: 0;
+ left: auto;
+}
 
+.right-btn .iconfont{
+  font-size: 22px;
+}
 
 /*去掉百度地图logo*/
 

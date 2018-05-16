@@ -51,7 +51,7 @@ export const MONITOR_PARAMS = [{
   name: 'AppPaDsch',
   name_cn: '视在局放放电量',
   unit: 'pC',
-  show_type:'Linear',
+  show_type:'Radial',
   monitor_type: 'SPDC'
 }, {
   name: 'TotCurrent',
@@ -86,7 +86,7 @@ export const MONITOR_PARAMS = [{
 }, {
   name: 'waterLevel',
   name_cn: '水位',
-  unit: '%',
+  unit: 'mm',
   show_type:'Radial',
   monitor_type: 'ENVR'
 }]

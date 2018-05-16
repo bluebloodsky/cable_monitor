@@ -119,6 +119,13 @@ export const MONITOR_DEVICES = [{
   section: 'fangqu2',
   phase: 'A相'
 }, {
+  name: 'wd1',
+  name_cn: '光纤测温监测点1',
+  monitor_type: 'STMP',
+  wire: 'xiafeng3',
+  section: 'fangqu1',
+  phase: 'A相'
+}, {
   name: 'hj1',
   name_cn: '环境监测点1',
   monitor_type: 'ENVR',

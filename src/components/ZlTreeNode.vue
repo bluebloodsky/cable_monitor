@@ -1,13 +1,13 @@
 <template>
   <ul>
-    <li v-for="item in data" :key="item.id">
-      <a @click="onNodeClick(item)" :class="{selected:item==currentNode}">
-        <button type='text' @click.stop="onExpandChage(item)">
-          <i class="iconfont" :class="item.children?item.expand?'icon-nodeexpand':'icon-nodecollapse':'icon-document'"></i>
+    <li v-for="node in data">
+      <a @click="onNodeClick(node)" :class="{selected:node==currentNode}">
+        <button type='text' @click.stop="onExpandChage(node)">
+          <i class="iconfont" :class="node.children?node.expand?'icon-nodeexpand':'icon-nodecollapse':'icon-document'"></i>
         </button>
-        <span>{{item.label}}</span>
+        <span>{{node.label}}</span>
       </a>
-      <ZlTreeNode :data="item.children" :currentNode="currentNode" @node-click="onNodeClick" v-if="item.children&&item.expand"></ZlTreeNode>
+      <ZlTreeNode :data="node.children" :currentNode="currentNode" @node-click="onNodeClick" v-if="node.children&&node.expand"></ZlTreeNode>
     </li>
   </ul>
 </template>
@@ -22,16 +22,16 @@ export default {
     currentNode: Object
   },
   methods: {
-    onNodeClick(item) {
-      if (item.children && !item.clickable) {
-        item.expand = item.expand ? false : true
+    onNodeClick(node) {
+      if (node.children && !node.clickable) {
+        node.expand = node.expand ? false : true
       } else {
-        this.$emit('node-click', item)
+        this.$emit('node-click', node)
       }
     },
-    onExpandChage(item){
-      if (item.children){
-        item.expand = item.expand ? false : true
+    onExpandChage(node) {
+      if (node.children) {
+        node.expand = node.expand ? false : true
       }
     }
   }

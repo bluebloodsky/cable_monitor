@@ -10,7 +10,8 @@ export default {
   components: { ZlTreeNode },
   data() {
     return {
-      currentNode: null
+      currentNode: null,
+      nodeData: []
     }
   },
   props: {
@@ -19,12 +20,7 @@ export default {
     parentClickable: Boolean
   },
   mounted() {
-
-  },
-  computed: {
-    nodeData() {
-      return this.data.map(child => this.calData(child, 0))
-    }
+    this.nodeData = this.data.map(child => this.calData(child, 0))
   },
   methods: {
     calData(node, level) {
@@ -39,7 +35,7 @@ export default {
       if (node.children) {
         result['expand'] = this.parentClickable || level == 0 || this.defaultExpandAll ? true : false
         result['children'] = node.children.map(child => this.calData(child, level + 1))
-        result['clickable'] = true
+        result['clickable'] = this.parentClickable ? true : false
       } else {
         result['isLeaf'] = true
       }
@@ -51,6 +47,11 @@ export default {
     onNodeClick(item) {
       this.currentNode = item
       this.$emit('node-click', item)
+    }
+  },
+  watch: {
+    data(newVal) {
+      this.nodeData = newVal.map(child => this.calData(child, 0))
     }
   }
 }

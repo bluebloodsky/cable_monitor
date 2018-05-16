@@ -28,6 +28,7 @@
         </template>
         <template v-else-if="currentNode.type == 'SECTION'">
           <SectionState :node="currentNode" v-show="currentPage == 0"></SectionState>
+          <GaugeRealData :node="currentNode" v-show="currentPage == 1"></GaugeRealData>
         </template>
       </section>
     </section>
@@ -114,6 +115,7 @@ export default {
               name: section.name,
               label: section.name_cn,
               type: 'SECTION',
+              monitor_type_name: monitor_type.name,
               img_url: section.img_url
             })
           })
@@ -135,7 +137,9 @@ export default {
   },
   methods: {
     onNodeClick(item) {
-      this.currentPage = 0
+      if (!this.currentNode.isLeaf) {
+        this.currentPage = 0
+      }
       this.currentNode = item
     }
   }

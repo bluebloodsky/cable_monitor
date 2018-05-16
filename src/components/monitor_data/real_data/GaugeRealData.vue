@@ -7,7 +7,8 @@
       <div>
         <ul>
           <li v-for="param in device.params">
-            <GaugeData :param="param"></GaugeData>
+            <LinearGauge :param="param" v-if="param.show_type=='Linear'"></LinearGauge>
+            <RadialGauge :param="param" v-else></RadialGauge>
           </li>
         </ul>
       </div>
@@ -15,11 +16,12 @@
   </section>
 </template>
 <script>
-import GaugeData from '@/components/GaugeData'
+import LinearGauge from "@/components/LinearGauge";
+import RadialGauge from "@/components/RadialGauge";
 import { MONITOR_DEVICES } from '../../../json/json_device_info'
 import { MONITOR_PARAMS } from '../../../json/json_base_info'
-export default {
-  components: { GaugeData },
+export default {  
+  components: { LinearGauge, RadialGauge },
   props: {
     node: Object
   },
@@ -35,7 +37,7 @@ export default {
       let l_params = MONITOR_PARAMS.filter(param => param.monitor_type == this.node.monitor_type_name)
       /*获取每个该线路该监测类型设备实时数据*/
       MONITOR_DEVICES.map(device => {
-        if (device.wire == this.node.name && device.monitor_type == this.node.monitor_type_name) {
+        if (this.node.name == (device.wire ? device.wire : device.section) && device.monitor_type == this.node.monitor_type_name) {
           l_devices.push(device)
           let device_data = this.currentData.filter(adata => adata.device_name == device.name)
           device_data = device_data && device_data[0] ? device_data[0] : null
@@ -80,19 +82,27 @@ export default {
   padding-bottom: 10px;
   border-radius: 5px;
 }
-
-
 .content-box>header {
   position: relative;
   text-align: center;
   height: 30px;
   line-height: 30px;
+  padding: 10px;
 }
 
+.content-box ul{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
 .content-box li {
   display: block;
   padding: 5px;
   font-size: 14px;
   float: left;
+}
+
+p{
+  text-align: center;
 }
 </style>
