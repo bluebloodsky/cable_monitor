@@ -13,50 +13,38 @@
         </div>
       </header>
       <div>
-        <el-table border :data="testItems">
-          <el-table-column align="center" :prop="item.name" :label="item.caption" v-for="item in fields" :formatter="cellFormatter">
-          </el-table-column>
-          <el-table-column label="操作" align="center">
+        <ZlTable>
+          <ZlTableColumn v-for="field in fields" :label="field.caption"></ZlTableColumn>
+          <ZlTableColumn labe="操作">
             <template scope="scope">
               <button @click="editRow(scope.row)" type="text"><i class="iconfont icon-edit"></i>
               </button>
               <button @click="delRow(scope.row)" type="text"><i class="iconfont icon-trash"></i>
               </button>
             </template>
-          </el-table-column>
-        </el-table>
+          </ZlTableColumn>
+        </ZlTable>
       </div>
     </section>
   </div>
 </template>
 <script>
 import ZlTree from '../components/ZlTree'
+import ZlTable from '../components/ZlTable'
+import ZlTableColumn from '../components/ZlTableColumn'
+import { NAV_CONFIG_TREE, MONITOR_TYPES_FIELDS } from '@/shared/constant'
 export default {
   components: {
-    ZlTree
+    ZlTree,
+    ZlTable,
+    ZlTableColumn
   },
   data() {
     return {
-      nav: [{
-        label: '基本信息配置',
-        children: [{
-          label: '监测类型配置'
-        }, {
-          label: '监测参数配置'
-        }]
-      }, {
-        label: '设备信息配置',
-        children: [{
-          label: '电缆通道信息配置'
-        }, {
-          label: '电缆线路信息配置'
-        }, {
-          label: '监测设备配置'
-        }]
-      }],
+      nav: NAV_CONFIG_TREE,
       testItems: [],
       flg_showRightBox: false,
-      fields: []
+      fields: MONITOR_TYPES_FIELDS
     }
   },
   methods: {
@@ -77,11 +65,11 @@ export default {
     delRow(row) {
       remove(this.testItems, row)
     },
-    add(){
+    add() {
 
     },
-    submit(){
-      
+    submit() {
+
     }
   }
 }
@@ -112,7 +100,18 @@ export default {
 .main-box {
   position: absolute;
   left: 252px;
-  right: 0;
+  right: 0
+}
+
+.main-box>div {
+  background-color: #D0DEE9;
+  position: absolute;
+  top: 38px;
+  bottom: 2px;
+  left: 2px;
+  right: 2px;
+  border-radius: 2px;
+  padding: 20px;
 }
 
 .main-box>header,

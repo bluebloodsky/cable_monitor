@@ -137,7 +137,7 @@ export default {
   },
   methods: {
     onNodeClick(item) {
-      if (!this.currentNode.isLeaf) {
+      if (!item.isLeaf) {
         this.currentPage = 0
       }
       this.currentNode = item
