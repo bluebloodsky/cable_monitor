@@ -45,7 +45,7 @@ import TxtRealData from '../components/monitor_data/real_data/TxtRealData'
 import GaugeRealData from '../components/monitor_data/real_data/GaugeRealData'
 import { MONITOR_TYPES, MONITOR_PARAMS } from '../json/json_base_info'
 import { TUNNELS, WIRES, SECTIONS, MONITOR_DEVICES, MONITOR_CAMERAS } from '../json/json_device_info'
-import { DATA_THREE } from '../json/json_monitor_data'
+
 export default {
   components: { ZlTree, TunnelState, GILState, WireState, SectionState, CameraState, TxtRealData, GaugeRealData },
   data() {

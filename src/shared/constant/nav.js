@@ -27,17 +27,44 @@ export const NAV_MENUS = [{
 export const NAV_CONFIG_TREE = [{
   label: '基本信息配置',
   children: [{
-    label: '监测类型配置'
+    name: 'MONITOR_TYPES',
+    label: '监测类型信息',
+    defaultSelected: true
   }, {
-    label: '监测参数配置'
+    name: 'MONITOR_PARAMS',
+    label: '监测参数信息'
   }]
 }, {
   label: '设备信息配置',
   children: [{
-    label: '电缆通道信息配置'
+    name: 'TUNNELS',
+    label: '隧道信息'
   }, {
-    label: '电缆线路信息配置'
+    name: 'SECTIONS',
+    label: '防区信息'
   }, {
-    label: '监测设备配置'
+    name: 'WIRES',
+    label: '线缆信息'
+  }, {
+    name: 'MONITOR_DEVICES',
+    label: '监测设备信息'
+  }, {
+    name: 'MONITOR_CAMERAS',
+    label: '摄像头信息'
+  }]
+}, {
+  label: '布局配置',
+  children: [{
+    name: 'WIRE_MONITOR_POSITION',
+    label: '线路监测设备布局'
+  }, {
+    name: 'SECTION_ENVR_POSITION',
+    label: '防区环境监测设备布局'
+  }, {
+    name: 'SECTION__POSITION',
+    label: '防区安防设备布局'
+  }, {
+    name: 'CAMERA_LOCATION',
+    label: '摄像头布局'
   }]
 }]

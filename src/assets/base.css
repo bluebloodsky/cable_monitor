@@ -80,22 +80,23 @@ button[type="text"] {
 }
 
 button[type="text"]:hover {
-  opacity: 0.8;
+  opacity: 0.7;
 }
 
 .good {
   color: #28A646;
-  font-size: 14px;
 }
 
 .bad {
   color: #C55C60;
-  font-size: 14px;
 }
 
 .warn {
   color: #FEE179;
-  font-size: 14px;
+}
+
+.unkown {
+  color: #CCCCCC;
 }
 
 .right-btn {

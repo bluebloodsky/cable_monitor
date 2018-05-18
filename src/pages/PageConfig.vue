@@ -6,23 +6,15 @@
     </section>
     <section class="box main-box">
       <header>
-        <span>列表</span>
+        <span>{{currentNode.label}}</span>
         <div class="right-btn">
           <button type="text" @click="add"><i class="iconfont icon-add"></i></button>
           <button type="text" @click="submit"><i class="iconfont icon-right"></i></button>
         </div>
       </header>
       <div>
-        <ZlTable>
-          <ZlTableColumn v-for="field in fields" :label="field.caption"></ZlTableColumn>
-          <ZlTableColumn labe="操作">
-            <template scope="scope">
-              <button @click="editRow(scope.row)" type="text"><i class="iconfont icon-edit"></i>
-              </button>
-              <button @click="delRow(scope.row)" type="text"><i class="iconfont icon-trash"></i>
-              </button>
-            </template>
-          </ZlTableColumn>
+        <WireDevicePosition v-if="currentNode.name=='WIRE_MONITOR_POSITION'"></WireDevicePosition>
+        <ZlTable :fields="fields" :data="data" v-else>
         </ZlTable>
       </div>
     </section>
@@ -31,25 +23,47 @@
 <script>
 import ZlTree from '../components/ZlTree'
 import ZlTable from '../components/ZlTable'
-import ZlTableColumn from '../components/ZlTableColumn'
-import { NAV_CONFIG_TREE, MONITOR_TYPES_FIELDS } from '@/shared/constant'
+import WireDevicePosition from '../components/config/WireDevicePosition'
+import { NAV_CONFIG_TREE, FIELDS } from '@/shared/constant'
+import { MONITOR_TYPES, MONITOR_PARAMS } from '../json/json_base_info'
+import { TUNNELS, WIRES, SECTIONS, MONITOR_DEVICES, MONITOR_CAMERAS } from '../json/json_device_info'
+
 export default {
   components: {
     ZlTree,
     ZlTable,
-    ZlTableColumn
+    WireDevicePosition
   },
   data() {
     return {
       nav: NAV_CONFIG_TREE,
       testItems: [],
       flg_showRightBox: false,
-      fields: MONITOR_TYPES_FIELDS
+      MONITOR_TYPES: MONITOR_TYPES,
+      MONITOR_PARAMS: MONITOR_PARAMS,
+      TUNNELS: TUNNELS,
+      WIRES: WIRES,
+      SECTIONS: SECTIONS,
+      MONITOR_DEVICES: MONITOR_DEVICES,
+      MONITOR_CAMERAS: MONITOR_CAMERAS,
+      FIELDS: FIELDS,
+      currentNode: {}
+    }
+  },
+  mounted() {
+    this.currentNode = NAV_CONFIG_TREE[0].children[0]
+  },
+  computed: {
+    fields() {
+      return this.currentNode.name ? this['FIELDS'][this.currentNode.name + "_FIELDS"] : []
+    },
+    data() {
+      return this.currentNode.name ? this[this.currentNode.name] : []
     }
   },
   methods: {
     onNodeClick(node) {
-
+      this.currentNode = node
     },
     cellFormatter(row, column, cellValue) {
       if (Array.isArray(cellValue)) {
@@ -111,7 +125,7 @@ export default {
   left: 2px;
   right: 2px;
   border-radius: 2px;
-  padding: 20px;
+  /*padding: 20px;*/
 }
 
 .main-box>header,

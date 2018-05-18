@@ -4,11 +4,8 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import Date from './shared/extend'
-import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
 
 Vue.config.productionTip = true
-Vue.use(ElementUI)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
