@@ -159,23 +159,31 @@ export const MONITOR_CAMERAS = [{
   name_cn: '1#防区摄像头1',
   monitor_type: 'CAMR',
   section: 'fangqu1',
-  location: 'http://61.83.161.2:10000/mjpeg.cgi?channel=1&user=guest&password=guest&time=1524039431169'
+  location: 'http://61.83.161.2:10000/mjpeg.cgi?channel=1&user=guest&password=guest&time=1524039431169',
+  positionX: 10,
+  positionY: 50
 }, {
   name: 'sp2',
   name_cn: '1#防区摄像头2',
   monitor_type: 'CAMR',
   section: 'fangqu1',
-  location: 'http://61.83.161.2:10000/mjpeg.cgi?channel=1&user=guest&password=guest&time=1524039431169'
+  location: 'http://61.83.161.2:10000/mjpeg.cgi?channel=1&user=guest&password=guest&time=1524039431169',
+  positionX: 10,
+  positionY: 50
 }, {
   name: 'sp3',
   name_cn: '1#防区摄像头3',
   monitor_type: 'CAMR',
   section: 'fangqu1',
-  location: 'http://61.83.161.2:10000/mjpeg.cgi?channel=1&user=guest&password=guest&time=1524039431169'
+  location: 'http://61.83.161.2:10000/mjpeg.cgi?channel=1&user=guest&password=guest&time=1524039431169',
+  positionX: 10,
+  positionY: 50
 }, {
   name: 'sp4',
   name_cn: '1#防区摄像头4',
   monitor_type: 'CAMR',
   section: 'fangqu1',
-  location: 'http://61.83.161.2:10000/mjpeg.cgi?channel=1&user=guest&password=guest&time=1524039431169'
+  location: 'http://61.83.161.2:10000/mjpeg.cgi?channel=1&user=guest&password=guest&time=1524039431169',
+  positionX: 10,
+  positionY: 50
 }]

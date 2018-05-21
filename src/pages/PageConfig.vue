@@ -14,6 +14,7 @@
       </header>
       <div>
         <WireDevicePosition v-if="currentNode.name=='WIRE_MONITOR_POSITION'"></WireDevicePosition>
+        <CameraPosition v-else-if="currentNode.name=='CAMERA_LOCATION'"></CameraPosition>
         <ZlTable :fields="fields" :data="data" v-else>
         </ZlTable>
       </div>
@@ -24,6 +25,7 @@
 import ZlTree from '../components/ZlTree'
 import ZlTable from '../components/ZlTable'
 import WireDevicePosition from '../components/config/WireDevicePosition'
+import CameraPosition from '../components/config/CameraPosition'
 import { NAV_CONFIG_TREE, FIELDS } from '@/shared/constant'
 import { MONITOR_TYPES, MONITOR_PARAMS } from '../json/json_base_info'
 import { TUNNELS, WIRES, SECTIONS, MONITOR_DEVICES, MONITOR_CAMERAS } from '../json/json_device_info'
@@ -32,7 +34,8 @@ export default {
   components: {
     ZlTree,
     ZlTable,
-    WireDevicePosition
+    WireDevicePosition,
+    CameraPosition
   },
   data() {
     return {
@@ -47,7 +50,8 @@ export default {
       MONITOR_DEVICES: MONITOR_DEVICES,
       MONITOR_CAMERAS: MONITOR_CAMERAS,
       FIELDS: FIELDS,
-      currentNode: {}
+      currentNode: {},
+      currentRow: null
     }
   },
   mounted() {
