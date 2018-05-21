@@ -15,9 +15,14 @@
       <div>
         <WireDevicePosition v-if="currentNode.name=='WIRE_MONITOR_POSITION'"></WireDevicePosition>
         <CameraPosition v-else-if="currentNode.name=='CAMERA_LOCATION'"></CameraPosition>
-        <ZlTable :fields="fields" :data="data" v-else>
+        <ZlTable :fields="fields" :data="data"  @edit-row="editRow" @del-row="delRow" v-else>
         </ZlTable>
       </div>
+        <section class="right-pad-box" :class="{'right-pad-box-show': flg_showRightBox}">
+          <header>
+            <span>编辑</span>
+          </header>          
+        </section>
     </section>
   </div>
 </template>
@@ -118,7 +123,8 @@ export default {
 .main-box {
   position: absolute;
   left: 252px;
-  right: 0
+  right: 0;
+  overflow: hidden
 }
 
 .main-box>div {
