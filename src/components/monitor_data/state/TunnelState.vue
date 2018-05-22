@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div v-for="item in node.children" class="content-box">
+    <div v-for="item in node.children" class="content-box" @click="chooseItem(item)">
       <div>
         <i class="iconfont" :class="item.icon" v-if="item.icon"></i>
         <span>{{item.label}}</span>
@@ -16,6 +16,11 @@
 export default {
   props: {
     node: Object
+  },
+  methods: {
+    chooseItem(item) {
+      this.$emit('choose-item', item)
+    }
   }
 }
 
@@ -37,10 +42,10 @@ section {
   margin-right: 5px;
   width: 280px;
   height: 80px;
-  padding-bottom: 10px;
   border-radius: 5px;
   display: flex;
   justify-content: space-around;
+  cursor: pointer;
 }
 
 .content-box>div {

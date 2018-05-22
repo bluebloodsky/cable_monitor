@@ -2,7 +2,7 @@
   <div class="wrapper-box">
     <section class="box left-box">
       <header>导航</header>
-      <ZlTree :data="nav" @node-click="onNodeClick"></ZlTree>
+      <ZlTree :data="nav" @node-click="onNodeClick" :currentNode="currentNode"></ZlTree>
     </section>
     <section class="box main-box">
       <header>
@@ -15,14 +15,25 @@
       <div>
         <WireDevicePosition v-if="currentNode.name=='WIRE_MONITOR_POSITION'"></WireDevicePosition>
         <CameraPosition v-else-if="currentNode.name=='CAMERA_LOCATION'"></CameraPosition>
-        <ZlTable :fields="fields" :data="data"  @edit-row="editRow" @del-row="delRow" v-else>
+        <ZlTable :fields="fields" :data="data" @edit-row="editRow" @del-row="delRow" v-else>
         </ZlTable>
       </div>
-        <section class="right-pad-box" :class="{'right-pad-box-show': flg_showRightBox}">
-          <header>
-            <span>编辑</span>
-          </header>          
-        </section>
+      <section class="right-pad-box" :class="{'right-pad-box-show': flg_showRightBox}">
+        <header>
+          <span>编辑</span>
+          <div class="right-btn">
+            <button type="text" @click="flg_showRightBox=false"><i class="iconfont icon-close"></i></button>
+          </div>
+        </header>
+        <div>
+          <ul v-if="fields && fields.length">
+            <li v-for="field in fields">
+              <span>{{field.caption}}:</span>
+              <input v-model="currentRow[field.name]">
+            </li>
+          </ul>
+        </div>
+      </section>
     </section>
   </div>
 </template>
@@ -56,11 +67,8 @@ export default {
       MONITOR_CAMERAS: MONITOR_CAMERAS,
       FIELDS: FIELDS,
       currentNode: {},
-      currentRow: null
+      currentRow: {}
     }
-  },
-  mounted() {
-    this.currentNode = NAV_CONFIG_TREE[0].children[0]
   },
   computed: {
     fields() {
@@ -72,6 +80,7 @@ export default {
   },
   methods: {
     onNodeClick(node) {
+      this.flg_showRightBox = false
       this.currentNode = node
     },
     cellFormatter(row, column, cellValue) {
@@ -89,7 +98,8 @@ export default {
       remove(this.testItems, row)
     },
     add() {
-
+      this.flg_showRightBox = true
+      this.currentRow = {}
     },
     submit() {
 
@@ -106,12 +116,15 @@ export default {
   border-radius: 5px;
 }
 
-.box>header {
+header {
   height: 36px;
   font-size: 16px;
   line-height: 36px;
   overflow: hidden;
   position: relative;
+  padding-left: 5px;
+  border-bottom: 1px solid #3F6AA1;
+  background-color: #10406A;
 }
 
 .left-box {
@@ -138,10 +151,25 @@ export default {
   /*padding: 20px;*/
 }
 
-.main-box>header,
-.left-box>header {
-  padding-left: 5px;
-  border-bottom: 1px solid #3F6AA1;
+.right-pad-box>div {
+  padding-top: 10px;
+}
+
+.right-pad-box li {
+  height: 30px;
+  line-height: 30px;
+  font-size: 14px;
+}
+
+.right-pad-box li span {
+  width: 100px;
+  display: inline-block;
+  text-align: right;
+  padding-right: 10px;
+}
+
+.right-pad-box li input {
+  width: calc(100% - 130px);
 }
 
 </style>

@@ -39,8 +39,7 @@ export default {
       MONITOR_DEVICES.map(device => {
         if (this.node.name == (device.wire ? device.wire : device.section) && device.monitor_type == this.node.monitor_type_name) {
           l_devices.push(device)
-          let device_data = this.currentData.filter(adata => adata.device_name == device.name)
-          device_data = device_data && device_data[0] ? device_data[0] : null
+          let device_data = this.currentData.find(adata => adata.device_name == device.name)
           device.params = []
           l_params.map(param => {
             let l_param = {

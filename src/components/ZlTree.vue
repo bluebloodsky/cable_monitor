@@ -9,13 +9,13 @@ export default {
   name: 'ZlTree',
   components: { ZlTreeNode },
   data() {
-    return {
-      currentNode: null,
+    return {     
       nodeData: []
     }
   },
   props: {
     data: Array,
+    currentNode: Object,
     defaultExpandAll: Boolean,
     parentClickable: Boolean
   },
@@ -40,12 +40,11 @@ export default {
         result['isLeaf'] = true
       }
       if (node.defaultSelected) {
-        this.currentNode = result
+        this.$emit("node-click" , result)
       }
       return result
     },
     onNodeClick(item) {
-      this.currentNode = item
       this.$emit('node-click', item)
     }
   },

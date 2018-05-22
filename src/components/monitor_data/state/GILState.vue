@@ -1,22 +1,47 @@
 <template>
   <section>
-    <div v-for="i in 3" class="state-box">
+    <div v-for="phase in phases" class="state-box">
       <ul>
-        <li v-for="i in 6">
-          <span>{{i}}号防区</span>
-          <button type="text" v-for="i in 4">
-            <i class="iconfont icon-circle good"></i>
-          </button>
+        <li v-for="section in sections" :style="{width: 100 / sections.length + '%'}">
+          <span>{{section.name_cn}}</span>
+          <template v-for="device in devices">
+            <button type="text" v-if="device.section == section.name && device.phase == phase">
+              <i class="iconfont icon-circle good"></i>
+            </button>
+          </template>
         </li>
       </ul>
     </div>
   </section>
 </template>
 <script>
+import { MONITOR_DEVICES } from '../../../json/json_device_info'
+import { SECTIONS } from '../../../json/json_device_info'
 export default {
   props: {
     node: Object
-  }
+  },
+  data() {
+    return {
+      currentState: [],
+      sections: SECTIONS,
+      phases: ['A相', 'B相', 'C相']
+    }
+  },
+  computed: {
+    devices() {
+      let l_devices = []
+      /*获取每个该线路该监测类型设备实时状态*/
+      MONITOR_DEVICES.map(device => {
+        if (device.wire == this.node.name && device.monitor_type == this.node.monitor_type_name) {
+          l_devices.push(device)
+          let device_sate = this.currentState.find(state => state.device_name == device.name)
+          device.state = device_sate ? device_sate.state : null
+        }
+      })
+      return l_devices
+    }
+  },
 }
 
 </script>
@@ -75,7 +100,6 @@ section {
 .state-box li {
   float: left;
   position: relative;
-  width: 20%;
   height: 100%;
   display: flex;
   justify-content: space-around;

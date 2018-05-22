@@ -2,7 +2,7 @@
   <div class="wrapper-box">
     <section class="box left-box">
       <header>导航</header>
-      <ZlTree :data="nav" @node-click="onNodeClick" parent-clickable></ZlTree>
+      <ZlTree :data="nav" @node-click="onNodeClick" :currentNode="currentNode" parent-clickable></ZlTree>
     </section>
     <section class="box tab-box">
       <header>
@@ -15,7 +15,7 @@
       <section>
         <CameraState :node="currentNode" v-if="currentNode.type == 'CAMR_MONITOR'">
         </CameraState>
-        <TunnelState :node="currentNode" v-else-if="!currentNode.isLeaf">
+        <TunnelState :node="currentNode" v-else-if="!currentNode.isLeaf" @choose-item="onChooseItem">
         </TunnelState>
         <template v-else-if="currentNode.type == 'GIL'">
           <GILState :node="currentNode" v-show="currentPage == 0"></GILState>
@@ -76,7 +76,6 @@ export default {
       }
       if (index == 0) {
         node.defaultSelected = true
-        this.currentNode = node
       }
       this.nav.push(node)
       MONITOR_TYPES.map(monitor_type => {
@@ -136,14 +135,16 @@ export default {
     })
   },
   methods: {
-    onNodeClick(item) {
-      if (!item.isLeaf) {
+    onNodeClick(node) {
+      if (!node.isLeaf) {
         this.currentPage = 0
       }
-      this.currentNode = item
+      this.currentNode = node
+    },
+    onChooseItem(node) {
+      this.currentNode = node
     }
   }
-
 }
 
 </script>
