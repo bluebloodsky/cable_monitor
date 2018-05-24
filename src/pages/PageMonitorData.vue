@@ -20,7 +20,7 @@
         <template v-else-if="currentNode.type == 'GIL'">
           <GILState :node="currentNode" v-show="currentPage == 0"></GILState>
           <TxtRealData :node="currentNode" v-show="currentPage == 1"></TxtRealData>
-          <ChartTableHisData v-show="currentPage == 2"></ChartTableHisData>
+          <ChartTableHisData v-if = "currentPage == 2"></ChartTableHisData>
         </template>
         <template v-else-if="currentNode.type == 'WIRE'">
           <WireState v-show="currentPage == 0"></WireState>
