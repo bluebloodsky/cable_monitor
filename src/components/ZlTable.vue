@@ -1,9 +1,11 @@
 <template>
   <table>
     <thead>
-      <th>序号</th>
-      <th v-for="field in fields">{{field.caption}}</th>
-      <th>操作</th>
+      <tr>
+        <th>序号</th>
+        <th v-for="field in fields">{{field.caption}}</th>
+        <th>操作</th>
+      </tr>
     </thead>
     <tbody>
       <tr v-for="(row,row_id) in data">

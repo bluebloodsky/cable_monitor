@@ -1,59 +1,61 @@
 <template>
-  <div class="desktop">
+  <div class="wrapper-box">
+    <Gis></Gis>
+    <TaskView></TaskView>
+    <FaultCount></FaultCount>
+    <FaultRecord></FaultRecord>
   </div>
 </template>
 <script>
-export default {}
+import Gis from '../components/desktop/Gis'
+import TaskView from '../components/desktop/TaskView'
+import FaultCount from '../components/desktop/FaultCount'
+import FaultRecord from '../components/desktop/FaultRecord'
+export default {
+  components: { Gis, TaskView, FaultCount, FaultRecord }
+}
 
 </script>
 <style scoped>
-.desktop {
+.wrapper-box>section:nth-child(1) {
   position: absolute;
-  top: 80px;
-  left: 5px;
-  right: 5px;
-  bottom: 5px;
-  background: #000 url("../assets/zxt.png") no-repeat center center;
-  background-size: contain;
-  border-radius: 10px;
-}
-
-.alarm,
-.warn {
-  position: relative;
-  display: inline-block;
-  width: 70px;
-  height: 20px;
-  line-height: 20px;
-  text-align: center;
-  float: right;
-  color: #070707;
-  margin-right: 20px;
-  border-radius: 2px;
-}
-
-.alarm {
-  background-color: #C55C60;
-}
-
-.warn {
-  background-color: #FEE179;
-}
-
-.alarm>span,
-.warn>span {
-  display: inline-block;
-  position: absolute;
-  background-color: #F56C6C;
+  top: 10px;
+  bottom: 10px;
+  left: 10px;
+  width: calc(50% - 10px);
   border-radius: 5px;
-  top: -5px;
-  right: -15px;
-  left: auto;
-  height: 15px;
-  line-height: 15px;
-  width: 20px;
-  font-size: 6px;
-  color: #fff;
 }
 
+.wrapper-box>section:nth-child(2) {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: calc(50% - 15px);
+  height: 45%;
+  border-radius: 5px;
+  background-color: #132D48;
+  border: 1px solid #225373;
+}
+
+.wrapper-box>section:nth-child(3) {
+  position: absolute;
+  top: calc(45% + 15px);
+  right: 10px;
+  width: calc(50% - 15px);
+  height: 120px;
+  border-radius: 5px;
+  background-color: #132D48;
+  border: 1px solid #225373;
+}
+
+.wrapper-box>section:nth-child(4) {
+  position: absolute;
+  top: calc(45% + 140px);
+  right: 10px;
+  width: calc(50% - 15px);  
+  bottom: 10px;
+  border-radius: 5px;
+  background-color: #132D48;
+  border: 1px solid #225373;
+}
 </style>

@@ -202,11 +202,42 @@ export default {
   margin-left: -18px;
 }
 
+.tab-box>header a:before{
+  position: absolute;
+  content: '';
+  right: -18px;
+  top: 0;
+  border-bottom: 36px solid #ccc;
+  border-right: 18px solid transparent;
+  z-index: 99;
+}
+
+.tab-box>header a:after{
+  position: absolute;
+  content: '';
+  right: -17px;
+  top: 1px;
+  border-bottom: 35px solid #75A7C4;
+  border-right: 17px solid transparent;
+  z-index: 99;
+}
+
 .tab-box>header a:hover,
 .tab-box>header a.selected {
   border-bottom: 36px solid #CFDEE9;
   color: #3C3C3C;
   z-index: 999;
+}
+
+.tab-box>header a:hover::after,
+.tab-box>header a.selected::after{
+  position: absolute;
+  content: ' ';
+  right: -17px;
+  top: 1px;
+  border-bottom: 35px solid #CFDEE9;
+  border-right: 17px solid transparent;
+  z-index: 99;
 }
 
 
