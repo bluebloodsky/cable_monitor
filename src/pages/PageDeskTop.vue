@@ -1,7 +1,6 @@
 <template>
   <div class="wrapper-box">
     <Gis></Gis>
-    <TaskView></TaskView>
     <FaultCount></FaultCount>
     <FaultRecord></FaultRecord>
   </div>
@@ -31,7 +30,7 @@ export default {
   top: 10px;
   right: 10px;
   width: calc(50% - 15px);
-  height: 45%;
+  height: 120px;
   border-radius: 5px;
   background-color: #132D48;
   border: 1px solid #225373;
@@ -39,15 +38,15 @@ export default {
 
 .wrapper-box>section:nth-child(3) {
   position: absolute;
-  top: calc(45% + 15px);
+  top: 135px;
   right: 10px;
   width: calc(50% - 15px);
-  height: 120px;
+  bottom: 10px;
   border-radius: 5px;
   background-color: #132D48;
   border: 1px solid #225373;
 }
-
+/*
 .wrapper-box>section:nth-child(4) {
   position: absolute;
   top: calc(45% + 140px);
@@ -58,4 +57,5 @@ export default {
   background-color: #132D48;
   border: 1px solid #225373;
 }
+*/
 </style>

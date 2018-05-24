@@ -1,7 +1,7 @@
 <template>
   <section>
     <header>
-      <span>缺陷记录</span>
+      <span>告警记录</span>
     </header>
     <div>
       <table>
@@ -12,10 +12,7 @@
         </thead>
         <tbody>
           <tr v-for="i in 4">
-            <td><span></span></td>
-            <td><span></span></td>
-            <td><span></span></td>
-            <td><span></span></td>
+            <td v-for="field in fields"><span></span></td>
           </tr>
         </tbody>
       </table>
@@ -35,7 +32,7 @@
         <button type="text">
           <i class="iconfont icon-angle-double-right"></i>
         </button>
-        <span> 共1页 6条</span>
+        <span> 共1页 0条</span>
       </div>
     </footer>
   </section>
@@ -45,10 +42,11 @@ export default {
   data() {
     return {
       fields: [
-        { name: "wire_name", caption: '缺陷所属线路' },
-        { name: 'fault_handle', caption: '发现缺陷计划' },
-        { name: 'fault_level', caption: '缺陷级别' },
-        { name: 'fault_time', caption: '发现缺陷时间' },
+        { name: "wire_name", caption: '告警线路' },
+        { name: 'fault_handle', caption: '告警时间' },
+        { name: 'fault_handle', caption: '告警类型' },
+        { name: 'fault_level', caption: '告警级别' },
+        { name: 'fault_time', caption: '详细描述' },
       ]
     }
   }

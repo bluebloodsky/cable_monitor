@@ -1,12 +1,12 @@
 <template>
   <section>
     <header>
-      <span>缺陷与隐患</span>
+      <span>告警统计</span>
     </header>
     <div>
       <ul>
         <li>
-          <span>发现缺陷</span>
+          <span>告警信息</span>
           <span>严重</span>
           <span>危急</span>
         </li>

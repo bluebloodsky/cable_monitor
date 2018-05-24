@@ -20,6 +20,7 @@
         <template v-else-if="currentNode.type == 'GIL'">
           <GILState :node="currentNode" v-show="currentPage == 0"></GILState>
           <TxtRealData :node="currentNode" v-show="currentPage == 1"></TxtRealData>
+          <ChartTableHisData v-show="currentPage == 2"></ChartTableHisData>
         </template>
         <template v-else-if="currentNode.type == 'WIRE'">
           <WireState v-show="currentPage == 0"></WireState>
@@ -35,33 +36,50 @@
   </div>
 </template>
 <script>
-import ZlTree from '../components/ZlTree'
-import TunnelState from '../components/monitor_data/state/TunnelState'
-import GILState from '../components/monitor_data/state/GILState'
-import WireState from '../components/monitor_data/state/WireState'
-import SectionState from '../components/monitor_data/state/SectionState'
-import CameraState from '../components/monitor_data/state/CameraState'
-import TxtRealData from '../components/monitor_data/real_data/TxtRealData'
-import GaugeRealData from '../components/monitor_data/real_data/GaugeRealData'
-import { MONITOR_TYPES, MONITOR_PARAMS } from '../json/json_base_info'
-import { TUNNELS, WIRES, SECTIONS, MONITOR_DEVICES, MONITOR_CAMERAS } from '../json/json_device_info'
+import ZlTree from "../components/ZlTree";
+import TunnelState from "../components/monitor_data/state/TunnelState";
+import GILState from "../components/monitor_data/state/GILState";
+import WireState from "../components/monitor_data/state/WireState";
+import SectionState from "../components/monitor_data/state/SectionState";
+import CameraState from "../components/monitor_data/state/CameraState";
+import TxtRealData from "../components/monitor_data/real_data/TxtRealData";
+import GaugeRealData from "../components/monitor_data/real_data/GaugeRealData";
+import ChartTableHisData from "../components/monitor_data/his_data/ChartTableHisData";
+import { MONITOR_TYPES, MONITOR_PARAMS } from "../json/json_base_info";
+import {
+  TUNNELS,
+  WIRES,
+  SECTIONS,
+  MONITOR_DEVICES,
+  MONITOR_CAMERAS
+} from "../json/json_device_info";
 
 export default {
-  components: { ZlTree, TunnelState, GILState, WireState, SectionState, CameraState, TxtRealData, GaugeRealData },
+  components: {
+    ZlTree,
+    TunnelState,
+    GILState,
+    WireState,
+    SectionState,
+    CameraState,
+    TxtRealData,
+    GaugeRealData,
+    ChartTableHisData
+  },
   data() {
     return {
-      tabs: ['状态总览', '实时数据', '历史数据'],
+      tabs: ["状态总览", "实时数据", "历史数据"],
       currentPage: 0,
       nav: [],
       currentNode: {}
-    }
+    };
   },
   computed: {
     showTabs() {
       if (this.currentNode.isLeaf) {
-        return this.tabs
+        return this.tabs;
       } else {
-        return [this.tabs[0]]
+        return [this.tabs[0]];
       }
     }
   },
@@ -70,14 +88,14 @@ export default {
     TUNNELS.map((tunnel, index) => {
       let node = {
         name: tunnel.name,
-        type: 'tunnel',
+        type: "tunnel",
         label: tunnel.name_cn,
         children: []
-      }
+      };
       if (index == 0) {
-        node.defaultSelected = true
+        node.defaultSelected = true;
       }
-      this.nav.push(node)
+      this.nav.push(node);
       MONITOR_TYPES.map(monitor_type => {
         let subnode = {
           icon: monitor_type.icon,
@@ -85,8 +103,8 @@ export default {
           label: monitor_type.name_cn,
           type: monitor_type.type,
           children: []
-        }
-        if (monitor_type.type == 'WIRE_MONITOR') {
+        };
+        if (monitor_type.type == "WIRE_MONITOR") {
           WIRES.map(wire => {
             if (wire.type == "WIRE") {
               subnode.children.push({
@@ -94,10 +112,10 @@ export default {
                 label: wire.name_cn,
                 type: wire.type,
                 monitor_type_name: monitor_type.name
-              })
+              });
             }
-          })
-        } else if (monitor_type.type == 'GIL_MONITOR') {
+          });
+        } else if (monitor_type.type == "GIL_MONITOR") {
           WIRES.map(wire => {
             if (wire.type == "GIL") {
               subnode.children.push({
@@ -105,58 +123,57 @@ export default {
                 label: wire.name_cn,
                 type: wire.type,
                 monitor_type_name: monitor_type.name
-              })
+              });
             }
-          })
-        } else if (monitor_type.type == 'SECTION_MONITOR') {
+          });
+        } else if (monitor_type.type == "SECTION_MONITOR") {
           SECTIONS.map(section => {
             subnode.children.push({
               name: section.name,
               label: section.name_cn,
-              type: 'SECTION',
+              type: "SECTION",
               monitor_type_name: monitor_type.name,
               img_url: section.img_url
-            })
-          })
-        } else if (monitor_type.type == 'CAMR_MONITOR') {
+            });
+          });
+        } else if (monitor_type.type == "CAMR_MONITOR") {
           MONITOR_CAMERAS.map(camera => {
             subnode.children.push({
               name: camera.name,
               label: camera.name_cn,
-              type: 'CAMERA',
+              type: "CAMERA",
               location: camera.location
-            })
-          })
+            });
+          });
         }
         if (subnode.children && subnode.children.length > 0) {
-          node.children.push(subnode)
+          node.children.push(subnode);
         }
-      })
-    })
+      });
+    });
   },
   methods: {
     onNodeClick(node) {
       if (!node.isLeaf) {
-        this.currentPage = 0
+        this.currentPage = 0;
       }
-      this.currentNode = node
+      this.currentNode = node;
     },
     onChooseItem(node) {
-      this.currentNode = node
+      this.currentNode = node;
     }
   }
-}
-
+};
 </script>
 <style scoped>
 .box {
   height: 100%;
-  background-color: #0B3567;
-  border: 1px solid #3F6AA1;
+  background-color: #0b3567;
+  border: 1px solid #3f6aa1;
   border-radius: 5px;
 }
 
-.box>header {
+.box > header {
   height: 36px;
   font-size: 16px;
   line-height: 36px;
@@ -171,9 +188,9 @@ export default {
   margin-right: 2px;
 }
 
-.left-box>header {
+.left-box > header {
   padding-left: 5px;
-  border-bottom: 1px solid #3F6AA1;
+  border-bottom: 1px solid #3f6aa1;
 }
 
 .tab-box {
@@ -183,28 +200,28 @@ export default {
   width: calc(100% - 254px);
 }
 
-.tab-box>header {
-  margin-left: 5px
+.tab-box > header {
+  margin-left: 5px;
 }
 
-.tab-box>header li {
+.tab-box > header li {
   float: left;
 }
 
-.tab-box>header a {
+.tab-box > header a {
   position: relative;
   height: 0;
   display: inline-block;
   padding: 0 30px;
-  border-bottom: 36px solid #75A7C4;
+  border-bottom: 36px solid #75a7c4;
   border-left: 18px solid transparent;
   border-right: 18px solid transparent;
   margin-left: -18px;
 }
 
-.tab-box>header a:before{
+.tab-box > header a:before {
   position: absolute;
-  content: '';
+  content: "";
   right: -18px;
   top: 0;
   border-bottom: 36px solid #ccc;
@@ -212,37 +229,36 @@ export default {
   z-index: 99;
 }
 
-.tab-box>header a:after{
+.tab-box > header a:after {
   position: absolute;
-  content: '';
+  content: "";
   right: -17px;
   top: 1px;
-  border-bottom: 35px solid #75A7C4;
+  border-bottom: 35px solid #75a7c4;
   border-right: 17px solid transparent;
   z-index: 99;
 }
 
-.tab-box>header a:hover,
-.tab-box>header a.selected {
-  border-bottom: 36px solid #CFDEE9;
-  color: #3C3C3C;
+.tab-box > header a:hover,
+.tab-box > header a.selected {
+  border-bottom: 36px solid #cfdee9;
+  color: #3c3c3c;
   z-index: 999;
 }
 
-.tab-box>header a:hover::after,
-.tab-box>header a.selected::after{
+.tab-box > header a:hover::after,
+.tab-box > header a.selected::after {
   position: absolute;
-  content: ' ';
+  content: " ";
   right: -17px;
   top: 1px;
-  border-bottom: 35px solid #CFDEE9;
+  border-bottom: 35px solid #cfdee9;
   border-right: 17px solid transparent;
   z-index: 99;
 }
 
-
-.left-box>section,
-.tab-box>section {
+.left-box > section,
+.tab-box > section {
   position: absolute;
   top: 36px;
   bottom: 0;
@@ -251,9 +267,8 @@ export default {
   overflow-y: auto;
 }
 
-.tab-box>section {
-  background-color: #CEDDE8;
+.tab-box > section {
+  background-color: #cedde8;
   padding-top: 20px;
 }
-
 </style>
