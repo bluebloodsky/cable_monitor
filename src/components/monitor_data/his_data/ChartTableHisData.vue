@@ -1,67 +1,68 @@
 <template>
-    <section class="wrapper">
-      <header>
-        <div>
+  <section class="wrapper">
+    <header>
+      <div>
         <span>监测设备选择：</span>
         <select>
           <option>12</option>
         </select>
-        </div>
-        <div>
-        <span>开始时间:</span>
-        <ZlDatePicker></ZlDatePicker>  
-        </div>
-        <div>
-        <span>结束时间:</span>
-        <ZlDatePicker></ZlDatePicker>  
-        </div>
-      </header>
-        <div class="box left-box">
-          <header><span>历史趋势</span></header>
-          <div ref="container">  </div>
-        </div>
-        <div class="box right-box">
-          <header><span>数据详情</span></header>
-          <div>
-      <table>
-        <thead>
-          <tr>
-            <th v-for="field in fields">{{field.caption}}</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="i in 4">
-            <td v-for="field in fields"><span>1</span></td>
-          </tr>
-        </tbody>
-      </table>
-          </div>
-    <footer>
-      <div>
-        <button type="text">
-          <i class="iconfont icon-angle-double-left"></i>
-        </button>
-        <button type="text">
-          <i class="iconfont icon-return"></i>
-        </button>
-        <input value="1">
-        <button type="text">
-          <i class="iconfont icon-enter"></i>
-        </button>
-        <button type="text">
-          <i class="iconfont icon-angle-double-right"></i>
-        </button>
-        <span> 共1页 0条</span>
       </div>
-    </footer>
+      <div>
+        <span>开始时间:</span>
+        <ZlDatePicker></ZlDatePicker>
+      </div>
+      <div>
+        <span>结束时间:</span>
+        <ZlDatePicker></ZlDatePicker>
+      </div>
+      <button type="text"><i class="iconfont icon-search"></i></button>
+    </header>
+    <div class="box left-box">
+      <header><span>历史趋势</span></header>
+      <div ref="container"> </div>
+    </div>
+    <div class="box right-box">
+      <header><span>数据详情</span></header>
+      <div>
+        <table>
+          <thead>
+            <tr>
+              <th v-for="field in fields">{{field.caption}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="i in 20">
+              <td v-for="field in fields"><span></span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <footer>
+        <div>
+          <button type="text">
+            <i class="iconfont icon-angle-double-left"></i>
+          </button>
+          <button type="text">
+            <i class="iconfont icon-return"></i>
+          </button>
+          <input value="1">
+          <button type="text">
+            <i class="iconfont icon-enter"></i>
+          </button>
+          <button type="text">
+            <i class="iconfont icon-angle-double-right"></i>
+          </button>
+          <span> 共1页 0条</span>
         </div>
-    </section>
+      </footer>
+    </div>
+  </section>
 </template>
 <script>
 import ZlDatePicker from '../../ZlDatePicker'
 import echarts from "echarts";
 export default {
-  components:{ZlDatePicker},
+  components: { ZlDatePicker },
   data() {
     return {
       chart: null,
@@ -123,8 +124,7 @@ export default {
         },
         type: "value"
       },
-      series: [
-        {
+      series: [{
           name: "人员闯入",
           type: "line",
           stack: "总量",
@@ -150,6 +150,7 @@ export default {
     });
   }
 };
+
 </script>
 <style scoped>
 .wrapper {
@@ -160,18 +161,17 @@ export default {
   bottom: 10px;
 }
 
-section > header{
+section>header {
   height: 40px;
   background-color: #ccc;
-  display:flex;
-  justify-content: space-around;
+  display: flex;
+  justify-content: center;
   align-items: center;
   margin-bottom: 10px;
   background-color: #132D48;
 }
 
-.left-box,
-.right-box {
+section>div {
   float: left;
   width: calc(50% - 5px);
   margin-right: 5px;
@@ -179,7 +179,9 @@ section > header{
   background-color: #ccc;
   background-color: #132D48;
   border: solid 1px #406985;
+  overflow: hidden;
 }
+
 div>header {
   height: 36px;
   font-size: 16px;
@@ -190,9 +192,13 @@ div>header {
   margin-bottom: 3px;
 }
 
-.box > div {
+section>header select{
+  width: 200px;
+}
+.box>div {
   width: 100%;
   height: calc(100% - 40px);
+  overflow-y: auto;
 }
 
 footer {
@@ -229,7 +235,7 @@ tbody {
   text-align: center;
 }
 
-footer span {
+span {
   margin-right: 50px;
 }
 
@@ -238,12 +244,14 @@ footer div {
   float: left;
 }
 
-footer  input {
+footer input {
   width: 16px;
   text-align: center;
 }
 
-footer .iconfont {
+.iconfont {
   color: #fff;
+  font-size: 20px;
 }
+
 </style>

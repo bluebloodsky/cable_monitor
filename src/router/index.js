@@ -5,6 +5,7 @@ import PageNotFind from '../pages/PageNotFind'
 import PageDeskTop from '../pages/PageDeskTop'
 import PageMonitorData from '../pages/PageMonitorData'
 import PageConfig from '../pages/PageConfig'
+import PageAlarm from '../pages/PageAlarm'
 Vue.use(Router)
 
 const router = new Router({
@@ -25,6 +26,9 @@ const router = new Router({
     }, {
       path: 'data',
       component: PageMonitorData
+    }, {
+      path: 'alarm',
+      component: PageAlarm
     }, {
       path: 'config',
       component: PageConfig

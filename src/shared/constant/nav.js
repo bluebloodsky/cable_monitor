@@ -2,10 +2,6 @@ export const NAV_MENUS = [{
   name_cn: '首页',
   icon: 'icon-homepage',
   url: 'desktop'
-  // }, {
-  //   name_cn: '实时数据',
-  //   icon: 'icon-time',
-  //   url: 'on-data'
 }, {
   name_cn: '数据总览',
   icon: 'icon-dynamic',
