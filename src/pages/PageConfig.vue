@@ -1,9 +1,9 @@
 <template>
   <div class="wrapper-box">
-    <section class="box left-box">
+    <aside class="box">
       <header>导航</header>
       <ZlTree :data="nav" @node-click="onNodeClick" :currentNode="currentNode"></ZlTree>
-    </section>
+    </aside>
     <section class="box main-box">
       <header>
         <span>{{currentNode.label}}</span>
@@ -127,7 +127,7 @@ header {
   background-color: #10406A;
 }
 
-.left-box {
+aside {
   position: absolute;
   left: 0;
   width: 250px;
@@ -170,6 +170,10 @@ header {
 
 .right-pad-box li input {
   width: calc(100% - 130px);
+}
+
+.iconfont{
+  color:#fff;
 }
 
 </style>

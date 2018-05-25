@@ -26,7 +26,7 @@
     </header>
     <!--  <transition>
       <keep-alive> -->
-    <router-view :items="sub_menus"></router-view>
+    <router-view></router-view>
     <!--   </keep-alive>
     </transition> -->
   </div>

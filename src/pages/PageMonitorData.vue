@@ -1,9 +1,9 @@
 <template>
   <div class="wrapper-box">
-    <section class="box left-box">
+    <aside>
       <header>导航</header>
       <ZlTree :data="nav" @node-click="onNodeClick" :currentNode="currentNode" parent-clickable></ZlTree>
-    </section>
+    </aside>
     <section class="box tab-box">
       <header>
         <ul>
@@ -166,13 +166,14 @@ export default {
 };
 </script>
 <style scoped>
+aside,
 .box {
   height: 100%;
   background-color: #0b3567;
   border: 1px solid #3f6aa1;
   border-radius: 5px;
 }
-
+aside > header,
 .box > header {
   height: 36px;
   font-size: 16px;
@@ -181,14 +182,16 @@ export default {
   position: relative;
 }
 
-.left-box {
+aside {
   position: absolute;
   left: 0;
+  bottom: 0;
   width: 250px;
   margin-right: 2px;
+  overflow-y: auto;
 }
 
-.left-box > header {
+aside > header {
   padding-left: 5px;
   border-bottom: 1px solid #3f6aa1;
 }

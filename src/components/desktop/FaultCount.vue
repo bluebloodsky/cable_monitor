@@ -1,9 +1,8 @@
 <template>
   <section>
-    <header>
+    <!-- <header>
       <span>告警统计</span>
-    </header>
-    <div>
+    </header> -->
       <ul>
         <li>
           <span>告警信息</span>
@@ -16,18 +15,14 @@
           <span><strong>2</strong>条</span>
         </li>
       </ul>
-    </div>
   </section>
 </template>
 <script>
 export default {
   data() {
-    return {
-     
-    }
+    return {};
   }
-}
-
+};
 </script>
 <style scoped>
 header {
@@ -40,9 +35,8 @@ header {
   margin-bottom: 10px;
 }
 
-
 header:before {
-  content: '';
+  content: "";
   position: absolute;
   top: -1px;
   left: -1px;
@@ -52,43 +46,44 @@ header:before {
 }
 
 header:after {
-  content: '';
+  content: "";
   position: absolute;
   top: -1px;
   left: -1px;
   bottom: auto;
-  border-top: 16px solid #132D48;
+  border-top: 16px solid #132d48;
   border-right: 16px solid transparent;
 }
 
-section>div {
-  height: calc(100% - 60px);
+section > div {
+  height: 100%;
   overflow-y: auto;
 }
 
-ul{
+ul {
   margin-left: 50px;
   width: calc(100% - 100px);
-  border-left: 1px solid #729FB6;
-  border-right: 1px solid #729FB6;
+  border-left: 1px solid #729fb6;
+  border-right: 1px solid #729fb6;
 }
-li{
-  height: 30px;
+li {
+  height: 50px;
   display: flex;
   justify-content: space-around;
   align-items: center;
 }
 
-li span{
+li span {
   width: 25%;
+  font-size: 20px;
 }
-li:not(:first-child) span{
-  color: #4C89A8;
+li:not(:first-child) span {
+  color: #4c89a8;
 }
-strong{
-  color: #C8E3EE;
-  font-size: 18px;
-  margin-right: 3px;
+strong {
+  color: #c8e3ee;
+  font-size: 30px;
+  margin-right: 10px;
   font-weight: normal;
 }
 </style>

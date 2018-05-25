@@ -32,7 +32,7 @@
           </thead>
           <tbody>
             <tr v-for="i in 20">
-              <td v-for="field in fields"><span></span></td>
+              <td v-for="field in fields"><span><br> </span></td>
             </tr>
           </tbody>
         </table>
@@ -76,27 +76,21 @@ export default {
   mounted() {
     this.chart = echarts.init(this.$refs["container"]);
     let option = {
-      title: {
-        text: "告警类型趋势",
-        textStyle: {
-          color: "#fff"
-        }
-      },
       tooltip: {
         trigger: "axis"
       },
       legend: {
-        orient: "vertical",
+        orient: "horizontal",
         x: "right",
         textStyle: {
           color: "#fff"
         },
-        data: ["人员闯入", "氧气浓度过低", "天然气泄漏"]
+        data: ["视在局放电量" ]
       },
       grid: {
         left: "3%",
         right: "4%",
-        top: "25%",
+        top: "10%",
         bottom: "3%",
         containLabel: true
       },
@@ -125,22 +119,10 @@ export default {
         type: "value"
       },
       series: [{
-          name: "人员闯入",
+          name: "视在局放电量",
           type: "line",
           stack: "总量",
-          data: [0, 0, 0, 1, 0, 0, 0]
-        },
-        {
-          name: "氧气浓度过低",
-          type: "line",
-          stack: "总量",
-          data: [0, 0, 0, 0, 0, 0, 1]
-        },
-        {
-          name: "天然气泄漏",
-          type: "line",
-          stack: "总量",
-          data: [0, 1, 0, 1, 0, 0, 1]
+          data: [0, 0, 10, 3, 0, 0, 0]
         }
       ]
     };
@@ -170,11 +152,12 @@ section>header {
   margin-bottom: 10px;
   background-color: #132D48;
 }
-
+section>header>div{
+  margin-right: 20px;
+}
 section>div {
   float: left;
-  width: calc(50% - 5px);
-  margin-right: 5px;
+  width: 50%;
   height: calc(100% - 50px);
   background-color: #ccc;
   background-color: #132D48;
@@ -233,10 +216,6 @@ thead {
 tbody {
   line-height: 26px;
   text-align: center;
-}
-
-span {
-  margin-right: 50px;
 }
 
 footer div {

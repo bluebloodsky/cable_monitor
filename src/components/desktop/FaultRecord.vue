@@ -1,8 +1,5 @@
 <template>
   <section>
-    <header>
-      <span>告警记录</span>
-    </header>
     <div>
       <table>
         <thead>
@@ -11,15 +8,14 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="i in 4">
+          <tr v-for="i in 10">
             <td v-for="field in fields"><span></span></td>
           </tr>
         </tbody>
       </table>
     </div>
     <footer>
-      <div>
-        <button type="text">
+         <button type="text">
           <i class="iconfont icon-angle-double-left"></i>
         </button>
         <button type="text">
@@ -33,7 +29,6 @@
           <i class="iconfont icon-angle-double-right"></i>
         </button>
         <span> 共1页 0条</span>
-      </div>
     </footer>
   </section>
 </template>
@@ -42,16 +37,15 @@ export default {
   data() {
     return {
       fields: [
-        { name: "wire_name", caption: '告警线路' },
-        { name: 'fault_handle', caption: '告警时间' },
-        { name: 'fault_handle', caption: '告警类型' },
-        { name: 'fault_level', caption: '告警级别' },
-        { name: 'fault_time', caption: '详细描述' },
+        { name: "wire_name", caption: "告警线路" },
+        { name: "fault_handle", caption: "告警时间" },
+        { name: "fault_handle", caption: "告警类型" },
+        { name: "fault_level", caption: "告警级别" },
+        { name: "fault_time", caption: "详细描述" }
       ]
-    }
+    };
   }
-}
-
+};
 </script>
 <style scoped>
 header {
@@ -59,13 +53,13 @@ header {
   font-size: 16px;
   line-height: 36px;
   padding-left: 15px;
-  background-color: #1E364E;
+  background-color: #1e364e;
   border-bottom: 1px solid #406985;
   margin-bottom: 3px;
 }
 
 header:before {
-  content: '';
+  content: "";
   position: absolute;
   top: -1px;
   left: -1px;
@@ -75,31 +69,29 @@ header:before {
 }
 
 header:after {
-  content: '';
+  content: "";
   position: absolute;
   top: -1px;
   left: -1px;
   bottom: auto;
-  border-top: 16px solid #132D48;
+  border-top: 16px solid #132d48;
   border-right: 16px solid transparent;
 }
-
-section>div {
-  height: calc(100% - 60px);
+section{
+  font-size: 16px;
+}
+section > div {
+  max-height: calc(100% - 40px);
   overflow-y: auto;
 }
 
 footer {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  top: auto;
-  right: 0;
-  height: 30px;
-  line-height: 30px;
-  background-color: #133551;
-  border-radius: 5px 0;
+  height: 40px;
+  line-height: 40px;
   padding-left: 10px;
+  border-left: 1px solid #2b4f69;
+  border-right: 1px solid #2b4f69;
+  border-bottom: 1px solid #2b4f69;
 }
 
 table {
@@ -110,30 +102,28 @@ table {
 td,
 th,
 table {
-  border: 1px solid #2B4F69;
+  border: 1px solid #2b4f69;
   font-weight: normal;
 }
 
 thead {
-  background-color: #06192A;
-  line-height: 28px;
+  background-color: #06192a;
+  line-height: 40px;
 }
 
 tbody {
-  line-height: 26px;
+  line-height: 40px;
   text-align: center;
 }
 
 a {
-  color: #DFF789;
+  color: #dff789;
   text-decoration: underline;
 }
-
 
 span {
   margin-right: 50px;
 }
-
 
 footer div {
   margin-right: 50px;
@@ -141,11 +131,12 @@ footer div {
 }
 
 input {
-  width: 16px;
+  width: 20px;
   text-align: center;
 }
 
 .iconfont {
   color: #fff;
+  font-size: 16px;
 }
 </style>
