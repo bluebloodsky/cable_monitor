@@ -1,19 +1,37 @@
 <template>
-<dashboard-box title="在线监测">
-        <div v-for="i in 10">
-            <code>let a = 1;</code>
-            <hr>
-            <em>adfasf</em>
-        </div>
-</dashboard-box>
+  <article>
+    <header>
+      
+    </header>
+    <section>
+
+    </section>
+  </article>
 </template>
 
 <script>
-import DashboardBox from "../components/DashboardBox";
-export default {
-  components: { DashboardBox }
-};
+  import DashboardBox from "../components/DashboardBox";
+  import {
+    binaraySearch
+  } from '@/shared/util'
+  export default {
+    components: {
+      DashboardBox
+    },
+    data() {
+      return {
+        key: 12,
+        arr: ''
+      }
+    },
+    computed: {
+      result() {
+        return binaraySearch(this.key, this.arr.split(','))
+      }
+    }
+  };
 </script>
 
 <style scoped>
+  
 </style>

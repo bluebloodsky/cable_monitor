@@ -145,7 +145,6 @@ export default {
 
 section>header {
   height: 40px;
-  background-color: #ccc;
   display: flex;
   justify-content: center;
   align-items: center;
