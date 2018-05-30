@@ -18,18 +18,18 @@
         <TunnelState :node="currentNode" v-else-if="!currentNode.isLeaf" @choose-item="onChooseItem">
         </TunnelState>
         <template v-else-if="currentNode.type == 'GIL'">
-          <GILState :node="currentNode" v-show="currentPage == 0"></GILState>
-          <TxtRealData :node="currentNode" v-show="currentPage == 1"></TxtRealData>
+          <GILState :node="currentNode" v-if="currentPage == 0"></GILState>
+          <TxtRealData :node="currentNode" v-if="currentPage == 1"></TxtRealData>
           <ChartTableHisData v-if = "currentPage == 2"></ChartTableHisData>
         </template>
         <template v-else-if="currentNode.type == 'WIRE'">
-          <WireState v-show="currentPage == 0"></WireState>
-          <GaugeRealData :node="currentNode" v-show="currentPage == 1">
+          <WireState v-if="currentPage == 0" :node="currentNode"></WireState>
+          <GaugeRealData :node="currentNode" v-if="currentPage == 1">
           </GaugeRealData>
         </template>
         <template v-else-if="currentNode.type == 'SECTION'">
-          <SectionState :node="currentNode" v-show="currentPage == 0"></SectionState>
-          <GaugeRealData :node="currentNode" v-show="currentPage == 1"></GaugeRealData>
+          <SectionState :node="currentNode" v-if="currentPage == 0"></SectionState>
+          <GaugeRealData :node="currentNode" v-if="currentPage == 1"></GaugeRealData>
         </template>
       </section>
     </section>
