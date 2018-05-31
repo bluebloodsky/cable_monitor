@@ -11,7 +11,7 @@
       </div>
       <div>
         <span>结束时间:</span>
-        <ZlDatePicker v-model="endData"></ZlDatePicker>
+        <ZlDatePicker v-model="endDate"></ZlDatePicker>
       </div>
       <button type="text"><i class="iconfont icon-search"></i></button>
     </header>
@@ -48,6 +48,9 @@
           <span> 共1页 0条</span>
         </div>
       </footer>
+      <div>
+        <canvas ref="canvas"></canvas>
+      </div>
     </section>
   </article>
 </template>
@@ -58,6 +61,8 @@ import ZlDatePicker from "../components/ZlDatePicker";
 import ZlComboTree from "../components/ZlComboTree";
 import { binaraySearch } from "@/shared/util";
 import { NAV_CONFIG_TREE, FIELDS } from "@/shared/constant";
+import  DrawPD  from "@/shared/util/draw/drawPD";
+import {PD_WAVE} from '@/json/json_pd'
 export default {
   components: {
     DashboardBox,
@@ -79,10 +84,15 @@ export default {
       ]
     };
   },
-  computed: {
-    result() {
-      return binaraySearch(this.key, this.arr.split(","));
-    }
+  mounted(){
+    let canvas = this.$refs['canvas']
+    canvas.width = 250
+    canvas.height = 250
+    var pd = new DrawPD({
+      canvas:canvas,
+      points:PD_WAVE
+    })
+    pd.draw(5)
   }
 };
 </script>
@@ -103,11 +113,11 @@ header select {
   width: 200px;
 }
 
-section{
+section {
   position: relative;
   height: calc(100% - 60px);
   background-color: #ccc;
-  background-color: #132D48;
+  background-color: #132d48;
   border: solid 1px #406985;
   overflow: hidden;
 }
@@ -159,5 +169,9 @@ footer input {
 .iconfont {
   color: #fff;
   font-size: 20px;
+}
+
+canvas{
+  background-color: #fff;
 }
 </style>
