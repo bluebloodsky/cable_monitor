@@ -229,7 +229,7 @@ aside > header {
   top: 0;
   border-bottom: 36px solid #ccc;
   border-right: 18px solid transparent;
-  z-index: 99;
+  z-index: 2;
 }
 
 .tab-box > header a:after {
@@ -239,14 +239,14 @@ aside > header {
   top: 1px;
   border-bottom: 35px solid #75a7c4;
   border-right: 17px solid transparent;
-  z-index: 99;
+  z-index: 2;
 }
 
 .tab-box > header a:hover,
 .tab-box > header a.selected {
   border-bottom: 36px solid #cfdee9;
   color: #3c3c3c;
-  z-index: 999;
+  z-index: 3;
 }
 
 .tab-box > header a:hover::after,
@@ -257,7 +257,7 @@ aside > header {
   top: 1px;
   border-bottom: 35px solid #cfdee9;
   border-right: 17px solid transparent;
-  z-index: 99;
+  z-index: 3;
 }
 
 .left-box > section,

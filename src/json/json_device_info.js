@@ -49,14 +49,28 @@ export const MONITOR_DEVICES = [{
   section: 'fangqu1',
   phase: 'A相'
 }, {
+  name: 'gil3',
+  name_cn: 'GIL监测点3',
+  monitor_type: 'GILC',
+  wire: 'xiafeng1',
+  section: 'fangqu1',
+  phase: 'A相'
+}, {
+  name: 'gil4',
+  name_cn: 'GIL监测点4',
+  monitor_type: 'GILC',
+  wire: 'xiafeng1',
+  section: 'fangqu1',
+  phase: 'A相'
+}, {
   name: 'jf1',
   name_cn: '局放监测点1',
   monitor_type: 'SPDC',
   wire: 'xiafeng3',
   section: 'fangqu1',
   phase: 'A相',
-  positionX: 10,
-  positionY: 15
+  positionX: 5,
+  positionY: 5
 }, {
   name: 'jf2',
   name_cn: '局放监测点2',
@@ -73,7 +87,7 @@ export const MONITOR_DEVICES = [{
   wire: 'xiafeng3',
   section: 'fangqu1',
   phase: 'C相',
-  positionX: 20,
+  positionX: 25,
   positionY: 5
 }, {
   name: 'jf4',
@@ -82,8 +96,8 @@ export const MONITOR_DEVICES = [{
   wire: 'xiafeng3',
   section: 'fangqu2',
   phase: 'A相',
-  positionX: 10,
-  positionY: 10
+  positionX: 5,
+  positionY: 30
 }, {
   name: 'jf5',
   name_cn: '局放监测点5',
@@ -92,7 +106,7 @@ export const MONITOR_DEVICES = [{
   section: 'fangqu2',
   phase: 'B相',
   positionX: 15,
-  positionY: 10
+  positionY: 30
 }, {
   name: 'jf6',
   name_cn: '局放监测点6',
@@ -100,8 +114,8 @@ export const MONITOR_DEVICES = [{
   wire: 'xiafeng3',
   section: 'fangqu2',
   phase: 'C相',
-  positionX: 20,
-  positionY: 10
+  positionX: 25,
+  positionY: 30
 }, {
   name: 'jf7',
   name_cn: '局放监测点7',
@@ -109,8 +123,8 @@ export const MONITOR_DEVICES = [{
   wire: 'xiafeng3',
   section: 'fangqu2',
   phase: 'A相',
-  positionX: 10,
-  positionY: 30
+  positionX: 5,
+  positionY: 55
 }, {
   name: 'jf8',
   name_cn: '局放监测点8',
@@ -119,7 +133,7 @@ export const MONITOR_DEVICES = [{
   section: 'fangqu2',
   phase: 'B相',
   positionX: 15,
-  positionY: 30
+  positionY: 55
 }, {
   name: 'jf9',
   name_cn: '局放监测点9',
@@ -127,8 +141,8 @@ export const MONITOR_DEVICES = [{
   wire: 'xiafeng3',
   section: 'fangqu2',
   phase: 'C相',
-  positionX: 20,
-  positionY: 30
+  positionX: 25,
+  positionY: 55
 }, {
   name: 'jf10',
   name_cn: '局放监测点10',
@@ -136,8 +150,8 @@ export const MONITOR_DEVICES = [{
   wire: 'xiafeng4',
   section: 'fangqu2',
   phase: 'A相',
-  positionX: 10,
-  positionY: 40
+  positionX: 35,
+  positionY: 55
 }, {
   name: 'wd1',
   name_cn: '光纤测温监测点1',
@@ -147,7 +161,8 @@ export const MONITOR_DEVICES = [{
   phase: 'A相',
   positionX: 10,
   positionY: 50
-}, {
+}, 
+{
   name: 'hj1',
   name_cn: '环境监测点1',
   monitor_type: 'ENVR',

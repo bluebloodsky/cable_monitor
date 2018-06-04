@@ -19,7 +19,7 @@ export default {
   },
   data() {
     return {
-      currentNode: null,
+      currentNode: {},
       showTree: false
     };
   },
@@ -81,6 +81,7 @@ export default {
 .tree {
   position: absolute;
   top: 21px;
+  width: 100%;
   left: -9999px;
 }
 

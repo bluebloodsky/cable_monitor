@@ -1,23 +1,38 @@
 <template>
-  <section>
+  <section class="wrapper">
     <div v-for="phase in phases" class="state-box">
       <ul>
         <li v-for="section in sections" :style="{width: 100 / sections.length + '%'}">
           <span>{{section.name_cn}}</span>
           <template v-for="device in devices">
-            <button type="text" v-if="device.section == section.name && device.phase == phase">
+            <button type="text" v-if="device.section == section.name && device.phase == phase" @click="showWave">
               <i class="iconfont icon-circle good"></i>
             </button>
           </template>
         </li>
       </ul>
     </div>
+    <div class="wave-box" v-if="showWaveFlg">
+      <header>
+        <span>图谱展示</span>
+        <div class="right-btn">
+          <button type="text" @click="hideWave"><i class="iconfont
+           icon-close"></i></button>
+        </div>
+      </header>
+      <div>
+      <p-d-wave :points="wave" class="wave" v-for="wave in waves"></p-d-wave>
+      </div>
+    </div>
   </section>
 </template>
 <script>
-import { MONITOR_DEVICES } from '../../../json/json_device_info'
-import { SECTIONS } from '../../../json/json_device_info'
+import { MONITOR_DEVICES } from "../../../json/json_device_info";
+import { SECTIONS } from "../../../json/json_device_info";
+import PDWave from "@/components/PDWave";
+import { PD_WAVE, PD_WAVE1, PD_WAVE2 } from "@/json/json_pd";
 export default {
+  components: { PDWave },
   props: {
     node: Object
   },
@@ -25,28 +40,42 @@ export default {
     return {
       currentState: [],
       sections: SECTIONS,
-      phases: ['A相', 'B相', 'C相']
-    }
+      phases: ["A相", "B相", "C相"],
+      waves: [PD_WAVE, PD_WAVE1, PD_WAVE2 , PD_WAVE],
+      showWaveFlg: false
+    };
   },
   computed: {
     devices() {
-      let l_devices = []
+      let l_devices = [];
       /*获取每个该线路该监测类型设备实时状态*/
       MONITOR_DEVICES.map(device => {
-        if (device.wire == this.node.name && device.monitor_type == this.node.monitor_type_name) {
-          l_devices.push(device)
-          let device_sate = this.currentState.find(state => state.device_name == device.name)
-          device.state = device_sate ? device_sate.state : null
+        if (
+          device.wire == this.node.name &&
+          device.monitor_type == this.node.monitor_type_name
+        ) {
+          l_devices.push(device);
+          let device_sate = this.currentState.find(
+            state => state.device_name == device.name
+          );
+          device.state = device_sate ? device_sate.state : null;
         }
-      })
-      return l_devices
+      });
+      return l_devices;
     }
   },
-}
-
+  methods: {
+    showWave() {
+      this.showWaveFlg = true;
+    },
+    hideWave() {
+      this.showWaveFlg = false;
+    }
+  }
+};
 </script>
 <style scoped>
-section {
+.wrapper {
   padding-left: 20px;
   display: flex;
   justify-content: flex-start;
@@ -64,7 +93,7 @@ section {
 .state-box ul {
   width: calc(100% -70px);
   /*background-color: #DAEAF7;*/
-  background-color: #3C3C3C;
+  background-color: #3c3c3c;
   height: 3px;
   margin-left: 70px;
   border-radius: 3px;
@@ -78,19 +107,19 @@ section {
   top: -50%;
   transform: translateY(50%);
   left: 30px;
-  color: #3C3C3C;
+  color: #3c3c3c;
 }
 
 .state-box:nth-child(3n + 1):before {
-  content: 'A相';
+  content: "A相";
 }
 
 .state-box:nth-child(3n + 2):before {
-  content: 'B相';
+  content: "B相";
 }
 
 .state-box:nth-child(3n):before {
-  content: 'C相';
+  content: "C相";
 }
 
 .state-box:nth-child(3n) {
@@ -107,7 +136,7 @@ section {
 }
 
 .state-box li:after {
-  content: '';
+  content: "";
   border-left: dashed 3px #999;
   height: 100px;
   width: 0;
@@ -123,7 +152,40 @@ section {
   top: -50px;
   left: 50%;
   transform: translateX(-50%);
-  color: #3C3C3C;
+  color: #3c3c3c;
 }
-
+.wave-box {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9;
+  width: 800px;
+  height: 600px;
+  background-color: #000;
+}
+.wave-box > header {
+  height: 36px;
+  background-color: #000;
+  line-height: 36px;
+  text-align: center;
+  font-size: 16px;
+}
+.right-btn i {
+  color: #fff;
+  font-size: 18px;
+}
+.wave-box > div {
+  height: calc(100% - 36px);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  align-content: space-between;
+}
+.wave {
+  width: calc(50% - 1px);
+  height: calc(50% - 1px);
+  background-color: #fff;
+}
 </style>

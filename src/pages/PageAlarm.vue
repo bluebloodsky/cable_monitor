@@ -48,9 +48,6 @@
           <span> 共1页 0条</span>
         </div>
       </footer>
-      <div>
-        <canvas ref="canvas"></canvas>
-      </div>
     </section>
   </article>
 </template>
@@ -59,10 +56,9 @@
 import DashboardBox from "../components/DashboardBox";
 import ZlDatePicker from "../components/ZlDatePicker";
 import ZlComboTree from "../components/ZlComboTree";
-import { binaraySearch } from "@/shared/util";
-import { NAV_CONFIG_TREE, FIELDS } from "@/shared/constant";
-import  DrawPD  from "@/shared/util/draw/drawPD";
-import {PD_WAVE} from '@/json/json_pd'
+
+import { WIRES, SECTIONS } from "../json/json_device_info";
+
 export default {
   components: {
     DashboardBox,
@@ -73,26 +69,36 @@ export default {
     return {
       key: 12,
       arr: "",
-      treeDevice: NAV_CONFIG_TREE,
+      treeDevice: [],
       selDevice: null,
       startDate: null,
       endDate: null,
       fields: [
-        { name: "wire_name", caption: "采集时间" },
-        { name: "fault_handle", caption: "视在局放电量(pC)" },
-        { name: "fault_level", caption: "是否告警" }
+        { name: "wire_name", caption: "告警线路" },
+        { name: "fault_handle", caption: "告警时间" },
+        { name: "fault_level", caption: "告警类型" },
+        { name: "fault_level", caption: "告警级别" },
+        { name: "fault_level", caption: "详细描述" }
       ]
     };
   },
-  mounted(){
-    let canvas = this.$refs['canvas']
-    canvas.width = 250
-    canvas.height = 250
-    var pd = new DrawPD({
-      canvas:canvas,
-      points:PD_WAVE
-    })
-    pd.draw(5)
+  mounted() {
+    WIRES.map(wire => {
+      this.treeDevice.push({
+        name: wire.name,
+        label: wire.name_cn,
+        type: wire.type
+      });
+    });
+    SECTIONS.map(section => {
+      this.treeDevice.push({
+        name: section.name,
+        label: section.name_cn,
+        type: "SECTION"
+      });
+    });
+  },
+  methods: {
   }
 };
 </script>
@@ -171,7 +177,12 @@ footer input {
   font-size: 20px;
 }
 
-canvas{
+.wave {
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  height: 300px;
+  width: 400px;
   background-color: #fff;
 }
 </style>

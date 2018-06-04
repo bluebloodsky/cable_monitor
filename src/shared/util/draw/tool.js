@@ -37,6 +37,9 @@ export const CanvasDraw = (ctx, items) => {
       if (item.font) {
         ctx.font = item.font;
       }
+      if(item.fillStyle){
+        ctx.fillStyle = item.fillStyle
+      }
       if (item.rotate) {
         ctx.translate(item.x, item.y);
         ctx.rotate(item.rotate * Math.PI / 180);
