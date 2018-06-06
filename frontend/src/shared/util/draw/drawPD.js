@@ -113,14 +113,15 @@ function initMixin(DrawPD) {
       var maxX = this._coordinate.maxX
       var maxY = this._coordinate.maxY
       var maxZ = this._coordinate.maxZ
-      var maxXValue = 0; //x
-      var maxYValue = 0; //y
-      var maxZValue = 0; //z
-      var minZValue = 0; //-z
       let points = this.$options.points
       let step = this.$options.step
 
       this.items = []
+
+      var maxXValue = points[0][0][0]; //x
+      var maxYValue = points[0][0][1]//y
+      var maxZValue = points[0][0][2]; //z
+      var minZValue = points[0][0][2]; //-z
       for (var i = 0; i < points.length; i++) {
         for (var j = 0; j < points[i].length; j++) {
           if (maxXValue < parseFloat(points[i][j][0])) {

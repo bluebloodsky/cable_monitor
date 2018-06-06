@@ -27,9 +27,17 @@ img {
 
 html,
 body {
-  background-color: #0C2659;
+  /* background-color: #0C2659; */
+  /* background-color: #000; */
+  background-color: #081633;
+
 }
 
+@font-face{
+  font-family: "Yejing";
+  src: url('./yejing.ttf');
+
+}
 #app {
   font: normal 12px "微软雅黑", "Arial", "Verdana", "sans-serif";
   -webkit-font-smoothing: antialiased;

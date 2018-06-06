@@ -85,5 +85,8 @@ strong {
   font-size: 30px;
   margin-right: 10px;
   font-weight: normal;
+  font-family: "Yejing";
+  color: #FFE21E;
+  /* color: rgb(255, 238, 138); */
 }
 </style>

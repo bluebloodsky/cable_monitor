@@ -27,28 +27,23 @@ export default {
   top: 10px;
   bottom: 10px;
   left: 10px;
-  width: calc(50% - 80px);
-  border-radius: 5px;
+  width: calc(50% - 20px);
 }
 
 .wrapper-box > article:nth-child(2) {
   position: absolute;
   top: 10px;
   right: 10px;
-  width: calc(50% - 100px);
-  height: 120px;
-  border-radius: 5px;
-  /* background-color: #132d48; */
+  width: calc(50% - 20px);
+  height: 180px;
 }
 
 .wrapper-box > article:nth-child(3) {
   position: absolute;
-  top: 220px;
+  top: 230px;
   right: 10px;
-  width: calc(50% - 100px);
+  width: calc(50% - 20px);
   bottom: 10px;
-  border-radius: 5px;
-  /* background-color: #132d48; */
 }
 /*
 .wrapper-box>section:nth-child(4) {

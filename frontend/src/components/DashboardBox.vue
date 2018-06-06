@@ -17,19 +17,23 @@ export default {
 article {
   position: relative;
   border-style: solid;
-  border-width: 32px 37px;
+  border-width: 20px 25px;
+  padding: 5px;
+  width: 100%;
   border-image-source: url(../assets/border.png);
   border-image-slice: 32 37 fill;
   margin-top:30px;
+  border-radius: 5px;
+  box-sizing: border-box;
 }
 header {
   position: absolute;
   font-size: 24px;
   left: 0;
   width: 100%;
-  top: -48px;
+  top: -35px;
   text-align: center;
-  color: rgb(255, 238, 138);
+  /* color: rgb(255, 238, 138); */
 }
 
 section{
