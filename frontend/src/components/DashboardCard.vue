@@ -37,7 +37,8 @@ article > section {
   background: url(../assets/section.png) center center / 100% 100% no-repeat;
   /* border-image-slice: 32 37 fill; */
   /* border-width: 32px 37px; */
-  padding: 20px;
-  height: calc(100% - 126px);
+  padding: 1px;
+  height: calc(100% - 80px);
+  overflow-y: auto;
 }
 </style>

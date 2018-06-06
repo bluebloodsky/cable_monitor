@@ -43,8 +43,8 @@ export const MONITOR_TYPES = [{
 
 export const MONITOR_PARAMS = [{
   name: 'AppPaDsch',
-  name_cn: '视在局放放电量',
-  unit: 'pC',
+  name_cn: '局放幅值',
+  unit: 'mV',
   show_type:'Txt',
   monitor_type: 'GILC'
 }, {

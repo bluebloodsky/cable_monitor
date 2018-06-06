@@ -63,8 +63,8 @@ section > div {
 ul {
   margin-left: 50px;
   width: calc(100% - 100px);
-  border-left: 1px solid #729fb6;
-  border-right: 1px solid #729fb6;
+/*  border-left: 1px solid #729fb6;
+  border-right: 1px solid #729fb6;*/
 }
 li {
   height: 50px;

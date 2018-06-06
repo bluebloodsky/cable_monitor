@@ -4,12 +4,20 @@ export const NAV_MENUS = [{
   url: 'desktop'
 }, {
   name_cn: '数据总览',
-  icon: 'icon-dynamic',
+  icon: 'icon-browse',
   url: 'data'
 }, {
   name_cn: '告警记录',
   icon: 'icon-remind',
   url: 'alarm'
+}, {
+  name_cn: '巡检维护',
+  icon: 'icon-workbench',
+  url:'log'
+}, {
+  name_cn: '辅助决策',
+  icon: 'icon-dynamic',
+  url:'log'
 }, {
   name_cn: '日志查看',
   icon: 'icon-order',

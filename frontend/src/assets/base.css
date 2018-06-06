@@ -30,20 +30,21 @@ body {
   /* background-color: #0C2659; */
   /* background-color: #000; */
   background-color: #081633;
-
+  /*-webkit-filter: blur(1px);*/
 }
 
-@font-face{
+@font-face {
   font-family: "Yejing";
   src: url('./yejing.ttf');
-
 }
+
 #app {
   font: normal 12px "微软雅黑", "Arial", "Verdana", "sans-serif";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #fff;
 }
+
 
 input,
 button {
@@ -60,6 +61,7 @@ header button {
   border-radius: 3px;
   border: 1px solid #84CCDA;
 }
+
 
 
 /*基本盒子格式，定义为宽度包含边框内边距*/
@@ -79,7 +81,7 @@ header button {
   bottom: 0;
 }
 
-.right-pad-box{
+.right-pad-box {
   position: absolute;
   top: 0;
   left: 100%;
@@ -91,10 +93,11 @@ header button {
   transition: all 0.5s ease 0s;
 }
 
-.right-pad-box-show{
+.right-pad-box-show {
   left: 70%;
   right: 0;
 }
+
 button[type="text"] {
   background-color: transparent;
   border: none;
@@ -123,16 +126,17 @@ button[type="text"]:hover {
 }
 
 .right-btn {
- position: absolute;
- right: 5px;
- top: 0;
- bottom: 0;
- left: auto;
+  position: absolute;
+  right: 5px;
+  top: 0;
+  bottom: 0;
+  left: auto;
 }
 
-.right-btn .iconfont{
+.right-btn .iconfont {
   font-size: 22px;
 }
+
 
 /*去掉百度地图logo*/
 

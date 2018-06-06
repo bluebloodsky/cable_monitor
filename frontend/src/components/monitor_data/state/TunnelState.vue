@@ -2,7 +2,7 @@
   <section>
     <div v-for="item in node.children" class="content-box" @click="chooseItem(item)">
       <div>
-        <i class="iconfont" :class="item.icon" v-if="item.icon"></i>
+        <i class="iconfont" :class="item.icon"></i>
         <span>{{item.label}}</span>
       </div>
       <ul>
@@ -22,7 +22,7 @@ export default {
       this.$emit('choose-item', item)
     }
   }
-}
+};
 
 </script>
 <style scoped>
@@ -57,6 +57,7 @@ section {
 
 .content-box>div i {
   font-size: 60px;
+  min-width: 20px;
 }
 
 .content-box>ul {

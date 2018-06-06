@@ -10,7 +10,7 @@
       <span>视在局放：12pC</span>
         </li>
         <li> 
-      <span>视在局放：12pC</span>
+      <span>放电次数：20</span>
         </li>
       </ul>
     </div>

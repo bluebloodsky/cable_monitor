@@ -48,6 +48,12 @@ export default {
 };
 </script>
 <style scoped>
+section{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  font-size: 16px;
+}
 header {
   height: 36px;
   font-size: 16px;
@@ -77,21 +83,20 @@ header:after {
   border-top: 16px solid #132d48;
   border-right: 16px solid transparent;
 }
-section{
-  font-size: 16px;
-}
 section > div {
   max-height: calc(100% - 40px);
   overflow-y: auto;
 }
 
 footer {
+  position: absolute;
+  bottom: 0;
+  top: auto;
+  left: 0;
+  right: 0;
   height: 40px;
   line-height: 40px;
   padding-left: 10px;
-  border-left: 1px solid #2b4f69;
-  border-right: 1px solid #2b4f69;
-  border-bottom: 1px solid #2b4f69;
 }
 
 table {
