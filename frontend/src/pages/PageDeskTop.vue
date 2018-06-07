@@ -1,8 +1,8 @@
 <template>
   <div class="wrapper-box">
-    <DashboardBox title="概况信息统计">
+    <!-- <DashboardBox title="概况信息统计">
       <GeneralInfo></GeneralInfo>
-    </DashboardBox>
+    </DashboardBox> -->
     <DashboardBox title="视频监控">
       <Camera></Camera>
     </DashboardBox>
@@ -36,12 +36,12 @@ export default {
   left: 10px;
   top: 10px;
   right: 75%;
-  bottom: auto;
-  height: calc(50% + 10px);
+  bottom: 20px;
+  /* height: calc(50% + 10px); */
   width: auto;
 }
 
-.wrapper-box>article:nth-child(2) {
+/* .wrapper-box>article:nth-child(2) {
   position: absolute;
   left: 10px;
   top: auto;
@@ -49,9 +49,9 @@ export default {
   bottom: 20px;
   height: calc(50% - 50px);
   width: auto;
-}
+} */
 
-.wrapper-box>article:nth-child(3) {
+.wrapper-box>article:nth-child(2) {
   position: absolute;
   left: calc(25% + 10px);
   top: 10px;
@@ -61,7 +61,7 @@ export default {
   height: auto;
 }
 
-.wrapper-box>article:nth-child(4) {
+.wrapper-box>article:nth-child(3) {
   position: absolute;
   left: calc(75% - 90px);
   top: 10px;
@@ -71,7 +71,7 @@ export default {
   width: auto;
 }
 
-.wrapper-box>article:nth-child(5) {
+.wrapper-box>article:nth-child(4) {
   position: absolute;
   left: calc(75% - 90px);
   top: 250px;

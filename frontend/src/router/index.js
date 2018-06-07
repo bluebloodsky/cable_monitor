@@ -4,6 +4,7 @@ import PageHome from '../pages/PageHome'
 import PageNotFind from '../pages/PageNotFind'
 import PageDeskTop from '../pages/PageDeskTop'
 import PageMonitorData from '../pages/PageMonitorData'
+import PageInspectView from '../pages/PageInspectView'
 import PageConfig from '../pages/PageConfig'
 import PageAlarm from '../pages/PageAlarm'
 Vue.use(Router)
@@ -26,6 +27,9 @@ const router = new Router({
     }, {
       path: 'data',
       component: PageMonitorData
+    }, {
+      path: 'inspect-view',
+      component: PageInspectView
     }, {
       path: 'alarm',
       component: PageAlarm

@@ -19,17 +19,18 @@
         </TunnelState>
         <template v-else-if="currentNode.type == 'GIL'">
           <GILState :node="currentNode" v-if="currentPage == 0"></GILState>
-          <TxtRealData :node="currentNode" v-if="currentPage == 1"></TxtRealData>
-          <ChartTableHisData v-if = "currentPage == 2"></ChartTableHisData>
+          <TxtRealData :node="currentNode" v-else-if="currentPage == 1"></TxtRealData>
+          <ChartTableHisData :node="currentNode"  v-if = "currentPage == 2"></ChartTableHisData>
         </template>
         <template v-else-if="currentNode.type == 'WIRE'">
           <WireState v-if="currentPage == 0" :node="currentNode"></WireState>
-          <GaugeRealData :node="currentNode" v-if="currentPage == 1">
-          </GaugeRealData>
+          <GaugeRealData :node="currentNode" v-if="currentPage == 1"> </GaugeRealData>
+          <ChartTableHisData :node="currentNode"  v-if = "currentPage == 2"></ChartTableHisData>
         </template>
         <template v-else-if="currentNode.type == 'SECTION'">
           <SectionState :node="currentNode" v-if="currentPage == 0"></SectionState>
           <GaugeRealData :node="currentNode" v-if="currentPage == 1"></GaugeRealData>
+          <ChartTableHisData :node="currentNode"  v-if = "currentPage == 2"></ChartTableHisData>
         </template>
       </section>
     </section>

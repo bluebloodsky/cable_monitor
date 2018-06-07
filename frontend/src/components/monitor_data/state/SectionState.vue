@@ -11,15 +11,6 @@ export default {
     node: Object
   },
   mounted() {
-    let canvas = this.$refs["canvas"]
-    let [width,height] = [this.$refs['wrapper'].clientWidth , this.$refs['wrapper'].clientHeight]
-    canvas.width= width
-    canvas.height= height
-    let ctx = canvas.getContext("2d")
-    ctx.fillRect(0,0,100,100)
-    // let source = this.$refs["source"]
-    // ctx.drawImage(source, 0, 0 ,width,height)
-
   }
 };
 </script>

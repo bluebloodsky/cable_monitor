@@ -11,7 +11,7 @@ export default {
     }
   },
   mounted() {
-    for (let i = 1; i < 5; i++) {
+    for (let i = 1; i < 4; i++) {
       this.imgSrcs.push('http://61.83.161.2:10000/mjpeg.cgi?channel=' + i + '&user=guest&password=guest&time=1524039431169')
     }
   },
@@ -33,8 +33,8 @@ section {
 }
 
 img {
-  height: calc(50% - 5px);
-  width: calc(50% - 5px);
+  height: calc(33% - 5px);
+  width: calc(100% - 5px);
 }
 
 img:hover {

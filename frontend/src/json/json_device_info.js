@@ -32,6 +32,14 @@ export const SECTIONS = [{
   name: 'fangqu3',
   name_cn: '3#防区',
   img_url: '/static/img/section.png'
+}, {
+  name: 'fangqu4',
+  name_cn: '4#防区',
+  img_url: '/static/img/section.png'
+}, {
+  name: 'fangqu5',
+  name_cn: '5#防区',
+  img_url: '/static/img/section.png'
 }]
 
 export const MONITOR_DEVICES = [{

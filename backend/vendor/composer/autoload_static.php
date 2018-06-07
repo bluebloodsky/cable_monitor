@@ -9,8 +9,8 @@ class ComposerStaticInit71d0d87fc3b8ad11fc851861933cdfc3
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
-        '253c157292f75eb38082b5acb06f3f01' => __DIR__ . '/..' . '/nikic/fast-route/src/functions.php',
         '72579e7bd17821bb1321b87411366eae' => __DIR__ . '/..' . '/illuminate/support/helpers.php',
+        '253c157292f75eb38082b5acb06f3f01' => __DIR__ . '/..' . '/nikic/fast-route/src/functions.php',
         'c7359326b6707d98bdc176bf9ddeaebf' => __DIR__ . '/..' . '/catfan/medoo/medoo.php',
     );
 
@@ -48,10 +48,6 @@ class ComposerStaticInit71d0d87fc3b8ad11fc851861933cdfc3
         'D' => 
         array (
             'Dflydev\\FigCookies\\' => 19,
-        ),
-        'C' => 
-        array (
-            'Carbon\\' => 7,
         ),
     );
 
@@ -120,10 +116,10 @@ class ComposerStaticInit71d0d87fc3b8ad11fc851861933cdfc3
         array (
             0 => __DIR__ . '/..' . '/dflydev/fig-cookies/src/Dflydev/FigCookies',
         ),
-        'Carbon\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon',
-        ),
+    );
+
+    public static $fallbackDirsPsr4 = array (
+        0 => __DIR__ . '/..' . '/nesbot/carbon/src',
     );
 
     public static $prefixesPsr0 = array (
@@ -148,6 +144,7 @@ class ComposerStaticInit71d0d87fc3b8ad11fc851861933cdfc3
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit71d0d87fc3b8ad11fc851861933cdfc3::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit71d0d87fc3b8ad11fc851861933cdfc3::$prefixDirsPsr4;
+            $loader->fallbackDirsPsr4 = ComposerStaticInit71d0d87fc3b8ad11fc851861933cdfc3::$fallbackDirsPsr4;
             $loader->prefixesPsr0 = ComposerStaticInit71d0d87fc3b8ad11fc851861933cdfc3::$prefixesPsr0;
 
         }, null, ClassLoader::class);

@@ -13,7 +13,7 @@ export const NAV_MENUS = [{
 }, {
   name_cn: '巡检维护',
   icon: 'icon-workbench',
-  url:'log'
+  url:'inspect-view'
 }, {
   name_cn: '辅助决策',
   icon: 'icon-dynamic',
