@@ -81,11 +81,12 @@ export default {
   justify-content: flex-start;
   flex-wrap: wrap;
   align-content: flex-start;
+  height: 100%;
 }
 
 .state-box {
   width: 100%;
-  height: 30px;
+  height: 10px;
   margin: 10% 5px 0 5px;
   position: relative;
 }
@@ -104,22 +105,25 @@ export default {
 
 .state-box:before {
   position: absolute;
-  top: -50%;
+  top: -20px;
   transform: translateY(50%);
-  left: 30px;
-  color: #3c3c3c;
+  left: 20px;
+  font-size: 16px;
 }
 
 .state-box:nth-child(3n + 1):before {
   content: "A相";
+  color: yellow;
 }
 
 .state-box:nth-child(3n + 2):before {
   content: "B相";
+  color: green;
 }
 
 .state-box:nth-child(3n):before {
   content: "C相";
+  color: red;
 }
 
 .state-box:nth-child(3n) {
@@ -138,7 +142,7 @@ export default {
 .state-box li:after {
   content: "";
   border-left: dashed 3px #999;
-  height: 100px;
+  height: 80px;
   width: 0;
   position: absolute;
   right: 0;
