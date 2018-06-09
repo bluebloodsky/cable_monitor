@@ -1,20 +1,25 @@
 <template>
-  <section class="wrapper">
-    <img src="../../../assets/zxt.png">
-    <div :style="{ left:device.positionX + '%' , top:device.positionY  + '%'}" v-for="device in showDevices">
-      <button type="text"> 
-        <i class="iconfont good icon-circle"></i>
-      </button>
-      <ul>
-        <li> 
-      <span>视在局放：12pC</span>
-        </li>
-        <li> 
-      <span>放电次数：20</span>
-        </li>
-      </ul>
-    </div>
-  </section>
+  <article class="wrapper">
+    <section class="state-box">
+      <img src="../../../assets/zxt.png">
+      <div :style="{ left:device.positionX + '%' , top:device.positionY  + '%'}" v-for="device in showDevices">
+        <button type="text"> 
+          <i class="iconfont good icon-circle"></i>
+        </button>
+        <ul>
+          <li> 
+        <span>视在局放：12pC</span>
+          </li>
+          <li> 
+        <span>放电次数：20</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+    <section class="wave-box">
+      
+    </section>
+  </article>
 </template>
 <script>
 import { MONITOR_DEVICES } from "@/json/json_device_info";
@@ -43,7 +48,12 @@ export default {
   bottom: 10px;
   overflow: hidden;
 }
-img {
+.state-box{
+  width: 100%;
+  height: 60%;
+  position: relative;
+}
+.state-box img {
   position: absolute;
   left: 0;
   top: 0;
@@ -54,11 +64,11 @@ img {
 .iconfont {
   font-size: 20px;
 }
-.wrapper > div {
+.state-box > div {
   position: absolute;
   line-height: 20px;
 }
-.wrapper ul {
+.state-box ul {
   position: absolute;
   top: 0;
   left: 30px;

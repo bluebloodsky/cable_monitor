@@ -12,17 +12,9 @@
         </li>
       </ul>
     </div>
-    <div class="wave-box" v-if="showWaveFlg">
-      <header>
-        <span>图谱展示</span>
-        <div class="right-btn">
-          <button type="text" @click="hideWave"><i class="iconfont
-           icon-close"></i></button>
-        </div>
-      </header>
-      <div>
-      <p-d-wave :points="wave" class="wave" v-for="wave in waves"></p-d-wave>
-      </div>
+    <hr>
+    <div class="wave-box">
+      <PDWave :points="wave" :type="PRPS" class="wave" v-for="wave in waves"></PDWave>
     </div>
   </section>
 </template>
@@ -86,17 +78,18 @@ export default {
 
 .state-box {
   width: 100%;
-  height: 10px;
-  margin: 10% 5px 0 5px;
+  height: 20%;
   position: relative;
 }
 
 .state-box ul {
   width: calc(100% -70px);
-  /*background-color: #DAEAF7;*/
   background-color: #3c3c3c;
   height: 3px;
   margin-left: 70px;
+  margin-top: 5%;
+  transform: translateY(-50%);
+
   border-radius: 3px;
   /*border: 1px solid #CED4DF;*/
   display: flex;
@@ -105,8 +98,9 @@ export default {
 
 .state-box:before {
   position: absolute;
-  top: -20px;
-  transform: translateY(50%);
+  top: 0;
+  margin-top: 5%;
+  transform: translateY(-50%);
   left: 20px;
   font-size: 16px;
 }
@@ -126,9 +120,9 @@ export default {
   color: red;
 }
 
-.state-box:nth-child(3n) {
+/*.state-box:nth-child(3n) {
   margin-bottom: 100px;
-}
+}*/
 
 .state-box li {
   float: left;
@@ -159,28 +153,12 @@ export default {
   color: #3c3c3c;
 }
 .wave-box {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 9;
-  width: 800px;
-  height: 600px;
-  background-color: #000;
-}
-.wave-box > header {
-  height: 36px;
-  background-color: #000;
-  line-height: 36px;
-  text-align: center;
-  font-size: 16px;
-}
-.right-btn i {
-  color: #fff;
-  font-size: 18px;
-}
-.wave-box > div {
-  height: calc(100% - 36px);
+  position: absolute;
+  top: 60%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #fff;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -188,8 +166,9 @@ export default {
   align-content: space-between;
 }
 .wave {
-  width: calc(50% - 1px);
-  height: calc(50% - 1px);
+  width: calc(25% - 1px);
+  height: calc(100% - 1px);
   background-color: #fff;
+  border-right: 1px solid #000;
 }
 </style>

@@ -10,10 +10,14 @@
 </template>
 
 <script>
-import DrawPD from "@/shared/util/draw/drawPD";
+import DrawPRPS from "@/shared/util/draw/DrawPRPS";
+import DrawPRPD from "@/shared/util/draw/DrawPRPD";
 export default {
   props: {
-    points: Array
+    points: Array ,
+    type: {
+      default:'PRPD'
+    }
   },
   data() {
     return {
@@ -23,7 +27,12 @@ export default {
     };
   },
   mounted() {
-    this.chart = new DrawPD(this.$refs["container"]);
+    if(this.type == 'PRPS'){
+      this.chart = new DrawPRPS(this.$refs["container"]);
+    }
+    else{
+      this.chart = new DrawPRPD(this.$refs["container"]);
+    }
     this.chart.setOption({
       points: this.points
     });
