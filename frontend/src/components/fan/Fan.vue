@@ -7,19 +7,18 @@
 export default {
   props: {
     speed: {
-      default: 2
+      default: 1
     }
   },
   mounted() {
-    this.refs.rotator.style.animation = 'rotate ' + 1 / this.speed + 's linear infinite'
+    this.$refs["rotator"].style["animation-duration"] = 1 / this.speed + "s";
   },
   watch: {
     speed(newVal) {
-      this.refs.rotator.style.animation = 'rotate ' + 1 / newVal + 's linear infinite'
+      this.$refs["rotator"].style["animation-duration"] = 1 / this.speed + "s";
     }
   }
 };
-
 </script>
 <style scoped>
 section {
@@ -34,7 +33,7 @@ img {
   position: absolute;
   left: 7px;
   top: 4px;
-  animation: rotate 0.5s linear infinite;
+  animation: rotate linear infinite;
 }
 
 @keyframes rotate {
@@ -59,5 +58,4 @@ img {
     -o-transform: rotate(-360deg) skew(0deg) scale(1);
   }
 }
-
 </style>

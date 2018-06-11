@@ -34,7 +34,7 @@ export default {
   },
   data(){
     return {
-         waves: [PD_WAVE, PD_WAVE1, PD_WAVE2 , PD_WAVE],
+         waves: [PD_WAVE, PD_WAVE1, PD_WAVE2],
     }
   },
   computed: {
@@ -93,12 +93,12 @@ export default {
   background-color: #fff;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   align-content: space-between;
 }
 .wave {
-  width: calc(25% - 1px);
+  width: calc(33% - 1px);
   height: calc(100% - 1px);
   background-color: #fff;
   border-right: 1px solid #000;

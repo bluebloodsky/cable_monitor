@@ -1,7 +1,10 @@
 <template>
 <section class="wrapper" ref="wrapper">
    <img :src="node.img_url">
-   <Fan class="fan"></Fan>
+   <Fan class="fan" style="left:3%" :speed="2"></Fan>
+   <Fan class="fan" style="left:6%" :speed="1"></Fan>
+   <Fan class="fan" style="left:15%" :speed="5"></Fan>
+   <Fan class="fan" style="left:18%" :speed="3"></Fan>
 </section>
 </template>
 <script>
@@ -33,8 +36,7 @@ img{
 }
 .fan{
   position: absolute;
-  left: 3%;
-  top: 27%;
+  top: calc(32% - 41px);
   z-index: 99;
 }
 </style>

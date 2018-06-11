@@ -10,13 +10,13 @@
 </template>
 
 <script>
-import DrawPRPS from "@/shared/util/draw/DrawPRPS";
-import DrawPRPD from "@/shared/util/draw/DrawPRPD";
+import DrawPRPS from "@/shared/util/draw/drawPRPS";
+import DrawPRPD from "@/shared/util/draw/drawPRPD";
 export default {
   props: {
-    points: Array ,
+    points: Array,
     type: {
-      default:'PRPD'
+      default: "PRPD"
     }
   },
   data() {
@@ -27,10 +27,9 @@ export default {
     };
   },
   mounted() {
-    if(this.type == 'PRPS'){
+    if (this.type == "PRPS") {
       this.chart = new DrawPRPS(this.$refs["container"]);
-    }
-    else{
+    } else {
       this.chart = new DrawPRPD(this.$refs["container"]);
     }
     this.chart.setOption({
@@ -43,13 +42,13 @@ export default {
       }
     }, 100);
   },
-  methods:{
-      play(){
-          this.playFlg = !this.playFlg
-          if(this.period >= this.points.length){
-              this.period = 0
-          }
+  methods: {
+    play() {
+      this.playFlg = !this.playFlg;
+      if (this.period >= this.points.length) {
+        this.period = 0;
       }
+    }
   },
   watch: {
     period(newVal) {
