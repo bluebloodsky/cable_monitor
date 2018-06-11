@@ -1,12 +1,13 @@
 <template>
 <section class="wrapper" ref="wrapper">
-   <img :src="node.img_url" alt="无" ref="source">
-  <canvas ref="canvas">
-  </canvas>
+   <img :src="node.img_url">
+   <Fan class="fan"></Fan>
 </section>
 </template>
 <script>
+import Fan from '@/components/fan/Fan'
 export default {
+  components:{Fan},
   props: {
     node: Object
   },
@@ -29,5 +30,11 @@ img{
   top: 0;
   width: 100%;
   height: 100%;
+}
+.fan{
+  position: absolute;
+  left: 3%;
+  top: 27%;
+  z-index: 99;
 }
 </style>
