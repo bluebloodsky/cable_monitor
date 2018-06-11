@@ -14,7 +14,7 @@
     </div>
     <hr>
     <div class="wave-box">
-      <PDWave :points="wave" :type="PRPS" class="wave" v-for="wave in waves"></PDWave>
+      <PDWave :points="wave" type="PRPS" class="wave" v-for="wave in waves"></PDWave>
     </div>
   </section>
 </template>

@@ -16,14 +16,26 @@
         </ul>
       </div>
     </section>
+    <section class="wave-box">
+       <PDWave :points="wave" type="PRPD" class="wave" v-for="wave in waves"></PDWave>
+    </section>
   </article>
 </template>
 <script>
+import PDWave from "@/components/PDWave";
 import { MONITOR_DEVICES } from "@/json/json_device_info";
 import { MONITOR_TYPES } from "@/json/json_base_info";
+import { PD_WAVE, PD_WAVE1, PD_WAVE2 } from "@/json/json_pd";
+
 export default {
+  components:{PDWave},
   props: {
     node: Object
+  },
+  data(){
+    return {
+         waves: [PD_WAVE, PD_WAVE1, PD_WAVE2 , PD_WAVE],
+    }
   },
   computed: {
     showDevices() {
@@ -47,7 +59,7 @@ export default {
 }
 .state-box{
   width: 100%;
-  height: 100%;
+  height: 60%;
   position: relative;
 }
 .state-box img {
@@ -70,5 +82,25 @@ export default {
   top: 0;
   left: 30px;
   width: 300px;
+}
+
+.wave-box {
+  position: absolute;
+  top: 60%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #fff;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  align-content: space-between;
+}
+.wave {
+  width: calc(25% - 1px);
+  height: calc(100% - 1px);
+  background-color: #fff;
+  border-right: 1px solid #000;
 }
 </style>

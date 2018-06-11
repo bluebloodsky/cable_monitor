@@ -23,7 +23,10 @@
           <ChartTableHisData :node="currentNode"  v-if = "currentPage == 2"></ChartTableHisData>
         </template>
         <template v-else-if="currentNode.type == 'WIRE'">
-          <WireState v-if="currentPage == 0" :node="currentNode"></WireState>
+          <template  v-if="currentPage == 0">
+          <PDState :node="currentNode" v-if="currentNode.monitor_type_name =='SPDC'"></PDState>  
+          <WireState :node="currentNode" v-else></WireState>          
+          </template>
           <GaugeRealData :node="currentNode" v-if="currentPage == 1"> </GaugeRealData>
           <ChartTableHisData :node="currentNode"  v-if = "currentPage == 2"></ChartTableHisData>
         </template>
@@ -40,6 +43,8 @@
 import ZlTree from "../components/ZlTree";
 import TunnelState from "../components/monitor_data/state/TunnelState";
 import GILState from "../components/monitor_data/state/GILState";
+import PDState from "../components/monitor_data/state/PDState";
+
 import WireState from "../components/monitor_data/state/WireState";
 import SectionState from "../components/monitor_data/state/SectionState";
 import CameraState from "../components/monitor_data/state/CameraState";
@@ -60,6 +65,7 @@ export default {
     ZlTree,
     TunnelState,
     GILState,
+    PDState,
     WireState,
     SectionState,
     CameraState,
