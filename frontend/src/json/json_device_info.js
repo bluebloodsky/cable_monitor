@@ -77,8 +77,8 @@ export const MONITOR_DEVICES = [{
   wire: 'xiafeng3',
   section: 'fangqu1',
   phase: 'A相',
-  positionX: 5,
-  positionY: 5
+  positionX: 27,
+  positionY: 50
 }, {
   name: 'jf2',
   name_cn: '局放监测点2',
@@ -86,8 +86,8 @@ export const MONITOR_DEVICES = [{
   wire: 'xiafeng3',
   section: 'fangqu1',
   phase: 'B相',
-  positionX: 15,
-  positionY: 5
+  positionX: 27,
+  positionY: 58
 }, {
   name: 'jf3',
   name_cn: '局放监测点3',
@@ -95,8 +95,8 @@ export const MONITOR_DEVICES = [{
   wire: 'xiafeng3',
   section: 'fangqu1',
   phase: 'C相',
-  positionX: 25,
-  positionY: 5
+  positionX: 27,
+  positionY: 66
 }, {
   name: 'jf4',
   name_cn: '局放监测点4',
@@ -104,8 +104,8 @@ export const MONITOR_DEVICES = [{
   wire: 'xiafeng3',
   section: 'fangqu2',
   phase: 'A相',
-  positionX: 5,
-  positionY: 30
+  positionX: 46,
+  positionY: 50
 }, {
   name: 'jf5',
   name_cn: '局放监测点5',
@@ -113,8 +113,8 @@ export const MONITOR_DEVICES = [{
   wire: 'xiafeng3',
   section: 'fangqu2',
   phase: 'B相',
-  positionX: 15,
-  positionY: 30
+  positionX: 46,
+  positionY: 58
 }, {
   name: 'jf6',
   name_cn: '局放监测点6',
@@ -122,8 +122,8 @@ export const MONITOR_DEVICES = [{
   wire: 'xiafeng3',
   section: 'fangqu2',
   phase: 'C相',
-  positionX: 25,
-  positionY: 30
+  positionX: 46,
+  positionY: 66
 }, {
   name: 'jf7',
   name_cn: '局放监测点7',
@@ -131,8 +131,8 @@ export const MONITOR_DEVICES = [{
   wire: 'xiafeng3',
   section: 'fangqu2',
   phase: 'A相',
-  positionX: 5,
-  positionY: 55
+  positionX: 65,
+  positionY: 50
 }, {
   name: 'jf8',
   name_cn: '局放监测点8',
@@ -140,8 +140,8 @@ export const MONITOR_DEVICES = [{
   wire: 'xiafeng3',
   section: 'fangqu2',
   phase: 'B相',
-  positionX: 15,
-  positionY: 55
+  positionX: 65,
+  positionY: 58
 }, {
   name: 'jf9',
   name_cn: '局放监测点9',
@@ -149,8 +149,8 @@ export const MONITOR_DEVICES = [{
   wire: 'xiafeng3',
   section: 'fangqu2',
   phase: 'C相',
-  positionX: 25,
-  positionY: 55
+  positionX: 65,
+  positionY: 66
 }, {
   name: 'jf10',
   name_cn: '局放监测点10',
@@ -158,8 +158,53 @@ export const MONITOR_DEVICES = [{
   wire: 'xiafeng4',
   section: 'fangqu2',
   phase: 'A相',
-  positionX: 35,
-  positionY: 55
+  positionX: 27,
+  positionY: 50
+}, {
+  name: 'zll1',
+  name_cn: '载流量监测点1',
+  monitor_type: 'SPTR',
+  wire: 'xiafeng3',
+  section: 'fangqu1',
+  phase: 'A相',
+  positionX: 27,
+  positionY: 50
+}, {
+  name: 'zll2',
+  name_cn: '载流量监测点2',
+  monitor_type: 'SPTR',
+  wire: 'xiafeng3',
+  section: 'fangqu1',
+  phase: 'A相',
+  positionX: 46,
+  positionY: 50
+}, {
+  name: 'zll3',
+  name_cn: '载流量监测点3',
+  monitor_type: 'SPTR',
+  wire: 'xiafeng3',
+  section: 'fangqu1',
+  phase: 'A相',
+  positionX: 65,
+  positionY: 50
+}, {
+  name: 'jyjx1',
+  name_cn: '绝缘介损监测点1',
+  monitor_type: 'SSBH',
+  wire: 'xiafeng3',
+  section: 'fangqu1',
+  phase: 'A相',
+  positionX: 27,
+  positionY: 50
+}, {
+  name: 'jyjx2',
+  name_cn: '绝缘介损监测点2',
+  monitor_type: 'SSBH',
+  wire: 'xiafeng3',
+  section: 'fangqu1',
+  phase: 'A相',
+  positionX: 46,
+  positionY: 50
 }, {
   name: 'wd1',
   name_cn: '光纤测温监测点1',
@@ -167,7 +212,7 @@ export const MONITOR_DEVICES = [{
   wire: 'xiafeng3',
   section: 'fangqu1',
   phase: 'A相',
-  positionX: 10,
+  positionX: 27,
   positionY: 50
 }, 
 {

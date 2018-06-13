@@ -7,11 +7,9 @@
           <i class="iconfont good icon-circle"></i>
         </button>
         <ul>
-          <li> 
-        <span>视在局放：12pC</span>
-          </li>
-          <li> 
-        <span>放电次数：20</span>
+          <li v-for="param in device.params">
+            <span>{{param.name_cn}}：</span>
+            <span><strong>{{param.val}}</strong>{{param.unit}}</span>
           </li>
         </ul>
       </div>
@@ -21,17 +19,50 @@
 <script>
 import { MONITOR_DEVICES } from "@/json/json_device_info";
 import { MONITOR_TYPES } from "@/json/json_base_info";
+import { MONITOR_PARAMS } from "../../../json/json_base_info";
 export default {
   props: {
     node: Object
   },
+  data(){
+    return {
+      currentData:[]
+    }
+  },
   computed: {
     showDevices() {
-      return MONITOR_DEVICES.filter(
-        device =>
-          device.monitor_type == this.node.monitor_type_name &&
-          device.wire == this.node.name
+      let l_devices = [];
+      /*过滤所有该监测类型参数*/
+      let l_params = MONITOR_PARAMS.filter(
+        param => param.monitor_type == this.node.monitor_type_name
       );
+      /*获取每个该线路该监测类型设备实时数据*/
+      MONITOR_DEVICES.map(device => {
+        if (
+          this.node.name == (device.wire ? device.wire : device.section) &&
+          device.monitor_type == this.node.monitor_type_name
+        ) {
+          l_devices.push(device);
+          let device_data = this.currentData.find(
+            adata => adata.device_name == device.name
+          );
+          device.params = [];
+          l_params.map(param => {
+            let l_param = {
+              name: param.name,
+              name_cn: param.name_cn,
+              unit: param.unit,
+              show_type: param.show_type,
+              val: "/ "
+            };
+            if (device_data && device_data[param.name]) {
+              l_param.val = device_data[param.name];
+            }
+            device.params.push(l_param);
+          });
+        }
+      });
+      return l_devices;
     }
   }
 };
@@ -45,7 +76,7 @@ export default {
   bottom: 10px;
   overflow: hidden;
 }
-.state-box{
+.state-box {
   width: 100%;
   height: 100%;
   position: relative;
@@ -68,7 +99,11 @@ export default {
 .state-box ul {
   position: absolute;
   top: 0;
-  left: 30px;
+  left: -9999px;
   width: 300px;
+}
+
+.state-box > div:hover ul{
+  left: 30px;
 }
 </style>

@@ -19,7 +19,7 @@ function initMixin(DrawPRPS) {
         zDesc: '幅值',
         phaseX: 0,
         phaseY: Math.PI  / 4,
-        colors: ['grey', 'grey', 'blue', '#3c3c3c', 'red', 'blue'],
+        colors: ['lightgrey', 'lightgrey', 'blue', '#3c3c3c', 'red', 'blue'],
         step: 1,
       }
     },
@@ -52,7 +52,7 @@ function initMixin(DrawPRPS) {
           y: 20,
           text: this.$options.title,
           font: '14px Arial',
-          fillStyle: this.$options.colors[3]
+          fill: this.$options.colors[3]
         })
       this.$options.xDesc &&
         this.axes.push({
@@ -60,7 +60,7 @@ function initMixin(DrawPRPS) {
           x: this._coordinateMap(maxX, maxY, 0)[0] + 20,
           y: this._coordinateMap(maxX, maxY, 0)[1] + 5,
           text: this.$options.xDesc,
-          fillStyle: this.$options.colors[3]
+          fill: this.$options.colors[3]
         })
 
       this.$options.zDesc &&
@@ -70,7 +70,7 @@ function initMixin(DrawPRPS) {
           y: this._coordinateMap(0, maxY, maxZ)[1] - 10,
           text: this.$options.zDesc,
           rotate: 270,
-          fillStyle: this.$options.colors[3]
+          fill: this.$options.colors[3]
         })
       for (var i = 0; i < 5; i++) {
         this.axes.push({
@@ -143,13 +143,13 @@ function initMixin(DrawPRPS) {
         x: this._coordinateMap(-maxX, 0, maxZ - 10)[0],
         y: this._coordinateMap(-maxX, 0, maxZ - 10)[1],
         text: '最大值：' + maxZValue.toFixed(2),
-        fillStyle: this.$options.colors[4]
+        fill: this.$options.colors[4]
       }, {
         type: 'text',
         x: this._coordinateMap(-maxX, 0, maxZ - 30)[0],
         y: this._coordinateMap(-maxX, 0, maxZ - 30)[1],
         text: '最小值：' + minZValue.toFixed(2),
-        fillStyle: this.$options.colors[5]
+        fill: this.$options.colors[5]
       })
       minZValue = Math.floor(minZValue ) 
       var ZRange = Math.round((maxZValue - minZValue) * 1.2 / 10) * 10;
@@ -163,13 +163,13 @@ function initMixin(DrawPRPS) {
           x: this._coordinateMap(0, maxY, maxZ * i / 4)[0] - 45,
           y: this._coordinateMap(0, maxY, maxZ * i / 4)[1],
           text: (ZRange * i / 4 + minZValue).toFixed(2),
-          fillStyle: this.$options.colors[3]
+          fill: this.$options.colors[3]
         }, {
           type: 'text',
           x: this._coordinateMap(maxX * i / 4, maxY, 0)[0] - 10,
           y: this._coordinateMap(maxX * i / 4, maxY, 0)[1] + 15,
           text: maxXValue * i / 4,
-          fillStyle: this.$options.colors[3]
+          fill: this.$options.colors[3]
         })
       }
       //将数据转化为三维图上的点,并将前后两个点依次相连成线
