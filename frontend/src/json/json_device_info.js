@@ -168,25 +168,25 @@ export const MONITOR_DEVICES = [{
   section: 'fangqu1',
   phase: 'A相',
   positionX: 27,
-  positionY: 50
+  positionY: 51
 }, {
   name: 'zll2',
   name_cn: '载流量监测点2',
   monitor_type: 'SPTR',
   wire: 'xiafeng3',
   section: 'fangqu1',
-  phase: 'A相',
-  positionX: 46,
-  positionY: 50
+  phase: 'B相',
+  positionX: 27,
+  positionY: 58
 }, {
   name: 'zll3',
   name_cn: '载流量监测点3',
   monitor_type: 'SPTR',
   wire: 'xiafeng3',
   section: 'fangqu1',
-  phase: 'A相',
-  positionX: 65,
-  positionY: 50
+  phase: 'C相',
+  positionX: 27,
+  positionY: 66
 }, {
   name: 'jyjx1',
   name_cn: '绝缘介损监测点1',
@@ -195,27 +195,53 @@ export const MONITOR_DEVICES = [{
   section: 'fangqu1',
   phase: 'A相',
   positionX: 27,
-  positionY: 50
+  positionY: 51
 }, {
   name: 'jyjx2',
   name_cn: '绝缘介损监测点2',
   monitor_type: 'SSBH',
   wire: 'xiafeng3',
   section: 'fangqu1',
-  phase: 'A相',
-  positionX: 46,
-  positionY: 50
+  phase: 'B相',
+  positionX: 27,
+  positionY: 58
 }, {
-  name: 'wd1',
+  name: 'jyjx3',
+  name_cn: '绝缘介损监测点3',
+  monitor_type: 'SSBH',
+  wire: 'xiafeng3',
+  section: 'fangqu1',
+  phase: 'C相',
+  positionX: 27,
+  positionY: 66
+}, {
+  name: 'gxcw1',
   name_cn: '光纤测温监测点1',
   monitor_type: 'STMP',
   wire: 'xiafeng3',
   section: 'fangqu1',
   phase: 'A相',
-  positionX: 27,
-  positionY: 50
-}, 
-{
+  positionX: 46,
+  positionY: 51
+}, {
+  name: 'gxcw3',
+  name_cn: '光纤测温监测点2',
+  monitor_type: 'STMP',
+  wire: 'xiafeng3',
+  section: 'fangqu1',
+  phase: 'B相',
+  positionX: 46,
+  positionY: 58
+}, {
+  name: 'gxcw3',
+  name_cn: '光纤测温监测点3',
+  monitor_type: 'STMP',
+  wire: 'xiafeng3',
+  section: 'fangqu1',
+  phase: 'C相',
+  positionX: 46,
+  positionY: 66
+}, {
   name: 'hj1',
   name_cn: '环境监测点1',
   monitor_type: 'ENVR',

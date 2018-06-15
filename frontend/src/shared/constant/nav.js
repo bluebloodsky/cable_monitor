@@ -17,7 +17,7 @@ export const NAV_MENUS = [{
 }, {
   name_cn: '辅助决策',
   icon: 'icon-dynamic',
-  url:'log'
+  url:'support'
 }, {
   name_cn: '日志查看',
   icon: 'icon-order',

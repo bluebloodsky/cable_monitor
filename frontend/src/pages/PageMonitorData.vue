@@ -13,28 +13,9 @@
         </ul>
       </header>
       <section>
-        <CameraState :node="currentNode" v-if="currentNode.type == 'CAMR_MONITOR'">
-        </CameraState>
-        <TunnelState :node="currentNode" v-else-if="!currentNode.isLeaf" @choose-item="onChooseItem">
-        </TunnelState>
-        <template v-else-if="currentNode.type == 'GIL'">
-          <GILState :node="currentNode" v-if="currentPage == 0"></GILState>
-          <TxtRealData :node="currentNode" v-else-if="currentPage == 1"></TxtRealData>
-          <ChartTableHisData :node="currentNode"  v-if = "currentPage == 2"></ChartTableHisData>
-        </template>
-        <template v-else-if="currentNode.type == 'WIRE'">
-          <template  v-if="currentPage == 0">
-          <PDState :node="currentNode" v-if="currentNode.monitor_type_name =='SPDC'"></PDState>  
-          <WireState :node="currentNode" v-else></WireState>          
-          </template>
-          <GaugeRealData :node="currentNode" v-if="currentPage == 1"> </GaugeRealData>
-          <ChartTableHisData :node="currentNode"  v-if = "currentPage == 2"></ChartTableHisData>
-        </template>
-        <template v-else-if="currentNode.type == 'SECTION'">
-          <SectionState :node="currentNode" v-if="currentPage == 0"></SectionState>
-          <GaugeRealData :node="currentNode" v-if="currentPage == 1"></GaugeRealData>
-          <ChartTableHisData :node="currentNode"  v-if = "currentPage == 2"></ChartTableHisData>
-        </template>
+        <keep-alive>
+        <component :is="componentName" :node="currentNode"  @choose-item="onChooseItem"></component>
+        </keep-alive>
       </section>
     </section>
   </div>
@@ -43,7 +24,6 @@
 import ZlTree from "../components/ZlTree";
 import TunnelState from "../components/monitor_data/state/TunnelState";
 import GILState from "../components/monitor_data/state/GILState";
-import PDState from "../components/monitor_data/state/PDState";
 
 import WireState from "../components/monitor_data/state/WireState";
 import SectionState from "../components/monitor_data/state/SectionState";
@@ -65,7 +45,6 @@ export default {
     ZlTree,
     TunnelState,
     GILState,
-    PDState,
     WireState,
     SectionState,
     CameraState,
@@ -87,6 +66,25 @@ export default {
         return this.tabs;
       } else {
         return [this.tabs[0]];
+      }
+    },
+    componentName() {
+      if (this.currentNode.type == "CAMR_MONITOR") {
+        return "CameraState";
+      } else if (!this.currentNode.isLeaf) {
+        return "TunnelState";
+      } else if (this.currentNode.type == "GIL") {
+        return this.currentPage == 0
+          ? "GILState"
+          : this.currentPage == 1 ? "TxtRealData" : "ChartTableHisData";
+      } else if (this.currentNode.type == "WIRE") {
+        return this.currentPage == 0
+          ? "WireState"
+          : this.currentPage == 1 ? "GaugeRealData" : "ChartTableHisData";
+      } else if (this.currentNode.type == "SECTION") {
+        return this.currentPage == 0
+          ? "SectionState"
+          : this.currentPage == 1 ? "GaugeRealData" : "ChartTableHisData";
       }
     }
   },

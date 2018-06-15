@@ -1,6 +1,6 @@
 <template>
   <article class="wrapper">
-    <section class="state-box">
+    <section class="state-box" :class="{'pd-box':node.monitor_type_name =='SPDC'}">
       <img src="../../../assets/zxt.png">
       <div :style="{ left:device.positionX + '%' , top:device.positionY  + '%'}" v-for="device in showDevices">
         <button type="text"> 
@@ -14,24 +14,32 @@
         </ul>
       </div>
     </section>
+    <section class="wave-box" v-if="node.monitor_type_name =='SPDC'">
+       <PDWave :points="wave" type="PRPD" class="wave" v-for="wave in waves"></PDWave>
+    </section>
   </article>
 </template>
 <script>
+import PDWave from "@/components/PDWave";
 import { MONITOR_DEVICES } from "@/json/json_device_info";
 import { MONITOR_TYPES } from "@/json/json_base_info";
+import { PD_WAVE, PD_WAVE1, PD_WAVE2 } from "@/json/json_pd";
 import { MONITOR_PARAMS } from "../../../json/json_base_info";
+
 export default {
+  components:{PDWave},
   props: {
     node: Object
   },
   data(){
     return {
-      currentData:[]
+         waves: [PD_WAVE, PD_WAVE1, PD_WAVE2],
+         currentData:[]
     }
   },
   computed: {
     showDevices() {
-      let l_devices = [];
+       let l_devices = [];
       /*过滤所有该监测类型参数*/
       let l_params = MONITOR_PARAMS.filter(
         param => param.monitor_type == this.node.monitor_type_name
@@ -76,10 +84,13 @@ export default {
   bottom: 10px;
   overflow: hidden;
 }
-.state-box {
+.state-box{
   width: 100%;
   height: 100%;
   position: relative;
+}
+.pd-box{
+  height: 60%;
 }
 .state-box img {
   position: absolute;
@@ -105,5 +116,25 @@ export default {
 
 .state-box > div:hover ul{
   left: 30px;
+}
+
+.wave-box {
+  position: absolute;
+  top: 60%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #fff;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  align-content: space-between;
+}
+.wave {
+  width: calc(33% - 1px);
+  height: calc(100% - 1px);
+  background-color: #fff;
+  border-right: 1px solid #000;
 }
 </style>

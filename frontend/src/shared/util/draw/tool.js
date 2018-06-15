@@ -30,6 +30,18 @@ export const GetArrowPath = (options) => {
   return points
 }
 
+/**
+ * 计算火焰颜色，从黑色逐渐变为红色再变为蓝色
+ * @param {实际数值} n 
+ * @param {最小值，为黑色} min 
+ * @param {最大值，为黄色} max 
+ */
+export const CalcFireColor = (n , min = 1 , max = 50)=>{
+  let val = Math.floor(0xFFFF * (n - min) / (max - min)).toString(16)
+  val = ('0000' + val).substr(val.length)
+  return '#' + val.slice(2,4) + val.slice(0,2) + '00'
+}
+
 export const CanvasDraw = (ctx, items) => {
   items.map(item => {
     ctx.save();

@@ -7,6 +7,7 @@ import PageMonitorData from '../pages/PageMonitorData'
 import PageInspectView from '../pages/PageInspectView'
 import PageConfig from '../pages/PageConfig'
 import PageAlarm from '../pages/PageAlarm'
+import PageLog from '../pages/PageLog'
 Vue.use(Router)
 
 const router = new Router({
@@ -30,6 +31,9 @@ const router = new Router({
     }, {
       path: 'inspect-view',
       component: PageInspectView
+    }, {
+      path: 'log',
+      component: PageLog
     }, {
       path: 'alarm',
       component: PageAlarm

@@ -1,5 +1,6 @@
 import {
-  CanvasDraw
+  CanvasDraw,
+  CalcFireColor
 } from './tool'
 
 function initMixin(DrawPRPD) {
@@ -64,7 +65,7 @@ function initMixin(DrawPRPD) {
           rotate: 270,
           fill: this.$options.colors[3]
         })
-      for (var i = 0; i < 5; i++) {
+      for (let i = 0; i < 5; i++) {
         this.axes.push({
           type: 'line',
           path: [this._coordinateMap(maxX * i / 4, -maxY), this._coordinateMap(maxX * i / 4, maxY)],
@@ -101,19 +102,19 @@ function initMixin(DrawPRPD) {
       });
     },
     _getLine: function (period) {
-      var maxX = this._coordinate.maxX
-      var maxY = this._coordinate.maxY
+      let maxX = this._coordinate.maxX
+      let maxY = this._coordinate.maxY
       let points = this.$options.points
       let step = this.$options.step
 
       this.items = []
 
-      var maxXValue = points[0][0][0]; //x
-      var maxYValue = points[0][0][2]; //y
-      var minYValue = points[0][0][2]; //y
+      let maxXValue = points[0][0][0]; //x
+      let maxYValue = points[0][0][2]; //y
+      let minYValue = points[0][0][2]; //y
 
-      for (var i = 0; i < points.length; i++) {
-        for (var j = 0; j < points[i].length; j++) {
+      for (let i = 0; i < points.length; i++) {
+        for (let j = 0; j < points[i].length; j++) {
           if (maxXValue < parseFloat(points[i][j][0])) {
             maxXValue = parseFloat(points[i][j][0])
           }
@@ -145,7 +146,7 @@ function initMixin(DrawPRPD) {
         maxYValue = 10
       }
       //画y坐标轴量程
-      for (var i = 0; i < 5; i++) {
+      for (let i = 0; i < 5; i++) {
         this.items.push({
           type: 'text',
           x: this._coordinateMap(0, maxY * (i - 2) / 2)[0] - 45,
@@ -155,18 +156,45 @@ function initMixin(DrawPRPD) {
         })
       }
 
-      for (var i = 0; i < period; i++) {
-        for (var j = 0; j < points[i].length; j++) {
-          var point = this._coordinateMap(points[i][j][0] * maxX / maxXValue, points[i][j][2] * maxX / maxXValue);
-          this.items.push({
-            type: 'circle',
-            x: point[0],
-            y: point[1],
-            radius: 0.5,
-            fill: this.$options.colors[2]
-          });
+      for (let i = 0; i < 360; i++) {
+        let pulse = []
+        for (let j = 0; j < period; j++) {
+          if (points[j][i]) {
+            pulse.push(points[j][i][2])
+          }
+        }
+        pulse.sort((a, b) => parseFloat(a) > parseFloat(b))
+        for(let k = 0 , n = 1 ; k < pulse.length ; k++){
+          if(k == (pulse.length -1) || pulse[k+1] > (pulse[k] + 0.1)){ // 值变化了
+            let point = this._coordinateMap( i  * maxX / maxXValue,  pulse[k]* maxY / maxYValue);
+            this.items.push({
+              type: 'circle',
+              x: point[0],
+              y: point[1],
+              radius: 1,
+              fill: CalcFireColor(n , 1 , 60)
+            })
+            n = 1
+          }else{
+            n++
+          }
         }
       }
+
+
+
+      // for (let i = 0; i < period; i++) {
+      //   for (let j = 0; j < points[i].length; j++) {
+      //     let point = this._coordinateMap(points[i][j][0] * maxX / maxXValue, points[i][j][2] * maxY / maxYValue)
+      //     this.items.push({
+      //       type: 'circle',
+      //       x: point[0],
+      //       y: point[1],
+      //       radius: 0.5,
+      //       fill: this.$options.colors[2]
+      //     });
+      //   }
+      // }
 
 
     },

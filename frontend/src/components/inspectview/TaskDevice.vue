@@ -5,7 +5,7 @@
       <li>结果一览</li>
     </ul>
     <ul v-for="i in 10">
-      <li>管廊雨污舱氧气传感器</li>
+      <li>管廊电力舱传感器</li>
       <li></li>
     </ul>
   </section>

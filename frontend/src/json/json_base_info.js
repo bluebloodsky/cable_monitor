@@ -50,7 +50,7 @@ export const MONITOR_PARAMS = [{
 }, {
   name: 'AppPaDsch',
   name_cn: '视在局放放电量',
-  unit: 'pC',
+  unit: 'V',
   show_type:'Radial',
   monitor_type: 'SPDC'
 }, {
