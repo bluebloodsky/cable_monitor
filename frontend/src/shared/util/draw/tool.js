@@ -37,9 +37,16 @@ export const GetArrowPath = (options) => {
  * @param {最大值，为黄色} max 
  */
 export const CalcFireColor = (n , min = 1 , max = 50)=>{
-  let val = Math.floor(0xFFFF * (n - min) / (max - min)).toString(16)
-  val = ('0000' + val).substr(val.length)
-  return '#' + val.slice(2,4) + val.slice(0,2) + '00'
+  // let start = 0xADD8E6,end = 0x00008B
+  let start = 0xFF0000,end = 0xFFFF00
+  let val = '#'
+  for(let i = 0 ; i < 3 ; i++){
+    let start_num = (start >>(16 - 8 * i) ) % 256
+    let end_num = (end >>(16 - 8 * i) ) % 256
+    let val_num = Math.floor(start_num + (end_num - start_num) * (n - min) / (max - min)).toString(16)
+    val += ('00'+val_num).substr(val_num.length)
+  }
+   return val
 }
 
 export const CanvasDraw = (ctx, items) => {
@@ -57,7 +64,7 @@ export const CanvasDraw = (ctx, items) => {
         ctx.rotate(item.rotate * Math.PI / 180);
         ctx.fillText(item.text, 0, 0);
       } else {
-        ctx.fillText(item.text, item.x, item.y);
+        ctx.fillText(item.text, item.x, item.y)
       }
     } else if (item.type == "line") {
       ctx.beginPath();

@@ -40,7 +40,7 @@ export default {
       if (this.playFlg) {
         this.period++;
       }
-    }, 100);
+    }, 200);
   },
   methods: {
     play() {

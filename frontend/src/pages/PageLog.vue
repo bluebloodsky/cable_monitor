@@ -28,6 +28,6 @@
 div{
     width: 300px;
     height: 300px;
-    background: linear-gradient(black , red,yellow);
+    background: linear-gradient(lightblue , darkblue);
 }
 </style>

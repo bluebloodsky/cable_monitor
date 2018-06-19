@@ -17,8 +17,10 @@ function initMixin(DrawPRPS) {
         title: 'PRPS图',
         xDesc: '相位',
         zDesc: '幅值',
-        phaseX: 0,
+        phaseX: 0 ,
         phaseY: Math.PI  / 4,
+        // phaseX: - Math.PI  / 6,
+        // phaseY: Math.PI  * 5 / 6,
         colors: ['lightgrey', 'lightgrey', 'blue', '#3c3c3c', 'red', 'blue'],
         step: 1,
       }
@@ -27,6 +29,8 @@ function initMixin(DrawPRPS) {
     axes: [],
     get _coordinate() {
       return {
+        // originX: 50 ,
+        // originY: this._height * 0.6,
         originX: this._width * 0.5,
         originY: this._height * 0.35,
         maxX: this._width / 2 - 10,
