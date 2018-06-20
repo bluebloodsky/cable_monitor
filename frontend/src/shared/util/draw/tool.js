@@ -36,17 +36,24 @@ export const GetArrowPath = (options) => {
  * @param {最小值，为黑色} min 
  * @param {最大值，为黄色} max 
  */
-export const CalcFireColor = (n , min = 1 , max = 50)=>{
-  // let start = 0xADD8E6,end = 0x00008B
-  let start = 0xFF0000,end = 0xFFFF00
+export const CalcFireColor = (n, min = 1, max = 50) => {
+  // let colors = [0xADD8E6, 0x00008B]
+  // let colors = [0xFF0000,0xFFFF00]
+  // let colors = [0x000000 ,0xf2720c,0xff7f00,0xfff272,0xfffff2]
+  let colors = [0x000000, 0xff7f00, 0xfff272, 0xfffff2]
+  // let colors = [0x000000, 0xff0000, 0x00ff00, 0x0000ff]
+
+  let position = (n - min) * (colors.length - 1) / (max - min)
+  let start_index = Math.floor(position)
+  let offset = position - start_index
   let val = '#'
-  for(let i = 0 ; i < 3 ; i++){
-    let start_num = (start >>(16 - 8 * i) ) % 256
-    let end_num = (end >>(16 - 8 * i) ) % 256
-    let val_num = Math.floor(start_num + (end_num - start_num) * (n - min) / (max - min)).toString(16)
-    val += ('00'+val_num).substr(val_num.length)
+  for (let i = 0; i < 3; i++) {
+    let start_num = (colors[start_index] >> (16 - 8 * i)) % 256
+    let end_num = (colors[start_index + 1] >> (16 - 8 * i)) % 256
+    let val_num = Math.floor(start_num + (end_num - start_num) * offset).toString(16)
+    val += ('00' + val_num).substr(val_num.length)
   }
-   return val
+  return val
 }
 
 export const CanvasDraw = (ctx, items) => {
@@ -56,7 +63,7 @@ export const CanvasDraw = (ctx, items) => {
       if (item.font) {
         ctx.font = item.font;
       }
-      if(item.fill){
+      if (item.fill) {
         ctx.fillStyle = item.fill
       }
       if (item.rotate) {

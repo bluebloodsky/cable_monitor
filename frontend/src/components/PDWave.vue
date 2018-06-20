@@ -64,6 +64,7 @@ export default {
 <style scoped>
 .container {
   height: calc(100% - 30px);
+  background-color: whitesmoke;
 }
 .control {
   height: 30px;

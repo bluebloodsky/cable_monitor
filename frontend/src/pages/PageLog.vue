@@ -1,7 +1,7 @@
 <template>
     <section>
-        <input type="text" v-model="name">
         <div>{{name|capitalize}}</div>
+        <img src="@/assets/fire.png" alt="">
     </section>
 </template>
 
@@ -25,9 +25,14 @@
 </script>
 
 <style scoped>
+section{
+    background-color: #ccc;
+}
 div{
-    width: 300px;
-    height: 300px;
-    background: linear-gradient(lightblue , darkblue);
+    width: 30px;
+    height: 262px;
+    background: linear-gradient(to top ,#000000 ,#ff7f00,#ffff7f,#fffff2);
+    float: left;
+    margin: 0 20px;
 }
 </style>

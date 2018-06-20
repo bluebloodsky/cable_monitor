@@ -102,7 +102,7 @@ function initMixin(DrawPRPD) {
       });
 
       //绘制图例
-      let maxNum = 80
+      let maxNum = 100
       for(let i =0 ; i < maxNum; i ++){
         this.axes.push({
           type:'rect' ,
@@ -187,8 +187,8 @@ function initMixin(DrawPRPD) {
               type: 'circle',
               x: point[0],
               y: point[1],
-              radius: 1,
-              fill: CalcFireColor(n , 1 , 60)
+              radius: 0.8,
+              fill: CalcFireColor(n , 1 , 80)
             })
             n = 0
           }

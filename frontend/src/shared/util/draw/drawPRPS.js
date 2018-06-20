@@ -52,7 +52,7 @@ function initMixin(DrawPRPS) {
       this.$options.title &&
         this.axes.push({
           type: 'text',
-          x: this._coordinate.originX - 20,
+          x: this._width / 2 -10 ,
           y: 20,
           text: this.$options.title,
           font: '14px Arial',
