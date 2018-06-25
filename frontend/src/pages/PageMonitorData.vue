@@ -13,9 +13,9 @@
         </ul>
       </header>
       <section>
-        <keep-alive>
+        <!-- <keep-alive> -->
         <component :is="componentName" :node="currentNode"  @choose-item="onChooseItem"></component>
-        </keep-alive>
+        <!-- </keep-alive> -->
       </section>
     </section>
   </div>

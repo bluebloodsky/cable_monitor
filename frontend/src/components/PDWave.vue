@@ -41,6 +41,9 @@ export default {
         this.period++;
       }
     }, 200);
+    window.addEventListener("resize", () => {
+        this.chart.resize();
+      });
   },
   methods: {
     play() {

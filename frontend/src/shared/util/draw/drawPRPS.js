@@ -13,6 +13,7 @@ function initMixin(DrawPRPS) {
       this._canvas = canvas
       this._width = canvas.width
       this._height = canvas.height
+      this._period = 0
       this.$options = {
         title: 'PRPS图',
         xDesc: '相位',
@@ -208,13 +209,16 @@ function initMixin(DrawPRPS) {
       this._initAxis()
     },
     resize: function () {
-      canvas.width = this._container.clientWidth
-      canvas.height = this._container.clientHeight
-      this._width = canvas.width
-      this._height = canvas.height
+      this._canvas.width = this._container.clientWidth
+      this._canvas.height = this._container.clientHeight
+      this._width = this._canvas.width
+      this._height = this._canvas.height
+      this._initAxis()
+      this.draw(this._period)
     },
 
     draw: function (period) {
+      this._period = period
       let ctx = this._canvas.getContext("2d")
       ctx.clearRect(0, 0, this._width, this._height);
       CanvasDraw(ctx, this.axes);
