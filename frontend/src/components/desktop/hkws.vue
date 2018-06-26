@@ -2,7 +2,7 @@
   <section>
       <video :id="src" playsInline webkit-playsinline autoplay v-for="src in videoSrcs" @dblclick="fullScreen">
           <source :src="'http://hls.open.ys7.com/openlive/'+ src +'.hd.m3u8'"  type="application/x-mpegURL" />
-          <!-- <source src="rtmp://rtmp.open.ys7.com/openlive/67902b82419a4b91a5e73aa868613f42.hd" type=""> -->
+          <source :src="'rtmp://rtmp.open.ys7.com/openlive/' + src + '.hd'" type="">
       </video>
   </section>
 </template>
@@ -10,7 +10,11 @@
 export default {
   data() {
     return {
-      videoSrcs: ['67902b82419a4b91a5e73aa868613f42']
+      videoSrcs: [
+      '11b9cf280b054e3f86ac88a556969ebf',
+      '67902b82419a4b91a5e73aa868613f42',
+      'ac07b68b3f064d2da62c1f51ad2c5ee2',
+      ]
     }
   },
   mounted() {
