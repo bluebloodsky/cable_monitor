@@ -20,7 +20,7 @@
 <script>
 import DashboardBox from "../components/DashboardCard";
 import GeneralInfo from "../components/desktop/GeneralInfo";
-import Camera from "../components/desktop/Camera";
+import Camera from "../components/desktop/hkws";
 import Gis from "../components/desktop/Gis";
 import TaskView from "../components/desktop/TaskView";
 import FaultCount from "../components/desktop/FaultCount";
