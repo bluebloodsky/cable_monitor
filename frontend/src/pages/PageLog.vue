@@ -21,8 +21,10 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="i in 20">
-                            <td v-for="field in fields"><span><br> </span></td>
+                        <tr v-for="(row,row_id) in data">
+                            <td v-for="field in fields">
+                                <span>{{row[field.name]}}</span>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -30,18 +32,18 @@
             <footer>
                 <div>
                     <button type="text">
-                        <i class="iconfont icon-angle-double-left"></i>
-                      </button>
+                                    <i class="iconfont icon-angle-double-left"></i>
+                                  </button>
                     <button type="text">
-                        <i class="iconfont icon-return"></i>
-                      </button>
+                                    <i class="iconfont icon-return"></i>
+                                  </button>
                     <input value="1">
                     <button type="text">
-                        <i class="iconfont icon-enter"></i>
-                      </button>
+                                    <i class="iconfont icon-enter"></i>
+                                  </button>
                     <button type="text">
-                        <i class="iconfont icon-angle-double-right"></i>
-                      </button>
+                                    <i class="iconfont icon-angle-double-right"></i>
+                                  </button>
                     <span> 共1页 0条</span>
                 </div>
             </footer>
@@ -51,31 +53,28 @@
 
 <script>
     import ZlDatePicker from "../components/ZlDatePicker";
+    import {
+        LOG_RECORDS
+    } from "../json/json_event";
     export default {
         components: {
             ZlDatePicker,
         },
         data() {
             return {
-                startDate: null,
-                endDate: null,
+                startDate: (new Date).addMonths(-1),
+                endDate: new Date(),
                 fields: [{
-                        name: "wire_name",
-                        caption: "序号"
-                    },
-                    {
-                        name: "fault_handle",
-                        caption: "时间"
-                    },
-                    {
-                        name: "fault_level",
-                        caption: "类型"
-                    },
-                    {
-                        name: "fault_level",
-                        caption: "日志内容"
-                    },
-                ]
+                    name: "time",
+                    caption: "时间"
+                }, {
+                    name: "type",
+                    caption: "类型"
+                }, {
+                    name: "content",
+                    caption: "日志内容"
+                }],
+                data: LOG_RECORDS
             };
         },
     };
@@ -123,6 +122,7 @@
     table {
         width: 100%;
         border-collapse: collapse;
+        font-size: 14px;
     }
     
     td,
@@ -134,12 +134,17 @@
     
     thead {
         background-color: #06192a;
-        line-height: 28px;
+        line-height: 40px;
     }
     
     tbody {
-        line-height: 26px;
+        line-height: 40px;
         text-align: center;
+    }
+    
+    td:last-child {
+        text-align: left;
+        padding-left: 20px;
     }
     
     footer div {

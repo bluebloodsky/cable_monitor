@@ -8,8 +8,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="i in 10">
-            <td v-for="field in fields"><span></span></td>
+            <tr v-for="(row,row_id) in data" :class="row.level==1?'warn':'bad'">
+        <td v-for="field in fields">
+          <span>{{row[field.name]}}</span>
+        </td>
           </tr>
         </tbody>
       </table>
@@ -33,22 +35,25 @@
   </section>
 </template>
 <script>
+import {
+  ALARM_RECORDS
+    } from "@/json/json_event";
 export default {
   data() {
     return {
       fields: [
-        { name: "wire_name", caption: "告警线路" },
-        { name: "fault_handle", caption: "告警时间" },
-        { name: "fault_handle", caption: "告警类型" },
-        { name: "fault_level", caption: "告警级别" },
-        { name: "fault_time", caption: "详细描述" }
-      ]
+        { name: "name", caption: "告警线路" },
+        { name: "time", caption: "告警时间" },
+        { name: "type", caption: "告警类型" },
+        { name: "level_desc", caption: "告警级别" },
+      ],
+      data:ALARM_RECORDS
     };
   }
 };
 </script>
 <style scoped>
-section{
+section {
   position: relative;
   width: 100%;
   height: 100%;
@@ -126,9 +131,6 @@ a {
   text-decoration: underline;
 }
 
-span {
-  margin-right: 50px;
-}
 
 footer div {
   margin-right: 50px;

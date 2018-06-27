@@ -24,9 +24,11 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="i in 20">
-              <td v-for="field in fields"><span><br> </span></td>
-            </tr>
+            <tr v-for="(row,row_id) in data" :class="row.level==1?'warn':'bad'">
+        <td v-for="field in fields">
+          <span>{{row[field.name]}}</span>
+        </td>
+          </tr>
           </tbody>
         </table>
       </div>
@@ -58,6 +60,9 @@ import ZlDatePicker from "../components/ZlDatePicker";
 import ZlComboTree from "../components/ZlComboTree";
 
 import { WIRES, SECTIONS } from "../json/json_device_info";
+import {
+  ALARM_RECORDS
+    } from "@/json/json_event";
 
 export default {
   components: {
@@ -68,18 +73,19 @@ export default {
   data() {
     return {
       key: 12,
-      arr: "",
       treeDevice: [],
       selDevice: null,
-      startDate: null,
-      endDate: null,
+      startDate: (new Date).addMonths(-1),
+      endDate: new Date(),
       fields: [
-        { name: "wire_name", caption: "告警线路" },
-        { name: "fault_handle", caption: "告警时间" },
-        { name: "fault_level", caption: "告警类型" },
-        { name: "fault_level", caption: "告警级别" },
-        { name: "fault_level", caption: "详细描述" }
-      ]
+        { name: "name", caption: "告警线路" },
+        { name: "time", caption: "告警时间" },
+        { name: "type", caption: "告警类型" },
+        { name: "level_desc", caption: "告警级别" },
+        { name: "detail", caption: "详细描述" },
+        { name: "state", caption: "状态" },
+      ] ,
+      data:ALARM_RECORDS
     };
   },
   mounted() {
@@ -143,6 +149,7 @@ footer {
 table {
   width: 100%;
   border-collapse: collapse;
+  font-size: 14px;
 }
 
 td,
@@ -154,12 +161,19 @@ table {
 
 thead {
   background-color: #06192a;
-  line-height: 28px;
+  line-height: 40px;
 }
 
 tbody {
-  line-height: 26px;
+  line-height: 40px;
   text-align: center;
+}
+td:last-child{
+  color: #28A646;
+}
+
+a{
+  color: #28A646;
 }
 
 footer div {

@@ -6,6 +6,7 @@ import PageDeskTop from '../pages/PageDeskTop'
 import PageMonitorData from '../pages/PageMonitorData'
 import PageInspectView from '../pages/PageInspectView'
 import PageConfig from '../pages/PageConfig'
+import PageSupport from '../pages/PageSupport'
 import PageAlarm from '../pages/PageAlarm'
 import PageLog from '../pages/PageLog'
 Vue.use(Router)
@@ -34,6 +35,9 @@ const router = new Router({
     }, {
       path: 'log',
       component: PageLog
+    }, {
+      path: 'support',
+      component: PageSupport
     }, {
       path: 'alarm',
       component: PageAlarm
