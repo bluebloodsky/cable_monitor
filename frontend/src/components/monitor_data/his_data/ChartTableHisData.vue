@@ -67,7 +67,6 @@
     MONITOR_DEVICES
   } from "@/json/json_device_info";
   import {
-    MONITOR_TYPES,
     MONITOR_PARAMS
   } from "@/json/json_base_info";
   

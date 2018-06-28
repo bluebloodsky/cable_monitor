@@ -6,9 +6,14 @@
       </header>
       <div>
         <ul>
-          <li v-for="param in device.params">
-            <LinearGauge :param="param" v-if="param.show_type=='Linear'"></LinearGauge>
-            <RadialGauge :param="param" v-else></RadialGauge>
+          <li v-for="param in device.params" :class="{'content-txt' : param.show_type !='1'}">
+            <div v-if="param.show_type=='1'">
+              <span>{{param.name_cn}}：</span>
+              <span><strong>{{param.val}}</strong>{{param.unit}}</span>
+            </div>
+            <RadialGauge :param="param" v-else-if="param.show_type=='2'"></RadialGauge>
+            <LinearGauge :param="param" v-else-if="param.show_type=='3'"></LinearGauge>
+            <SwitchGauge :param="param" v-else-if="param.show_type=='4'"></SwitchGauge>
           </li>
         </ul>
       </div>
@@ -18,30 +23,35 @@
 <script>
 import LinearGauge from "@/components/LinearGauge";
 import RadialGauge from "@/components/RadialGauge";
-import { MONITOR_DEVICES } from '../../../json/json_device_info'
-import { MONITOR_PARAMS } from '../../../json/json_base_info'
-import {CUR_DATA} from '@/json/json_monitor_data'
+import SwitchGauge from "@/components/SwitchGauge";
 export default {  
-  components: { LinearGauge, RadialGauge },
+  components: { LinearGauge, RadialGauge , SwitchGauge },
   props: {
     node: Object
   },
   data() {
     return {
-      currentData: CUR_DATA
+      currentData: [] ,
+      monitor_devices : [] ,
+      monitor_params:[]
     }
   },
   computed: {
     devices() {
       let l_devices = []
       /*过滤所有该监测类型参数*/
-      let l_params = MONITOR_PARAMS.filter(param => param.monitor_type == this.node.monitor_type_name)
+      let l_params = this.monitor_params.filter(param => param.monitor_type == this.node.monitor_type_name)
       /*获取每个该线路该监测类型设备实时数据*/
-      MONITOR_DEVICES.map(device => {
+      this.monitor_devices.map(device => {
         if (this.node.name == (device.wire ? device.wire : device.section) && device.monitor_type == this.node.monitor_type_name) {
           l_devices.push(device)
           let device_data = this.currentData.find(adata => adata.device_name == device.name)
-          device.params = []
+          device.params = [{
+            name_cn: '采集时间',
+            val: device_data && device_data['data_time'] ? device_data['data_time'] : '/',
+            unit: '' ,
+            show_type : 1
+          }]
           l_params.map(param => {
             let l_param = {
               name: param.name,
@@ -60,7 +70,36 @@ export default {
       return l_devices
     }
   },
-  mounted() {}
+  methods:{
+    queryData(){
+      this.axios.get('/test/real-data').then(response=>{
+        this.currentData = []
+        response.data.map(adata=>{
+          let old_data = this.currentData.find(item=>item.device_name == adata.device_name)
+          if(old_data){
+            old_data[adata['param_name']] = adata['val']
+          }else{
+            this.currentData.push({
+              device_name : adata['device_name'] ,
+              data_time : adata['data_time'],
+              [adata['param_name']] : adata['val']
+            })
+          }
+        })
+      })
+    }
+  },
+  mounted() {
+    this.axios.get('monitor-devices').then(response=>{
+      this.monitor_devices = response.data
+      return this.axios.get('monitor-params')
+    }).then(response=>{
+      this.monitor_params = response.data
+      this.queryData() 
+    })
+
+    window.setInterval(() => this.queryData(), 2000)
+  }
 }
 
 </script>
@@ -91,18 +130,37 @@ export default {
 }
 
 .content-box ul{
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+/*  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  align-content: flex-start;*/
 }
 .content-box li {
   display: block;
   padding: 5px;
   font-size: 14px;
-  float: left;
 }
 
-p{
-  text-align: center;
+li.content-txt{ 
+  display: inline-block;
+}
+li>div{
+  padding: 0 10px;
+  font-size: 14px;
+  width: 300px;
+}
+li span:first-child {
+  color: #ccc;
+  display: inline-block;
+  width: 80px;
+  text-align: right;
+}
+
+li span:last-child {
+  color: #90DFE4;
+}
+
+li strong {
+  font-size: 18px;
 }
 </style>
