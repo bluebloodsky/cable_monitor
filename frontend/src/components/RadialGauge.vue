@@ -26,7 +26,7 @@ export default {
       width: 300,
       height: 300,
       units: this.param.unit,
-      value: 12,
+      value: this.param.val?this.param.val:12,
       minValue: 0,
       maxValue: 220,
       majorTicks: ["0", "20", "40", "60", "80", "100", "120", "140", "160", "180", "200", "220"],

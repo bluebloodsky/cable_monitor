@@ -100,60 +100,62 @@ export default {
       if (index == 0) {
         node.defaultSelected = true;
       }
-      this.nav.push(node);
-      MONITOR_TYPES.map(monitor_type => {
-        let subnode = {
-          icon: monitor_type.icon,
-          name: monitor_type.name,
-          label: monitor_type.name_cn,
-          type: monitor_type.type,
-          children: []
-        };
-        if (monitor_type.type == "WIRE_MONITOR") {
-          WIRES.map(wire => {
-            if (wire.type == "WIRE") {
-              subnode.children.push({
-                name: wire.name,
-                label: wire.name_cn,
-                type: wire.type,
-                monitor_type_name: monitor_type.name
-              });
-            }
-          });
-        } else if (monitor_type.type == "GIL_MONITOR") {
-          WIRES.map(wire => {
-            if (wire.type == "GIL") {
-              subnode.children.push({
-                name: wire.name,
-                label: wire.name_cn,
-                type: wire.type,
-                monitor_type_name: monitor_type.name
-              });
-            }
-          });
-        } else if (monitor_type.type == "SECTION_MONITOR") {
-          SECTIONS.map(section => {
-            subnode.children.push({
-              name: section.name,
-              label: section.name_cn,
-              type: "SECTION",
-              monitor_type_name: monitor_type.name,
-              img_url: section.img_url
+      this.axios.get("monitor-types").then(response => {
+        response.data.map(monitor_type => {
+          let subnode = {
+            icon: monitor_type.icon,
+            name: monitor_type.name,
+            label: monitor_type.name_cn,
+            type: monitor_type.type,
+            children: []
+          };
+          if (monitor_type.type == "WIRE_MONITOR") {
+            WIRES.map(wire => {
+              if (wire.type == "WIRE") {
+                subnode.children.push({
+                  name: wire.name,
+                  label: wire.name_cn,
+                  type: wire.type,
+                  monitor_type_name: monitor_type.name
+                });
+              }
             });
-          });
-        } else if (monitor_type.type == "CAMR_MONITOR") {
-          MONITOR_CAMERAS.map(camera => {
-            subnode.children.push({
-              name: camera.name,
-              label: camera.name_cn,
-              type: "CAMERA",
-              location: camera.location
+          } else if (monitor_type.type == "GIL_MONITOR") {
+            WIRES.map(wire => {
+              if (wire.type == "GIL") {
+                subnode.children.push({
+                  name: wire.name,
+                  label: wire.name_cn,
+                  type: wire.type,
+                  monitor_type_name: monitor_type.name
+                });
+              }
             });
-          });
-        }
-        if (subnode.children && subnode.children.length > 0) {
-          node.children.push(subnode);
-        }
+          } else if (monitor_type.type == "SECTION_MONITOR") {
+            SECTIONS.map(section => {
+              subnode.children.push({
+                name: section.name,
+                label: section.name_cn,
+                type: "SECTION",
+                monitor_type_name: monitor_type.name,
+                img_url: section.img_url
+              });
+            });
+          } else if (monitor_type.type == "CAMR_MONITOR") {
+            MONITOR_CAMERAS.map(camera => {
+              subnode.children.push({
+                name: camera.name,
+                label: camera.name_cn,
+                type: "CAMERA",
+                location: camera.location
+              });
+            });
+          }
+          if (subnode.children && subnode.children.length > 0) {
+            node.children.push(subnode);
+          }
+          this.nav.push(node);
+        });
       });
     });
   },

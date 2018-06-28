@@ -15,7 +15,7 @@
       </div>
     </section>
     <section class="wave-box" v-if="node.monitor_type_name =='SPDC'">
-       <PDWave :points="wave" type="PRPD" class="wave" v-for="wave in waves"></PDWave>
+       <PDWave :points="wave" :title="phases[index]" type="PRPD" class="wave" v-for="(wave,index) in waves"></PDWave>
     </section>
   </article>
 </template>
@@ -25,21 +25,22 @@ import { MONITOR_DEVICES } from "@/json/json_device_info";
 import { MONITOR_TYPES } from "@/json/json_base_info";
 import { PD_WAVE, PD_WAVE1, PD_WAVE2 } from "@/json/json_pd";
 import { MONITOR_PARAMS } from "../../../json/json_base_info";
-
+import { CUR_DATA } from "@/json/json_monitor_data";
 export default {
-  components:{PDWave},
+  components: { PDWave },
   props: {
     node: Object
   },
-  data(){
+  data() {
     return {
-         waves: [PD_WAVE, PD_WAVE1, PD_WAVE2],
-         currentData:[]
-    }
+      waves: [PD_WAVE, PD_WAVE1, PD_WAVE2],
+      currentData: CUR_DATA,
+      phases: ["A相", "B相", "C相"]
+    };
   },
   computed: {
     showDevices() {
-       let l_devices = [];
+      let l_devices = [];
       /*过滤所有该监测类型参数*/
       let l_params = MONITOR_PARAMS.filter(
         param => param.monitor_type == this.node.monitor_type_name
@@ -84,12 +85,12 @@ export default {
   bottom: 10px;
   overflow: hidden;
 }
-.state-box{
+.state-box {
   width: 100%;
   height: 100%;
   position: relative;
 }
-.pd-box{
+.pd-box {
   height: 60%;
 }
 .state-box img {
@@ -114,7 +115,7 @@ export default {
   width: 300px;
 }
 
-.state-box > div:hover ul{
+.state-box > div:hover ul {
   left: 30px;
 }
 

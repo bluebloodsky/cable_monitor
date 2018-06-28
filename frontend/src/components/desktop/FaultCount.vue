@@ -10,9 +10,9 @@
           <span>危急</span>
         </li>
         <li>
-          <span><strong>8</strong>条</span>
-          <span><strong>1</strong>条</span>
-          <span><strong>2</strong>条</span>
+          <span><strong>0</strong>条</span>
+          <span><strong>0</strong>条</span>
+          <span><strong>0</strong>条</span>
         </li>
       </ul>
   </section>

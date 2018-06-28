@@ -18,13 +18,14 @@
 <script>
 import { MONITOR_DEVICES } from '../../../json/json_device_info'
 import { MONITOR_PARAMS } from '../../../json/json_base_info'
+import {CUR_DATA} from '@/json/json_monitor_data'
 export default {
   props: {
     node: Object
   },
   data() {
     return {
-      currentData: []
+      currentData: CUR_DATA
     }
   },
   computed: {
@@ -78,7 +79,7 @@ section {
   background-color: #38648D;
   margin-bottom: 5px;
   margin-right: 5px;
-  width: 230px;
+  width: 300px;
   padding-bottom: 10px;
   border-radius: 5px;
 }
@@ -93,14 +94,14 @@ section {
 
 .content-box li {
   display: block;
-  padding: 5px;
+  padding: 5px 15px;
   font-size: 14px;
 }
 
 .content-box li span:first-child {
   color: #ccc;
   display: inline-block;
-  width: 60%;
+  /* width: 60%; */
   text-align: right;
 }
 

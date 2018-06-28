@@ -14,7 +14,7 @@
     </div>
     <hr>
     <div class="wave-box">
-      <PDWave :points="wave" type="PRPS" class="wave" v-for="wave in waves"></PDWave>
+      <PDWave :points="waves[index]" :title="device.name_cn" type="PRPS" class="wave" v-for="(device,index) in waveDevices"></PDWave>
     </div>
   </section>
 </template>
@@ -54,6 +54,9 @@ export default {
         }
       });
       return l_devices;
+    },
+    waveDevices(){
+      return this.devices.slice(0,4)
     }
   },
   methods: {

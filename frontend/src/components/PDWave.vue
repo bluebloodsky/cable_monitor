@@ -17,6 +17,9 @@ export default {
     points: Array,
     type: {
       default: "PRPD"
+    },
+    title:{
+      default:"局放图谱"
     }
   },
   data() {
@@ -33,7 +36,8 @@ export default {
       this.chart = new DrawPRPD(this.$refs["container"]);
     }
     this.chart.setOption({
-      points: this.points
+      points: this.points,
+      title: this.title,
     });
     this.period = 0;
     window.setInterval(() => {

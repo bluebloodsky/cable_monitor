@@ -29,6 +29,7 @@ export default {
       barBeginCircle: false,
       minValue: -30,
       maxValue: 90,
+      value: this.param.val?this.param.val:12,
       majorTicks: [
         "-30",
         "0",

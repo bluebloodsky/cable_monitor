@@ -31,8 +31,8 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="i in 20">
-              <td v-for="field in fields"><span><br> </span></td>
+            <tr v-for="adata in his_data">
+              <td v-for="field in fields"><span>{{adata[field.name]}} </span></td>
             </tr>
           </tbody>
         </table>
@@ -62,6 +62,7 @@
 <script>
   import ZlDatePicker from "../../ZlDatePicker";
   import echarts from "echarts";
+  import {HIS_DATA} from '@/json/json_monitor_data'
   import {
     MONITOR_DEVICES
   } from "@/json/json_device_info";
@@ -80,11 +81,12 @@
     data() {
       return {
         chart: null,
-        startDate: new Date().addDays(-3).format("yyyy-MM-dd"),
+        startDate: new Date().addMonths(-1).format("yyyy-MM-dd"),
         endDate: new Date().format("yyyy-MM-dd"),
         devices: [],
         params: [],
-        fields: []
+        fields: [],
+        his_data: HIS_DATA
       };
     },
     mounted() {
@@ -112,18 +114,25 @@
           param => param.monitor_type == this.node.monitor_type_name
         );
         this.fields = [{
-          name: "wire_name",
+          name: "data_time",
           caption: "采集时间"
         }];
         this.params.map(param => {
           this.fields.push({
             name: param.name,
-            caption: param.name_cn
+            caption: param.name_cn + (param.unit?'(' + param.unit +')' : '')
           });
         });
       },
       queryData() {
         let l_d = this.params.map(param => param.name_cn);
+        let series = this.params.map(param=>{
+          return {
+            name: param.name_cn ,
+            type: "line",
+            data: this.his_data.map(adata=>adata[param.name])
+          }
+        })
         let option = {
           tooltip: {
             trigger: "axis"
@@ -154,7 +163,7 @@
                 color: "#fff"
               }
             },
-            data: ["4-11", "4-12", "4-13", "4-14", "4-15", "4-16", "4-17"]
+            data: this.his_data.map(adata=>adata['data_time'])
           },
           yAxis: {
             axisLabel: {
@@ -167,12 +176,7 @@
             },
             type: "value"
           },
-          series: [{
-            name: l_d[0],
-            type: "line",
-            stack: "总量",
-            data: [0, 0, 10, 3, 0, 0, 0]
-          }]
+          series: series
         };
         this.chart.setOption(option);
       }
@@ -247,6 +251,7 @@
   table {
     width: 100%;
     border-collapse: collapse;
+    font-size: 16px;
   }
   
   td,
@@ -258,11 +263,11 @@
   
   thead {
     background-color: #06192a;
-    line-height: 28px;
+    line-height: 36px;
   }
   
   tbody {
-    line-height: 26px;
+    line-height: 30px;
     text-align: center;
   }
   

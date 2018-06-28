@@ -1,15 +1,15 @@
 <?php
-use Slim\Http\Response;
-use Slim\Http\Request;
+/**
+ * Created by PhpStorm.
+ * User: Administrator
+ * Date: 2018/1/31
+ * Time: 12:38
+ */
+$app->group('/', function () {
+    $this->get('', function ($req, $resp, $args) {
+        //var_dump($RET);
+        return 'aa';
+        // return $resp->withJson($RET);
+    });
 
-$app->get('/', function (Request $req, Response $resp, $args) {
-    return $resp->withJson(['ret'=>'success']);
-});
-
-$app->get('/phpinfo', function (Request $req, Response $resp, $args) {
-   return phpinfo();
-});
-
-$app->post('/error', function (Request $req, Response $resp, $args) {
-    throw new CmuException("this is an veryveryveryvery veryveryveryvery veryveryveryvery looooooooooooooooooooooong error test.......");
 });

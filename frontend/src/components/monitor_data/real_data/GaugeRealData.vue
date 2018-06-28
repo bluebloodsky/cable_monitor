@@ -20,6 +20,7 @@ import LinearGauge from "@/components/LinearGauge";
 import RadialGauge from "@/components/RadialGauge";
 import { MONITOR_DEVICES } from '../../../json/json_device_info'
 import { MONITOR_PARAMS } from '../../../json/json_base_info'
+import {CUR_DATA} from '@/json/json_monitor_data'
 export default {  
   components: { LinearGauge, RadialGauge },
   props: {
@@ -27,7 +28,7 @@ export default {
   },
   data() {
     return {
-      currentData: []
+      currentData: CUR_DATA
     }
   },
   computed: {
