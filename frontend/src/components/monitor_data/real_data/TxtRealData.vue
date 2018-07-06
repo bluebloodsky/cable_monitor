@@ -1,3 +1,4 @@
+<!-- deprecated -->
 <template>
   <section>
     <div class="content-box" v-for="device in devices">
@@ -18,7 +19,7 @@
 <script>
 import { MONITOR_DEVICES } from '../../../json/json_device_info'
 import { MONITOR_PARAMS } from '../../../json/json_base_info'
-import {CUR_DATA} from '@/json/json_monitor_data'
+import { CUR_DATA } from '@/json/json_monitor_data'
 export default {
   props: {
     node: Object

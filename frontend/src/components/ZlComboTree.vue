@@ -1,12 +1,11 @@
 <template>
-    <div class="combo-tree" @click.stop>
-        <input placeholder="请选择" :value="currentNode.label" @focus="focus" ref="input"  readonly>
-        <button type="text" @click="chooseData"><i class="iconfont icon-unfold"></i></button>
-        <ZlTree class="tree" :class="{'show-tree':showTree}" :data="treeData" @node-click="onNodeClick" :currentNode="currentNode">
-        </ZlTree>
-    </div>
+  <div class="combo-tree" @click.stop>
+    <input placeholder="请选择" :value="currentNode.label" @focus="focus" ref="input" readonly>
+    <button type="text" @click="chooseData"><i class="iconfont icon-unfold"></i></button>
+    <ZlTree class="tree" :class="{'show-tree':showTree}" :data="treeData" @node-click="onNodeClick" :currentNode="currentNode">
+    </ZlTree>
+  </div>
 </template>
-
 <script>
 import ZlTree from "./ZlTree";
 export default {
@@ -42,8 +41,8 @@ export default {
     }
   }
 };
-</script>
 
+</script>
 <style scoped>
 .combo-tree {
   position: relative;
@@ -90,4 +89,5 @@ export default {
   z-index: 9999;
   background-color: #0b3567;
 }
+
 </style>

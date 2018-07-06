@@ -26,7 +26,8 @@ import TunnelState from "../components/monitor_data/state/TunnelState";
 import GILState from "../components/monitor_data/state/GILState";
 
 import WireState from "../components/monitor_data/state/WireState";
-import SectionState from "../components/monitor_data/state/SectionState";
+import EnvrState from "../components/monitor_data/state/EnvrState";
+import GaurdState from "../components/monitor_data/state/GaurdState";
 import CameraState from "../components/monitor_data/state/CameraState";
 import TxtRealData from "../components/monitor_data/real_data/TxtRealData";
 import GaugeRealData from "../components/monitor_data/real_data/GaugeRealData";
@@ -46,7 +47,8 @@ export default {
     TunnelState,
     GILState,
     WireState,
-    SectionState,
+    EnvrState,
+    GaurdState,
     CameraState,
     TxtRealData,
     GaugeRealData,
@@ -83,7 +85,7 @@ export default {
           : this.currentPage == 1 ? "GaugeRealData" : "ChartTableHisData";
       } else if (this.currentNode.type == "SECTION") {
         return this.currentPage == 0
-          ? "SectionState"
+          ? this.currentNode.monitor_type_name =='ENVR'?"EnvrState":"GaurdState"
           : this.currentPage == 1 ? "GaugeRealData" : "ChartTableHisData";
       }
     }

@@ -1,17 +1,18 @@
 <template>
-    <article>
-        <header>
-            {{title}}
-        </header>
-        <section>
-            <slot></slot>
-        </section>
-    </article>
+  <article>
+    <header>
+      {{title}}
+    </header>
+    <section>
+      <slot></slot>
+    </section>
+  </article>
 </template>
 <script>
 export default {
   props: { title: String }
 };
+
 </script>
 <style scoped>
 article {
@@ -22,10 +23,11 @@ article {
   width: 100%;
   border-image-source: url(../assets/border.png);
   border-image-slice: 32 37 fill;
-  margin-top:30px;
+  margin-top: 30px;
   border-radius: 5px;
   box-sizing: border-box;
 }
+
 header {
   position: absolute;
   font-size: 24px;
@@ -36,8 +38,9 @@ header {
   /* color: rgb(255, 238, 138); */
 }
 
-section{
-    width: 100%;
-    height: 100%;
+section {
+  width: 100%;
+  height: 100%;
 }
+
 </style>

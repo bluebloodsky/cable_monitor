@@ -24,16 +24,16 @@
 import LinearGauge from "@/components/LinearGauge";
 import RadialGauge from "@/components/RadialGauge";
 import SwitchGauge from "@/components/SwitchGauge";
-export default {  
-  components: { LinearGauge, RadialGauge , SwitchGauge },
+export default {
+  components: { LinearGauge, RadialGauge, SwitchGauge },
   props: {
     node: Object
   },
   data() {
     return {
-      currentData: [] ,
-      monitor_devices : [] ,
-      monitor_params:[]
+      currentData: [],
+      monitor_devices: [],
+      monitor_params: []
     }
   },
   computed: {
@@ -49,8 +49,8 @@ export default {
           device.params = [{
             name_cn: '采集时间',
             val: device_data && device_data['data_time'] ? device_data['data_time'] : '/',
-            unit: '' ,
-            show_type : 1
+            unit: '',
+            show_type: 1
           }]
           l_params.map(param => {
             let l_param = {
@@ -70,19 +70,19 @@ export default {
       return l_devices
     }
   },
-  methods:{
-    queryData(){
-      this.axios.get('/test/real-data').then(response=>{
+  methods: {
+    queryData() {
+      this.axios.get('/test/real-data').then(response => {
         this.currentData = []
-        response.data.map(adata=>{
-          let old_data = this.currentData.find(item=>item.device_name == adata.device_name)
-          if(old_data){
+        response.data.map(adata => {
+          let old_data = this.currentData.find(item => item.device_name == adata.device_name)
+          if (old_data) {
             old_data[adata['param_name']] = adata['val']
-          }else{
+          } else {
             this.currentData.push({
-              device_name : adata['device_name'] ,
-              data_time : adata['data_time'],
-              [adata['param_name']] : adata['val']
+              device_name: adata['device_name'],
+              data_time: adata['data_time'],
+              [adata['param_name']]: adata['val']
             })
           }
         })
@@ -90,12 +90,12 @@ export default {
     }
   },
   mounted() {
-    this.axios.get('monitor-devices').then(response=>{
+    this.axios.get('monitor-devices').then(response => {
       this.monitor_devices = response.data
       return this.axios.get('monitor-params')
-    }).then(response=>{
+    }).then(response => {
       this.monitor_params = response.data
-      this.queryData() 
+      this.queryData()
     })
 
     window.setInterval(() => this.queryData(), 2000)
@@ -121,6 +121,7 @@ export default {
   padding-bottom: 10px;
   border-radius: 5px;
 }
+
 .content-box>header {
   position: relative;
   text-align: center;
@@ -129,26 +130,29 @@ export default {
   padding: 10px;
 }
 
-.content-box ul{
-/*  display: flex;
+.content-box ul {
+  /*  display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
   align-content: flex-start;*/
 }
+
 .content-box li {
   display: block;
   padding: 5px;
   font-size: 14px;
 }
 
-li.content-txt{ 
+li.content-txt {
   display: inline-block;
 }
-li>div{
+
+li>div {
   padding: 0 10px;
   font-size: 14px;
   width: 300px;
 }
+
 li span:first-child {
   color: #ccc;
   display: inline-block;
@@ -163,4 +167,5 @@ li span:last-child {
 li strong {
   font-size: 18px;
 }
+
 </style>

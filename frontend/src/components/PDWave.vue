@@ -1,14 +1,13 @@
 <template>
-    <section>
-        <div ref="container" class="container">
-        </div>
-        <div class="control">
-            <button type="text" @click="play"><i class="iconfont" :class="playFlg? 'icon-suspend' : 'icon-play' "></i></button>
-            <input type="range" v-model="period" min="0" :max="points.length">
-        </div>
-    </section>
+  <section>
+    <div ref="container" class="container">
+    </div>
+    <div class="control">
+      <button type="text" @click="play"><i class="iconfont" :class="playFlg? 'icon-suspend' : 'icon-play' "></i></button>
+      <input type="range" v-model="period" min="0" :max="points.length">
+    </div>
+  </section>
 </template>
-
 <script>
 import DrawPRPS from "@/shared/util/draw/drawPRPS";
 import DrawPRPD from "@/shared/util/draw/drawPRPD";
@@ -18,8 +17,8 @@ export default {
     type: {
       default: "PRPD"
     },
-    title:{
-      default:"局放图谱"
+    title: {
+      default: "局放图谱"
     }
   },
   data() {
@@ -46,8 +45,8 @@ export default {
       }
     }, 200);
     window.addEventListener("resize", () => {
-        this.chart.resize();
-      });
+      this.chart.resize();
+    });
   },
   methods: {
     play() {
@@ -66,25 +65,27 @@ export default {
     }
   }
 };
-</script>
 
+</script>
 <style scoped>
 .container {
   height: calc(100% - 30px);
   background-color: whitesmoke;
 }
+
 .control {
   height: 30px;
   display: flex;
   align-items: center;
 }
+
 .control i {
   font-size: 20px;
   width: 30px;
 }
+
 .control input {
   width: calc(100% - 40px);
 }
+
 </style>
-
-

@@ -9,7 +9,7 @@ export default {
   name: 'ZlTree',
   components: { ZlTreeNode },
   data() {
-    return {     
+    return {
       nodeData: []
     }
   },
@@ -40,7 +40,7 @@ export default {
         result['isLeaf'] = true
       }
       if (node.defaultSelected) {
-        this.$emit("node-click" , result)
+        this.$emit("node-click", result)
       }
       return result
     },

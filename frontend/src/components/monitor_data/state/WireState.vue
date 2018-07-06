@@ -3,7 +3,7 @@
     <section class="state-box" :class="{'pd-box':node.monitor_type_name =='SPDC'}">
       <img src="../../../assets/zxt.png">
       <div :style="{ left:device.positionX + '%' , top:device.positionY  + '%'}" v-for="device in showDevices">
-        <button type="text"> 
+        <button type="text">
           <i class="iconfont good icon-circle"></i>
         </button>
         <ul>
@@ -15,7 +15,7 @@
       </div>
     </section>
     <section class="wave-box" v-if="node.monitor_type_name =='SPDC'">
-       <PDWave :points="wave" :title="phases[index]" type="PRPD" class="wave" v-for="(wave,index) in waves"></PDWave>
+      <PDWave :points="wave" :title="phases[index]" type="PRPD" class="wave" v-for="(wave,index) in waves"></PDWave>
     </section>
   </article>
 </template>
@@ -75,6 +75,7 @@ export default {
     }
   }
 };
+
 </script>
 <style scoped>
 .wrapper {
@@ -85,14 +86,17 @@ export default {
   bottom: 10px;
   overflow: hidden;
 }
+
 .state-box {
   width: 100%;
   height: 100%;
   position: relative;
 }
+
 .pd-box {
   height: 60%;
 }
+
 .state-box img {
   position: absolute;
   left: 0;
@@ -104,10 +108,12 @@ export default {
 .iconfont {
   font-size: 20px;
 }
-.state-box > div {
+
+.state-box>div {
   position: absolute;
   line-height: 20px;
 }
+
 .state-box ul {
   position: absolute;
   top: 0;
@@ -115,7 +121,7 @@ export default {
   width: 300px;
 }
 
-.state-box > div:hover ul {
+.state-box>div:hover ul {
   left: 30px;
 }
 
@@ -132,10 +138,12 @@ export default {
   align-items: center;
   align-content: space-between;
 }
+
 .wave {
   width: calc(33% - 1px);
   height: calc(100% - 1px);
   background-color: #fff;
   border-right: 1px solid #000;
 }
+
 </style>

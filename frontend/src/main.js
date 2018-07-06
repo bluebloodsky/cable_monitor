@@ -7,11 +7,16 @@ import router from './router'
 import store from './store'
 import Date from './shared/extend'
 
+if (process.env.NODE_ENV == 'development') {
+  Vue.prototype.cfgInfo= cfgInfo['development']
+} else {
+  Vue.prototype.cfgInfo = cfgInfo['production']
+}
+
 Vue.config.productionTip = true
 /* eslint-disable no-new */
-Vue.prototype.cfgInfo = cfgInfo
 Vue.prototype.axios = axios
-new Vue({
+let vm = new Vue({
   el: '#app',
   router,
   store,

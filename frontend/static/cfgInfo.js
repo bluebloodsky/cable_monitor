@@ -1,4 +1,8 @@
 this.cfgInfo = {
-    baseURL: 'http://localhost:8088/git/cable_monitor/backend/api/index.php/',  
+  development: {
+    baseURL: 'http://localhost/api/index.php/',
+  },
+  production: {
+    baseURL: '../api/index.php/',
   }
-  
+}

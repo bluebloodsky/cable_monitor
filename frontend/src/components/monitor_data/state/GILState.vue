@@ -33,7 +33,7 @@ export default {
       currentState: [],
       sections: SECTIONS,
       phases: ["A相", "B相", "C相"],
-      waves: [PD_WAVE, PD_WAVE1, PD_WAVE2 , PD_WAVE],
+      waves: [PD_WAVE, PD_WAVE1, PD_WAVE2, PD_WAVE],
       showWaveFlg: false
     };
   },
@@ -55,8 +55,8 @@ export default {
       });
       return l_devices;
     },
-    waveDevices(){
-      return this.devices.slice(0,4)
+    waveDevices() {
+      return this.devices.slice(0, 4)
     }
   },
   methods: {
@@ -68,6 +68,7 @@ export default {
     }
   }
 };
+
 </script>
 <style scoped>
 .wrapper {
@@ -123,6 +124,7 @@ export default {
   color: red;
 }
 
+
 /*.state-box:nth-child(3n) {
   margin-bottom: 100px;
 }*/
@@ -155,6 +157,7 @@ export default {
   transform: translateX(-50%);
   color: #3c3c3c;
 }
+
 .wave-box {
   position: absolute;
   top: 60%;
@@ -168,10 +171,12 @@ export default {
   align-items: center;
   align-content: space-between;
 }
+
 .wave {
   width: calc(25% - 1px);
   height: calc(100% - 1px);
   background-color: #fff;
   border-right: 1px solid #000;
 }
+
 </style>

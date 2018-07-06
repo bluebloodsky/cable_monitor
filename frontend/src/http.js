@@ -4,7 +4,12 @@ import store from './store'
 console.log(store)
 // axios 配置
 axios.defaults.timeout = 15000
-axios.defaults.baseURL = cfgInfo.baseURL
+
+if (process.env.NODE_ENV == 'development') {
+  axios.defaults.baseURL= cfgInfo['development'].baseURL
+} else {
+  axios.defaults.baseURL = cfgInfo['production'].baseURL
+}
 axios.defaults.withCredentials = true
 // http request 拦截器
 axios.interceptors.request.use(

@@ -29,7 +29,7 @@ export default {
       barBeginCircle: false,
       minValue: -30,
       maxValue: 90,
-      value: this.param.val?this.param.val:12,
+      value: this.param.val ? this.param.val : 12,
       majorTicks: [
         "-30",
         "0",
@@ -38,8 +38,8 @@ export default {
         "90"
       ],
       highlights: [
-        { from: -30, to: 50, color: "rgba(0,255,0,.15)" },
-        { from: 50, to: 90, color: "rgba(255,30,0,.25)" }
+        { from: -30, to: 38, color: "#28A646" },
+        { from: 38, to: 90, color: "#C55C60" }
       ],
       tickSide: "right",
       numberSide: "right",

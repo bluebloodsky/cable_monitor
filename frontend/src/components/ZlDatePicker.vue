@@ -11,7 +11,7 @@ export default {
   name: 'ZlDatePicker',
   components: { ZlCalendar },
   props: {
-    value :{},
+    value: {},
   },
   data() {
     return {

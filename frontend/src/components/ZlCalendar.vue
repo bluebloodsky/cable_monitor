@@ -11,7 +11,7 @@
       </div>
       <span>{{title}}</span>
       <div>
-        <button type="text" @click="goNextMonth"> 
+        <button type="text" @click="goNextMonth">
           <i class="iconfont icon-enter"></i>
         </button>
         <button type="text" @click="goNextYear">
@@ -210,7 +210,7 @@ export default {
   font-size: 14px;
   height: auto;
   padding-bottom: 10px;
-  color:#000;
+  color: #000;
 }
 
 .zl-calendar-header {
