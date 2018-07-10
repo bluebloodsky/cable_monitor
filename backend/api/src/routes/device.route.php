@@ -5,6 +5,14 @@ $app->group('/tunnels', function () {
         $RET = $db->select("tbl_tunnel","*");
         return $resp->withJson($RET);
     });
+    $this->post('', function ($req, $resp, $args) {
+        global $db;
+        $db->pdo->beginTransaction();
+        $db->delete("tbl_tunnel",[]);
+        $db->insert("tbl_tunnel",json_decode($req->getBody() , true));
+        $db->pdo->commit();
+        return $resp->withJson([]);
+    });
 });
 
 $app->group('/wires', function () {
@@ -12,6 +20,14 @@ $app->group('/wires', function () {
         global $db;
         $RET = $db->select("tbl_wire","*");
         return $resp->withJson($RET);
+    });
+    $this->post('', function ($req, $resp, $args) {
+        global $db;
+        $db->pdo->beginTransaction();
+        $db->delete("tbl_wire",[]);
+        $db->insert("tbl_wire",json_decode($req->getBody() , true));
+        $db->pdo->commit();
+        return $resp->withJson([]);
     });
 });
 
@@ -21,6 +37,14 @@ $app->group('/sections', function () {
         $RET = $db->select("tbl_section","*");
         return $resp->withJson($RET);
     });
+    $this->post('', function ($req, $resp, $args) {
+        global $db;
+        $db->pdo->beginTransaction();
+        $db->delete("tbl_section",[]);
+        $db->insert("tbl_section",json_decode($req->getBody() , true));
+        $db->pdo->commit();
+        return $resp->withJson([]);
+    });
 });
 
 $app->group('/monitor-devices', function () {
@@ -28,6 +52,14 @@ $app->group('/monitor-devices', function () {
         global $db;
         $RET = $db->select("tbl_monitor_device","*");
         return $resp->withJson($RET);
+    });
+    $this->post('', function ($req, $resp, $args) {
+        global $db;
+        $db->pdo->beginTransaction();
+        $db->delete("tbl_monitor_device",[]);
+        $db->insert("tbl_monitor_device",json_decode($req->getBody() , true));
+        $db->pdo->commit();
+        return $resp->withJson([]);
     });
 });
 

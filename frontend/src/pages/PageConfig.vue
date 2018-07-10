@@ -42,6 +42,7 @@ import ZlTree from '../components/ZlTree'
 import ZlTable from '../components/ZlTable'
 import WireDevicePosition from '../components/config/WireDevicePosition'
 import CameraPosition from '../components/config/CameraPosition'
+import { remove } from '../shared/util'
 import { NAV_CONFIG_TREE, FIELDS } from '@/shared/constant'
 import { MONITOR_TYPES, MONITOR_PARAMS } from '../json/json_base_info'
 import { TUNNELS, WIRES, SECTIONS, MONITOR_DEVICES, MONITOR_CAMERAS } from '../json/json_device_info'
@@ -56,10 +57,9 @@ export default {
   data() {
     return {
       nav: NAV_CONFIG_TREE,
-      testItems: [],
       flg_showRightBox: false,
-      MONITOR_TYPES: MONITOR_TYPES,
-      MONITOR_PARAMS: MONITOR_PARAMS,
+      MONITOR_TYPES: [],
+      MONITOR_PARAMS: [],
       TUNNELS: TUNNELS,
       WIRES: WIRES,
       SECTIONS: SECTIONS,
@@ -67,21 +67,25 @@ export default {
       MONITOR_CAMERAS: MONITOR_CAMERAS,
       FIELDS: FIELDS,
       currentNode: {},
-      currentRow: {}
+      currentRow: {},
+      data: []
     }
   },
   computed: {
     fields() {
       return this.currentNode.name ? this['FIELDS'][this.currentNode.name + "_FIELDS"] : []
-    },
-    data() {
-      return this.currentNode.name ? this[this.currentNode.name] : []
     }
   },
   methods: {
     onNodeClick(node) {
       this.flg_showRightBox = false
-      this.currentNode = node
+      this.$set(this, 'currentNode', node)
+      this.axios.get(this.currentNode.url).then(resp => {
+        this.data = resp['data']
+      }).catch(err => {
+
+        this.data = []
+      })
     },
     cellFormatter(row, column, cellValue) {
       if (Array.isArray(cellValue)) {
@@ -95,14 +99,19 @@ export default {
       this.currentRow = row
     },
     delRow(row) {
-      remove(this.testItems, row)
+      remove(this.data, row)
     },
     add() {
       this.flg_showRightBox = true
       this.currentRow = {}
+      this.data.push(this.currentRow)
     },
     submit() {
+      this.axios.post(this.currentNode.url , this.data).then(resp => {
+        console.log(resp)
+      }).catch(err => {
 
+      })
     }
   }
 }
@@ -149,6 +158,7 @@ aside {
   right: 2px;
   border-radius: 2px;
   /*padding: 20px;*/
+  overflow: auto;
 }
 
 .right-pad-box>div {
@@ -172,8 +182,8 @@ aside {
   width: calc(100% - 130px);
 }
 
-.iconfont{
-  color:#fff;
+.iconfont {
+  color: #fff;
 }
 
 </style>
