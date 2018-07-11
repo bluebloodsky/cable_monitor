@@ -21,10 +21,7 @@
 </template>
 <script>
 import PDWave from "@/components/PDWave";
-import { MONITOR_DEVICES } from "@/json/json_device_info";
-import { MONITOR_TYPES } from "@/json/json_base_info";
 import { PD_WAVE, PD_WAVE1, PD_WAVE2 } from "@/json/json_pd";
-import { MONITOR_PARAMS } from "../../../json/json_base_info";
 import { CUR_DATA } from "@/json/json_monitor_data";
 export default {
   components: { PDWave },
@@ -35,18 +32,28 @@ export default {
     return {
       waves: [PD_WAVE, PD_WAVE1, PD_WAVE2],
       currentData: CUR_DATA,
-      phases: ["A相", "B相", "C相"]
+      phases: ["A相", "B相", "C相"],
+      monitor_devices: [],
+      monitor_params: []
     };
+  },
+  mounted() {
+    this.axios.get("monitor-params").then(response => {
+      this.monitor_params = response.data
+      return this.axios.get("monitor-devices")
+    }).then(response => {
+      this.monitor_devices = response.data
+    })
   },
   computed: {
     showDevices() {
       let l_devices = [];
       /*过滤所有该监测类型参数*/
-      let l_params = MONITOR_PARAMS.filter(
+      let l_params = this.monitor_params.filter(
         param => param.monitor_type == this.node.monitor_type_name
       );
       /*获取每个该线路该监测类型设备实时数据*/
-      MONITOR_DEVICES.map(device => {
+      this.monitor_devices.map(device => {
         if (
           this.node.name == (device.wire ? device.wire : device.section) &&
           device.monitor_type == this.node.monitor_type_name

@@ -43,7 +43,8 @@ export default {
         return result
       },
       set(newVal) {
-        this.$emit('input', newVal)
+        console.log(newVal)
+        // this.$emit('input', newVal)
       }
     }
   },
@@ -69,6 +70,15 @@ export default {
         this.selectDevice.positionX = parseFloat(this.selectDevice.positionX) + 100 * (e.clientX - this.cursePoint[0]) / wrapper.clientWidth
         this.selectDevice.positionY = parseFloat(this.selectDevice.positionY) + 100 * (e.clientY - this.cursePoint[1]) / wrapper.clientHeight
         this.cursePoint = [e.clientX, e.clientY]
+        
+        let devices_copy = copyObject(this.value)
+        devices_copy.map(device => {
+          if (device.name == this.selectDevice.name) {
+            device.positionX = this.selectDevice.positionX
+            device.positionY = this.selectDevice.positionY
+          }
+        })
+        this.$emit('input', devices_copy)
       }
     }
   }

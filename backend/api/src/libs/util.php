@@ -20,3 +20,12 @@ function GetMapDiff($arrayOldData, $arrayNewData)
     }
     return $result;
 }
+
+function Str2Time($str)
+{
+    if (strlen($str) != 8)
+    return '0000-00-00';
+
+$arr = str_split($str, 2);
+return "$arr[0]$arr[1]-$arr[2]-$arr[3]";
+}

@@ -151,30 +151,29 @@ export default {
         time_min: this.startDate.replace(/\D/g, ""),
         time_max: this.endDate.replace(/\D/g, "")
       };
-      let vm = this
       this.axios.get("/test/his-data?" + Qs.stringify(search_options))
         .then(resp => {
-          vm.his_data = []
+          this.his_data = []
           resp.data.map(adata => {
-            let old_data = vm.his_data.find(
+            let old_data = this.his_data.find(
               item => item.data_time == adata.data_time
             )
             if (old_data) {
               old_data[adata["param_name"]] = adata["val"];
             } else {
-              vm.his_data.push({
+              this.his_data.push({
                 device_name: adata["device_name"],
                 data_time: adata["data_time"],
                 [adata["param_name"]]: adata["val"]
               })
             }
           })
-          let l_d = vm.params.map(param => param.name_cn);
-          let series = vm.params.map(param => {
+          let l_d = this.params.map(param => param.name_cn);
+          let series = this.params.map(param => {
             return {
               name: param.name_cn,
               type: "line",
-              data: vm.his_data.map(adata => adata[param.name])
+              data: this.his_data.map(adata => adata[param.name])
             };
           });
           let option = {
@@ -208,7 +207,7 @@ export default {
                   color: "#fff"
                 }
               },
-              data: vm.his_data.map(adata => adata["data_time"])
+              data: this.his_data.map(adata => adata["data_time"])
             },
             yAxis: {
               axisLabel: {
@@ -223,7 +222,7 @@ export default {
             },
             series: series
           }
-          vm.chart.setOption(option)
+          this.chart.setOption(option)
         });
     }
   }
