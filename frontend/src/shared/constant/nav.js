@@ -15,7 +15,7 @@ export const NAV_MENUS = [{
   icon: 'icon-workbench',
   url:'inspect-view'
 }, {
-  name_cn: '评估诊断',
+  name_cn: '状态评估',
   icon: 'icon-dynamic',
   url:'support'
 }, {

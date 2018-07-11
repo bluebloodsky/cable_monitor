@@ -58,7 +58,7 @@ INSERT INTO `tbl_monitor_device` VALUES ('30', 'jyjx3', '绝缘介损监测点3'
 INSERT INTO `tbl_monitor_device` VALUES ('31', 'gxcw1', '光纤测温监测点1', 'STMP', 'xiafeng3', 'fangqu1', '1', '46', '51');
 INSERT INTO `tbl_monitor_device` VALUES ('32', 'gxcw2', '光纤测温监测点2', 'STMP', 'xiafeng3', 'fangqu1', '2', '46', '58');
 INSERT INTO `tbl_monitor_device` VALUES ('33', 'gxcw3', '光纤测温监测点3', 'STMP', 'xiafeng3', 'fangqu1', '3', '46', '66');
-INSERT INTO `tbl_monitor_device` VALUES ('34', 'hj1', '环境监测点1', 'ENVR', null, 'fangqu1', '3', '46', '66');
+INSERT INTO `tbl_monitor_device` VALUES ('34', 'hj1', '环境监测点1', 'ENVR', null, 'fangqu1', '3', '7', '13');
 
 -- ----------------------------
 -- Table structure for `tbl_monitor_param`
@@ -78,8 +78,8 @@ CREATE TABLE `tbl_monitor_param` (
 -- ----------------------------
 -- Records of tbl_monitor_param
 -- ----------------------------
-INSERT INTO `tbl_monitor_param` VALUES ('1', 'AppPaDsch', '局放幅值', 'FLOAT', 'mV', '1', 'SPDC');
-INSERT INTO `tbl_monitor_param` VALUES ('2', 'AppPaDsch', '视在局放放电量', 'FLOAT', 'V', '2', 'SPDC');
+INSERT INTO `tbl_monitor_param` VALUES ('1', 'AppPaDsch', '局放幅值', 'FLOAT', 'mV', '1', 'GILC');
+INSERT INTO `tbl_monitor_param` VALUES ('2', 'AppPaDsch', '局放幅值', 'FLOAT', 'V', '2', 'SPDC');
 INSERT INTO `tbl_monitor_param` VALUES ('3', 'TotCurrent', '护层环流电流', 'FLOAT', 'A', '2', 'SPTR');
 INSERT INTO `tbl_monitor_param` VALUES ('4', 'LosFact', '介质损耗因素', 'FLOAT', '%', '2', 'SSBH');
 INSERT INTO `tbl_monitor_param` VALUES ('5', 'Temp', '温度', 'FLOAT', '℃', '3', 'STMP');
@@ -188,4 +188,4 @@ CREATE TABLE `tbl_wire` (
 INSERT INTO `tbl_wire` VALUES ('1', 'xiafeng1', '500kV下凤1回', 'GIL');
 INSERT INTO `tbl_wire` VALUES ('2', 'xiafeng2', '500kV下凤2回', 'GIL');
 INSERT INTO `tbl_wire` VALUES ('3', 'xiafeng3', '220kV下凤1回', 'WIRE');
-INSERT INTO `tbl_wire` VALUES ('4', 'xiafeng4', '220kV下凤1回', 'WIRE');
+INSERT INTO `tbl_wire` VALUES ('4', 'xiafeng4', '220kV下凤2回', 'WIRE');

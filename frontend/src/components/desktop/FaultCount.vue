@@ -7,12 +7,12 @@
         <li>
           <span>告警信息</span>
           <span>严重</span>
-          <span>危急</span>
+          <span>一般</span>
         </li>
         <li>
-          <span><strong>0</strong>条</span>
-          <span><strong>0</strong>条</span>
-          <span><strong>0</strong>条</span>
+          <span><strong>5</strong>条</span>
+          <span><strong>2</strong>条</span>
+          <span><strong>3</strong>条</span>
         </li>
       </ul>
   </section>

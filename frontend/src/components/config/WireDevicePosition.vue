@@ -16,36 +16,41 @@
   </section>
 </template>
 <script>
-import { MONITOR_DEVICES } from '../../json/json_device_info'
-import { MONITOR_TYPES } from '../../json/json_base_info'
+import { copyObject } from '@/shared/util'
 export default {
+  props: {
+    value: Array
+  },
   data() {
     return {
-      devices: [],
-      showDevices: [],
       monitorTypes: [],
       selectDevice: null,
       cursePoint: null,
     }
   },
-  watch: {
-    monitorTypes: {
-      handler(newVal) {
-        this.showDevices = []
-        MONITOR_DEVICES.map(device => {
-          let monitorType = newVal.find(item => !item.hideFlg && item['name'] == device['monitor_type'])
+  computed: {
+    showDevices: {
+      get() {
+        let result = []
+        this.value && this.value.map(device => {
+          let monitorType = this.monitorTypes.find(item => !item.hideFlg && item['name'] == device['monitor_type'])
           if (monitorType) {
-            device['icon'] = monitorType['icon']
-            this.showDevices.push(device)
+            let showDevice = copyObject(device)
+            showDevice['icon'] = monitorType['icon']
+            result.push(showDevice)
           }
         })
+        return result
       },
-      deep: true
+      set(newVal) {
+        this.$emit('input', newVal)
+      }
     }
   },
   mounted() {
-    this.devices = MONITOR_DEVICES
-    this.monitorTypes = MONITOR_TYPES.filter(monitorType => monitorType['type'] == 'WIRE_MONITOR')
+    this.axios.get('monitor-types').then(resp => {
+      this.monitorTypes = resp.data.filter(monitorType => monitorType['type'] == 'WIRE_MONITOR')
+    })
   },
   methods: {
     legendChange(monitorType) {
@@ -61,8 +66,8 @@ export default {
     move(e) {
       if (this.selectDevice) {
         let wrapper = this.$refs["wrapper"]
-        this.selectDevice.positionX = this.selectDevice.positionX + 100 * (e.clientX - this.cursePoint[0]) / wrapper.clientWidth
-        this.selectDevice.positionY = this.selectDevice.positionY + 100 * (e.clientY - this.cursePoint[1]) / wrapper.clientHeight
+        this.selectDevice.positionX = parseFloat(this.selectDevice.positionX) + 100 * (e.clientX - this.cursePoint[0]) / wrapper.clientWidth
+        this.selectDevice.positionY = parseFloat(this.selectDevice.positionY) + 100 * (e.clientY - this.cursePoint[1]) / wrapper.clientHeight
         this.cursePoint = [e.clientX, e.clientY]
       }
     }

@@ -13,7 +13,7 @@
         </div>
       </header>
       <div>
-        <WireDevicePosition v-if="currentNode.name=='WIRE_MONITOR_POSITION'"></WireDevicePosition>
+        <WireDevicePosition v-model="data" v-if="currentNode.name=='WIRE_MONITOR_POSITION'"></WireDevicePosition>
         <CameraPosition v-else-if="currentNode.name=='CAMERA_LOCATION'"></CameraPosition>
         <ZlTable :fields="fields" :data="data" @edit-row="editRow" @del-row="delRow" v-else>
         </ZlTable>
@@ -44,8 +44,6 @@ import WireDevicePosition from '../components/config/WireDevicePosition'
 import CameraPosition from '../components/config/CameraPosition'
 import { remove } from '../shared/util'
 import { NAV_CONFIG_TREE, FIELDS } from '@/shared/constant'
-import { MONITOR_TYPES, MONITOR_PARAMS } from '../json/json_base_info'
-import { TUNNELS, WIRES, SECTIONS, MONITOR_DEVICES, MONITOR_CAMERAS } from '../json/json_device_info'
 
 export default {
   components: {
@@ -58,13 +56,6 @@ export default {
     return {
       nav: NAV_CONFIG_TREE,
       flg_showRightBox: false,
-      MONITOR_TYPES: [],
-      MONITOR_PARAMS: [],
-      TUNNELS: TUNNELS,
-      WIRES: WIRES,
-      SECTIONS: SECTIONS,
-      MONITOR_DEVICES: MONITOR_DEVICES,
-      MONITOR_CAMERAS: MONITOR_CAMERAS,
       FIELDS: FIELDS,
       currentNode: {},
       currentRow: {},
