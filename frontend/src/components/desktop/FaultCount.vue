@@ -10,9 +10,9 @@
           <span>一般</span>
         </li>
         <li>
-          <span><strong>5</strong>条</span>
-          <span><strong>2</strong>条</span>
-          <span><strong>3</strong>条</span>
+          <span><strong class="yejing">5</strong>条</span>
+          <span><strong class="yejing">2</strong>条</span>
+          <span><strong class="yejing">3</strong>条</span>
         </li>
       </ul>
   </section>
@@ -85,7 +85,6 @@ strong {
   font-size: 30px;
   margin-right: 10px;
   font-weight: normal;
-  font-family: "Yejing";
   color: #FFE21E;
   /* color: rgb(255, 238, 138); */
 }

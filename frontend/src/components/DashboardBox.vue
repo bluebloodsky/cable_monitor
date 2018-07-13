@@ -21,7 +21,7 @@ article {
   border-width: 20px 25px;
   padding: 5px;
   width: 100%;
-  border-image-source: url(../assets/border.png);
+  border-image-source: url(../assets/img/border.png);
   border-image-slice: 32 37 fill;
   margin-top: 30px;
   border-radius: 5px;

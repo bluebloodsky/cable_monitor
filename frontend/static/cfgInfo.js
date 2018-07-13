@@ -3,6 +3,6 @@ this.cfgInfo = {
     baseURL: '//localhost/cable_monitor/backend/api/index.php/',
   },
   production: {
-    baseURL: '../api/index.php/',
+    baseURL: './api/index.php/',
   }
 }

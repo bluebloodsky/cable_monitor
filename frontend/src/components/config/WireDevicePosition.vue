@@ -7,7 +7,7 @@
       </a>
     </header>
     <div @mouseup="drop" @mousemove="move" ref="wrapper" class="wrapper">
-      <img class="bg" src="../../assets/zxt.png">
+      <img class="bg" src="../../assets/img/zxt.png">
       <button type="text" :style="{ left:device.positionX + '%' , top:device.positionY  + '%'}" @mousedown.left="grab($event,device)" v-for="device in showDevices">
         <i class="iconfont good" :class="device.icon"></i>
         <span class="good">{{device.name_cn}}</span>

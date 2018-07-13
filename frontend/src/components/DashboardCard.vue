@@ -23,7 +23,7 @@ article {
 
 article>header {
   font-size: 18px;
-  background: url(../assets/title.png) center center / 100% 100% no-repeat;
+  background: url(../assets/img/title.png) center center / 100% 100% no-repeat;
   width: 322px;
   height: 86px;
   /* color: rgb(255, 238, 138); */
@@ -33,7 +33,7 @@ article>header {
 
 article>section {
   /* border-image-source: url(../assets/section.png); */
-  background: url(../assets/section.png) center center / 100% 100% no-repeat;
+  background: url(../assets/img/section.png) center center / 100% 100% no-repeat;
   /* border-image-slice: 32 37 fill; */
   /* border-width: 32px 37px; */
   padding: 1px;

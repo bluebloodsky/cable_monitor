@@ -2,7 +2,7 @@
   <div>
     <header>
       <div class="logo">
-        <img src="../assets/logo.png">
+        <img src="../assets/img/logo.png">
         <h1>电缆通道综合在线监测系统</h1>
       </div>
       <nav>
@@ -16,7 +16,7 @@
         </ul>
       </nav>
       <div class="right-info">
-        <a> <img src="../assets/user.png"></a>
+        <a> <img src="../assets/img/user.png"></a>
         <span> 
           <strong>{{t}}</strong> 
           <br/>

@@ -1,0 +1,12 @@
+@font-face {
+  font-family: "yejing";
+  src: url('../fonts/yejing.ttf?t=1524816828127') format('truetype');
+}
+
+.yejing {
+  font-family: "yejing" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

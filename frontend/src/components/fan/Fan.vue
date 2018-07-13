@@ -1,6 +1,6 @@
 <template>
   <section ref="shell">
-    <img src="./rotator.png" ref="rotator">
+    <img src="../../assets/img/rotator.png" ref="rotator">
   </section>
 </template>
 <script>
@@ -23,7 +23,7 @@ export default {
 </script>
 <style scoped>
 section {
-  background: url(./shell.png) center center / 100% 100% no-repeat;
+  background: url(../../assets/img/shell.png) center center / 100% 100% no-repeat;
   width: 40px;
   height: 40px;
   z-index: 9;

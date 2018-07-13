@@ -34,7 +34,6 @@ strong {
   font-size: 18px;
   margin: 0 10px;
   font-weight: normal;
-  font-family: "Yejing";
   color: #FFE21E;
 }
 

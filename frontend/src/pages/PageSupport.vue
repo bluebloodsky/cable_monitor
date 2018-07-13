@@ -2,32 +2,37 @@
   <div class="wrapper-box">
     <aside>
       <header>导航</header>
-      <ZlTree :data="nav" @node-click="onNodeClick" :currentNode="currentNode"></ZlTree>
+      <zl-tree :data="nav" @node-click="onNodeClick" :currentNode="currentNode"></zl-tree>
     </aside>
     <section class="box tab-box">
       <header>
         <ul>
-          <li>
-            <a class="selected">
-               <span>状态评估</span>
-      		</a>
+          <li v-for="(tab,index) in tabs" :key="index">
+            <a :class="{selected : index == currentPage}" @click="currentPage=index"><span>{{tab}}</span></a>
           </li>
         </ul>
       </header>
       <section>
-      	
+        <state-evaluation v-if="currentPage == 0"></state-evaluation>
+        <state-data v-else></state-data>
       </section>
     </section>
   </div>
 </template>
 <script>
 import ZlTree from "../components/ZlTree";
+import StateEvaluation from "../components/support/StateEvaluation"
+import StateData from "../components/support/StateData"
 export default {
   components: {
-    ZlTree
+    ZlTree,
+    StateEvaluation,
+    StateData
   },
   data() {
     return {
+      tabs: ["状态评价", "状态数据"],
+      currentPage: 0,
       nav: [],
       currentNode: {}
     }

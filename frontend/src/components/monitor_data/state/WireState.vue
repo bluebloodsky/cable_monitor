@@ -1,7 +1,7 @@
 <template>
   <article class="wrapper">
     <section class="state-box" :class="{'pd-box':node.monitor_type_name =='SPDC'}">
-      <img src="../../../assets/zxt.png">
+      <img src="../../../assets/img/zxt.png">
       <div :style="{ left:device.positionX + '%' , top:device.positionY  + '%'}" v-for="device in showDevices">
         <button type="text">
           <i class="iconfont good icon-circle"></i>
