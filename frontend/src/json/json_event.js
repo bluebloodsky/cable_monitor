@@ -1,43 +1,43 @@
 export const ALARM_RECORDS = [{
-    name:'220kV下凤1回',
+    name:'220kV夏凤1回',
     time:'2018-06-02 08:00:00',
     type:'局部放电告警',
     level:1,
     level_desc:'注意',
     state:'已处理',
-    detail:'220kV下凤1回局放监测点1视在局放放电量超过阈值15%'
+    detail:'220kV夏凤1回局放监测点1视在局放放电量超过阈值15%'
 },{
-    name:'220kV下凤2回',
+    name:'220kV夏凤2回',
     time:'2018-06-02 09:00:00',
     type:'局部放电告警',
     level:2,
     level_desc:'警告',
     state:'已处理',
-    detail:'220kV下凤1回局放监测点2视在局放放电量超过阈值30%'
+    detail:'220kV夏凤1回局放监测点2视在局放放电量超过阈值30%'
 },{
-    name:'220kV下凤1回',
+    name:'220kV夏凤1回',
     time:'2018-06-02 10:00:00',
     type:'局部放电告警',
     level:1,
     level_desc:'注意',
     state:'已处理',
-    detail:'220kV下凤1回局放监测点3视在局放放电量超过阈值15%'
+    detail:'220kV夏凤1回局放监测点3视在局放放电量超过阈值15%'
 },{
-    name:'220kV下凤1回',
+    name:'220kV夏凤1回',
     time:'2018-06-02 08:00:00',
     type:'绝缘介损告警',
     level:1,
     level_desc:'注意',
     state:'已处理',
-    detail:'220kV下凤1回绝缘介损监测点1介质损耗因素超过阈值5%'
+    detail:'220kV夏凤1回绝缘介损监测点1介质损耗因素超过阈值5%'
 },{
-    name:'220kV下凤1回',
+    name:'220kV夏凤1回',
     time:'2018-06-02 10:00:00',
     type:'绝缘介损告警',
     level:2,
     level_desc:'警告',
     state:'已处理',
-    detail:'220kV下凤1回绝缘介损监测点1介质损耗因素超过阈值10%'
+    detail:'220kV夏凤1回绝缘介损监测点1介质损耗因素超过阈值10%'
 }]
 
 export const LOG_RECORDS = [{

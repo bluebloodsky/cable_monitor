@@ -2,16 +2,16 @@
   <section>
     <ul>
       <li>电缆隧道概况：</li>
-      <li>下凤电缆隧道位于XX市XX区，全长XXkm</li>
+      <li>下凤电缆隧道位于武汉市江夏区，全长4.0km</li>
     </ul>
     <hr>
     <ul>
       <li>传感器接入情况：</li>
-      <li><span>特高频传感器：总数<strong>12</strong>,在线<strong>12</strong>,故障<strong>0</strong></span></li>
-      <li><span>电流传感器：总数<strong>20</strong>,在线<strong>20</strong>,故障<strong>0</strong></span></li>
-      <li><span>温度传感器：总数<strong>8</strong>,在线<strong>8</strong>,故障<strong>0</strong></span></li>
-      <li><span>水位传感器：总数<strong>3</strong>,在线<strong>3</strong>,故障<strong>0</strong></span></li>
-      <li><span>摄像头：总数<strong>20</strong>,在线<strong>20</strong>,故障<strong>0</strong></span></li>
+      <li><span>特高频传感器：总数<strong  class="yejing">12</strong>,在线<strong>12</strong>,故障<strong>0</strong></span></li>
+      <li><span>电流传感器：总数<strong class="yejing">20</strong>,在线<strong>20</strong>,故障<strong>0</strong></span></li>
+      <li><span>温度传感器：总数<strong class="yejing">8</strong>,在线<strong>8</strong>,故障<strong>0</strong></span></li>
+      <li><span>水位传感器：总数<strong class="yejing">3</strong>,在线<strong>3</strong>,故障<strong>0</strong></span></li>
+      <li><span>摄像头：总数<strong class="yejing">20</strong>,在线<strong>20</strong>,故障<strong>0</strong></span></li>
     </ul>
   </section>
 </template>

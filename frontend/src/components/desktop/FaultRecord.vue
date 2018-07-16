@@ -8,7 +8,7 @@
           </tr>
         </thead>
         <tbody>
-            <tr v-for="(row,row_id) in data" :class="row.level==1?'warn':'bad'">
+            <tr v-for="(row,row_id) in data" :class="row.level==1?'warn':'bad'" @click="rowClick">
         <td v-for="field in fields">
           <span>{{row[field.name]}}</span>
         </td>
@@ -49,6 +49,11 @@ export default {
       ],
       data:ALARM_RECORDS
     };
+  },
+  methods:{
+    rowClick(e){
+      this.$router.push('alarm')
+    }
   }
 };
 </script>
@@ -132,6 +137,10 @@ a {
 }
 
 
+tbody tr:hover{
+  background-color: #104666;
+  cursor: pointer;
+}
 footer div {
   margin-right: 50px;
   float: left;

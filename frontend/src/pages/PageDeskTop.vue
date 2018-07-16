@@ -1,12 +1,12 @@
 <template>
   <div class="wrapper-box">
-    <!-- <DashboardBox title="概况信息统计">
+<!--     <DashboardBox title="概况信息">
       <GeneralInfo></GeneralInfo>
     </DashboardBox> -->
     <DashboardBox title="视频监控">
       <Camera></Camera>
     </DashboardBox>
-    <DashboardBox title="GIS">
+    <DashboardBox title="地理信息">
       <Gis></Gis>
     </DashboardBox>
     <DashboardBox title="告警统计">

@@ -3,7 +3,7 @@
     <header>
       <div class="logo">
         <img src="../assets/img/logo.png">
-        <h1>电缆通道综合在线监测系统</h1>
+        <h1>电缆及通道综合在线监测系统</h1>
       </div>
       <nav>
         <ul>
@@ -24,11 +24,11 @@
         </span>
       </div>
     </header>
-    <!--  <transition>
-      <keep-alive> -->
+     <transition>
+      <keep-alive>
     <router-view></router-view>
-    <!--   </keep-alive>
-    </transition> -->
+      </keep-alive>
+    </transition>
   </div>
 </template>
 <script>

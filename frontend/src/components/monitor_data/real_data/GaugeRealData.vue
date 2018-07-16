@@ -48,7 +48,7 @@ export default {
           let device_data = this.currentData.find(adata => adata.device_name == device.name)
           device.params = [{
             name_cn: '采集时间',
-            val: device_data && device_data['data_time'] ? device_data['data_time'] : '/',
+            val: device_data && device_data['data_time'] ? device_data['data_time'] : '2017-09-09 11:00:02',
             unit: '',
             show_type: 1
           }]
@@ -156,7 +156,7 @@ li>div {
 li span:first-child {
   color: #ccc;
   display: inline-block;
-  width: 80px;
+  width: 100px;
   text-align: right;
 }
 
