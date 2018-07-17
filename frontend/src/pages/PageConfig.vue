@@ -45,6 +45,8 @@ import CameraPosition from '../components/config/CameraPosition'
 import { remove } from '../shared/util'
 import { NAV_CONFIG_TREE, FIELDS } from '@/shared/constant'
 
+import { mapGetters } from 'vuex'
+
 export default {
   components: {
     ZlTree,
@@ -63,6 +65,15 @@ export default {
     }
   },
   computed: {
+    ...mapGetters({
+      tunnels: 'tunnels',
+      wires: 'wires',
+      sections: "sections",
+      monitor_types: "monitorTypes",
+      monitor_params: "monitorParams",
+      monitor_devices:"monitorDevices"
+
+    }),
     fields() {
       return this.currentNode.name ? this['FIELDS'][this.currentNode.name + "_FIELDS"] : []
     }
@@ -71,12 +82,7 @@ export default {
     onNodeClick(node) {
       this.flg_showRightBox = false
       this.$set(this, 'currentNode', node)
-      this.axios.get(this.currentNode.url).then(resp => {
-        this.data = resp['data']
-      }).catch(err => {
-
-        this.data = []
-      })
+      this.data = this[this.currentNode.url]
     },
     cellFormatter(row, column, cellValue) {
       if (Array.isArray(cellValue)) {
@@ -98,7 +104,8 @@ export default {
       this.data.push(this.currentRow)
     },
     submit() {
-      this.axios.post(this.currentNode.url , this.data).then(resp => {
+      this.axios.post(this.currentNode.url.replace('_','-'), this.data).then(resp => {
+        
         console.log(resp)
       }).catch(err => {
 

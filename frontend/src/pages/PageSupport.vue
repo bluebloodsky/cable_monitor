@@ -23,6 +23,8 @@
 import ZlTree from "../components/ZlTree";
 import StateEvaluation from "../components/support/StateEvaluation"
 import StateData from "../components/support/StateData"
+
+import { mapGetters } from 'vuex'
 export default {
   components: {
     ZlTree,
@@ -33,18 +35,20 @@ export default {
     return {
       tabs: ["状态评价", "状态数据"],
       currentPage: 0,
-      nav: [],
       currentNode: {}
     }
   },
-  mounted() {
-    /*计算左侧树形结构*/
-    this.axios.get("device-tree").then(response => {
-      let tunnels = response.data['tunnels']
-      let wires = response.data['wires']
-      let monitor_types = response.data['monitor_types']
-      let sections = response.data['sections']
-      tunnels.map(tunnel => {
+  computed: {
+    ...mapGetters({
+      tunnels: 'tunnels',
+      wires: 'wires',
+      sections: "sections",
+      monitor_types: "monitorTypes",
+      monitor_params: "monitorParams",
+    }),
+    nav() {
+      let ret = []
+      this.tunnels.map(tunnel => {
         let node = {
           name: tunnel.name,
           type: "tunnel",
@@ -52,9 +56,9 @@ export default {
           children: []
         };
 
-        this.nav.push(node);
+        ret.push(node);
 
-        wires.map((wire, index) => {
+        this.wires.map((wire, index) => {
           let subNode = {
             name: wire.name,
             label: wire.name_cn,
@@ -66,7 +70,11 @@ export default {
           node.children.push(subNode);
         });
       })
-    })
+      return ret
+    }
+  },
+  mounted() {
+
   },
   methods: {
     onNodeClick(node) {

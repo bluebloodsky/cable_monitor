@@ -4,7 +4,7 @@
     </div>
     <div class="control">
       <button type="text" @click="play"><i class="iconfont" :class="playFlg? 'icon-suspend' : 'icon-play' "></i></button>
-      <input type="range" v-model="period" min="0" :max="points.length">
+      <input type="range" v-model="period" min="0" :max="pointsLength">
     </div>
   </section>
 </template>
@@ -27,6 +27,11 @@ export default {
       period: 0,
       playFlg: true
     };
+  },
+  computed:{
+    pointsLength(){
+      return this.points ? this.points.length :0
+    }
   },
   mounted() {
     if (this.type == "PRPS") {
@@ -51,14 +56,14 @@ export default {
   methods: {
     play() {
       this.playFlg = !this.playFlg;
-      if (this.period >= this.points.length) {
+      if (this.period >= this.pointsLength) {
         this.period = 0;
       }
     }
   },
   watch: {
     period(newVal) {
-      if (this.period == this.points.length) {
+      if (this.period == this.pointsLength) {
         this.playFlg = false;
       }
       this.chart.draw(this.period);

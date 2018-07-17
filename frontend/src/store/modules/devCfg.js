@@ -8,8 +8,8 @@ const state = {
   cameras: []
 }
 const getters = {
-  monitorTypes: state => state.user,
-  monitorParams: state => state.token,
+  monitorTypes: state => state.monitorTypes,
+  monitorParams: state => state.monitorParams,
   tunnels: state => state.tunnels,
   sections: state => state.sections,
   wires: state => state.wires,
@@ -21,22 +21,22 @@ const mutations = {
   editMonitorTypes(state, data) {
     state.monitorTypes = data
   },
-  editMonitorParams(state) {
+  editMonitorParams(state, data) {
     state.monitorParams = data
   },
   editTunnels(state, data) {
     state.tunnels = data
   },
-  editSections(state) {
+  editSections(state, data) {
     state.sections = data
   },
   editWires(state, data) {
     state.wires = data
   },
-  editMonitorDevices(state) {
+  editMonitorDevices(state, data) {
     state.monitorDevices = data
   },
-  editCameras(state) {
+  editCameras(state, data) {
     state.cameras = data
   }
 }

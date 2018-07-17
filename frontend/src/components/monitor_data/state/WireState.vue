@@ -1,6 +1,6 @@
 <template>
   <article class="wrapper">
-    <section class="state-box" :class="{'pd-box':node.monitor_type_name =='SPDC'}">
+    <section class="state-box">
       <img src="../../../assets/img/zxt.png">
       <div :style="{ left:device.positionX + '%' , top:device.positionY  + '%'}" v-for="device in showDevices">
         <button type="text">
@@ -14,15 +14,16 @@
         </ul>
       </div>
     </section>
-    <section class="wave-box" v-if="node.monitor_type_name =='SPDC'">
+<!--     <section class="wave-box" v-if="node.monitor_type_name =='SPDC'">
       <PDWave :points="wave" :title="phases[index]" type="PRPD" class="wave" v-for="(wave,index) in waves"></PDWave>
-    </section>
+    </section> -->
   </article>
 </template>
 <script>
 import PDWave from "@/components/PDWave";
 import { PD_WAVE, PD_WAVE1, PD_WAVE2 } from "@/json/json_pd";
 import { CUR_DATA } from "@/json/json_monitor_data";
+import { mapGetters } from 'vuex'
 export default {
   components: { PDWave },
   props: {
@@ -33,19 +34,17 @@ export default {
       waves: [PD_WAVE, PD_WAVE1, PD_WAVE2],
       currentData: CUR_DATA,
       phases: ["A相", "B相", "C相"],
-      monitor_devices: [],
-      monitor_params: []
     };
   },
   mounted() {
-    this.axios.get("monitor-params").then(response => {
-      this.monitor_params = response.data
-      return this.axios.get("monitor-devices")
-    }).then(response => {
-      this.monitor_devices = response.data
-    })
+
   },
   computed: {
+    ...mapGetters({
+      monitor_params: "monitorParams",
+      monitor_devices: "monitorDevices",
+    }),
+
     showDevices() {
       let l_devices = [];
       /*过滤所有该监测类型参数*/

@@ -14,7 +14,7 @@
       </header>
       <section>
         <!-- <keep-alive> -->
-        <component :is="componentName" :node="currentNode"  @choose-item="onChooseItem"></component>
+          <component :is="componentName" :node="currentNode" @choose-item="onChooseItem" @choose-device="onChooseDevice"></component>
         <!-- </keep-alive> -->
       </section>
     </section>
@@ -29,17 +29,10 @@ import WireState from "../components/monitor_data/state/WireState";
 import EnvrState from "../components/monitor_data/state/EnvrState";
 import GaurdState from "../components/monitor_data/state/GaurdState";
 import CameraState from "../components/monitor_data/state/CameraState";
-import TxtRealData from "../components/monitor_data/real_data/TxtRealData";
 import GaugeRealData from "../components/monitor_data/real_data/GaugeRealData";
 import ChartTableHisData from "../components/monitor_data/his_data/ChartTableHisData";
-import { MONITOR_TYPES, MONITOR_PARAMS } from "../json/json_base_info";
-import {
-  TUNNELS,
-  WIRES,
-  SECTIONS,
-  MONITOR_DEVICES,
-  MONITOR_CAMERAS
-} from "../json/json_device_info";
+
+import { mapGetters } from 'vuex'
 
 export default {
   components: {
@@ -50,7 +43,6 @@ export default {
     EnvrState,
     GaurdState,
     CameraState,
-    TxtRealData,
     GaugeRealData,
     ChartTableHisData
   },
@@ -58,13 +50,97 @@ export default {
     return {
       tabs: ["状态总览", "实时数据", "历史数据"],
       currentPage: 0,
-      nav: [],
       currentNode: {}
     };
   },
   computed: {
+    ...mapGetters({
+      tunnels: 'tunnels',
+      wires: 'wires',
+      sections: "sections",
+      monitor_types: "monitorTypes",
+      monitor_params: "monitorParams",
+    }),
+    nav() {
+      let tunnels = this.tunnels
+      let wires = this.wires
+      let monitor_types = this.monitor_types
+      let sections = this.sections
+      let nav = []
+      tunnels.map((tunnel, index) => {
+        let node = {
+          name: tunnel.name,
+          type: "tunnel",
+          label: tunnel.name_cn,
+          children: []
+        };
+
+        nav.push(node);
+        if (index == 0) {
+          node.defaultSelected = true;
+        }
+        monitor_types.map(monitor_type => {
+          let subnode = {
+            icon: monitor_type.icon,
+            name: monitor_type.name,
+            label: monitor_type.name_cn,
+            type: monitor_type.type,
+            children: []
+          };
+          if (monitor_type.type == "WIRE_MONITOR") {
+            wires.map(wire => {
+              if (wire.type == "WIRE") {
+                subnode.children.push({
+                  name: wire.name,
+                  label: wire.name_cn,
+                  type: wire.type,
+                  monitor_type_name: monitor_type.name
+                });
+              }
+            });
+          } else if (monitor_type.type == "GIL_MONITOR") {
+            wires.map(wire => {
+              if (wire.type == "GIL") {
+                subnode.children.push({
+                  name: wire.name,
+                  label: wire.name_cn,
+                  type: wire.type,
+                  monitor_type_name: monitor_type.name
+                });
+              }
+            });
+          } else if (monitor_type.type == "SECTION_MONITOR") {
+            sections.map(section => {
+              subnode.children.push({
+                name: section.name,
+                label: section.name_cn,
+                type: "SECTION",
+                monitor_type_name: monitor_type.name,
+                img_url: section.img_url
+              });
+            });
+          } else if (monitor_type.type == "CAMR_MONITOR") {
+            // MONITOR_CAMERAS.map(camera => {
+            //   subnode.children.push({
+            //     name: camera.name,
+            //     label: camera.name_cn,
+            //     type: "CAMERA",
+            //     location: camera.location
+            //   });
+            // });
+          }
+          if (subnode.children && subnode.children.length > 0) {
+            node.children.push(subnode);
+          }
+        })
+      })
+      return nav
+    },
     showTabs() {
       if (this.currentNode.isLeaf) {
+        if (this.currentNode.type == "SECTION") {
+          return this.tabs.slice(1)
+        }
         return this.tabs;
       } else {
         return [this.tabs[0]];
@@ -75,96 +151,20 @@ export default {
         return "CameraState";
       } else if (!this.currentNode.isLeaf) {
         return "TunnelState";
-      } else if (this.currentNode.type == "GIL") {
-        return this.currentPage == 0
-          ? "GILState"
-          : this.currentPage == 1 ? "GaugeRealData" : "ChartTableHisData";
-      } else if (this.currentNode.type == "WIRE") {
-        return this.currentPage == 0
-          ? "WireState"
-          : this.currentPage == 1 ? "GaugeRealData" : "ChartTableHisData";
+      } else if (this.currentNode.type == "GIL" || this.currentNode.type == "WIRE") {
+        return this.currentPage == 0 ?
+          "GILState" :
+          this.currentPage == 1 ? "GaugeRealData" : "ChartTableHisData";
       } else if (this.currentNode.type == "SECTION") {
-        return this.currentPage == 0
-          ? this.currentNode.monitor_type_name =='ENVR'?"EnvrState":"GaurdState"
-          : this.currentPage == 1 ? "GaugeRealData" : "ChartTableHisData";
+        return this.currentPage == 0 ? "GaugeRealData" : "ChartTableHisData";
       }
     }
   },
   mounted() {
     /*计算左侧树形结构*/
-    this.axios.get("device-tree").then(response=>{
-      let tunnels = response.data['tunnels'] 
-      let wires  = response.data['wires'] 
-      let monitor_types  = response.data['monitor_types'] 
-      let sections  = response.data['sections'] 
-      tunnels.map((tunnel, index) => {
-        let node = {
-          name: tunnel.name,
-          type: "tunnel",
-          label: tunnel.name_cn,
-          children: []
-        };
+    // this.axios.get("device-tree").then(response => {
 
-            this.nav.push(node);
-        if (index == 0) {
-          node.defaultSelected = true;
-        }
-          monitor_types.map(monitor_type => {
-            let subnode = {
-              icon: monitor_type.icon,
-              name: monitor_type.name,
-              label: monitor_type.name_cn,
-              type: monitor_type.type,
-              children: []
-            };
-            if (monitor_type.type == "WIRE_MONITOR") {
-              wires.map(wire => {
-                if (wire.type == "WIRE") {
-                  subnode.children.push({
-                    name: wire.name,
-                    label: wire.name_cn,
-                    type: wire.type,
-                    monitor_type_name: monitor_type.name
-                  });
-                }
-              });
-            } else if (monitor_type.type == "GIL_MONITOR") {
-              wires.map(wire => {
-                if (wire.type == "GIL") {
-                  subnode.children.push({
-                    name: wire.name,
-                    label: wire.name_cn,
-                    type: wire.type,
-                    monitor_type_name: monitor_type.name
-                  });
-                }
-              });
-            } else if (monitor_type.type == "SECTION_MONITOR") {
-              sections.map(section => {
-                subnode.children.push({
-                  name: section.name,
-                  label: section.name_cn,
-                  type: "SECTION",
-                  monitor_type_name: monitor_type.name,
-                  img_url: section.img_url
-                });
-              });
-            } else if (monitor_type.type == "CAMR_MONITOR") {
-              // MONITOR_CAMERAS.map(camera => {
-              //   subnode.children.push({
-              //     name: camera.name,
-              //     label: camera.name_cn,
-              //     type: "CAMERA",
-              //     location: camera.location
-              //   });
-              // });
-            }
-            if (subnode.children && subnode.children.length > 0) {
-              node.children.push(subnode);
-            }
-          });
-      });
-    })
+    // })
 
   },
   methods: {
@@ -176,9 +176,13 @@ export default {
     },
     onChooseItem(node) {
       this.currentNode = node;
+    },
+    onChooseDevice(device) {
+      this.currentPage = 1
     }
   }
 };
+
 </script>
 <style scoped>
 aside,
@@ -188,8 +192,9 @@ aside,
   border: 1px solid #3f6aa1;
   border-radius: 5px;
 }
-aside > header,
-.box > header {
+
+aside>header,
+.box>header {
   height: 36px;
   font-size: 16px;
   line-height: 36px;
@@ -206,7 +211,7 @@ aside {
   overflow-y: auto;
 }
 
-aside > header {
+aside>header {
   padding-left: 5px;
   border-bottom: 1px solid #3f6aa1;
 }
@@ -218,15 +223,15 @@ aside > header {
   width: calc(100% - 254px);
 }
 
-.tab-box > header {
+.tab-box>header {
   margin-left: 5px;
 }
 
-.tab-box > header li {
+.tab-box>header li {
   float: left;
 }
 
-.tab-box > header a {
+.tab-box>header a {
   position: relative;
   height: 0;
   display: inline-block;
@@ -237,7 +242,7 @@ aside > header {
   margin-left: -18px;
 }
 
-.tab-box > header a:before {
+.tab-box>header a:before {
   position: absolute;
   content: "";
   right: -18px;
@@ -247,7 +252,7 @@ aside > header {
   z-index: 2;
 }
 
-.tab-box > header a:after {
+.tab-box>header a:after {
   position: absolute;
   content: "";
   right: -17px;
@@ -257,15 +262,15 @@ aside > header {
   z-index: 2;
 }
 
-.tab-box > header a:hover,
-.tab-box > header a.selected {
+.tab-box>header a:hover,
+.tab-box>header a.selected {
   border-bottom: 36px solid #cfdee9;
   color: #3c3c3c;
   z-index: 3;
 }
 
-.tab-box > header a:hover::after,
-.tab-box > header a.selected::after {
+.tab-box>header a:hover::after,
+.tab-box>header a.selected::after {
   position: absolute;
   content: " ";
   right: -17px;
@@ -275,8 +280,8 @@ aside > header {
   z-index: 3;
 }
 
-.left-box > section,
-.tab-box > section {
+.left-box>section,
+.tab-box>section {
   position: absolute;
   top: 36px;
   bottom: 0;
@@ -285,8 +290,9 @@ aside > header {
   overflow-y: auto;
 }
 
-.tab-box > section {
+.tab-box>section {
   background-color: #cedde8;
   padding-top: 20px;
 }
+
 </style>

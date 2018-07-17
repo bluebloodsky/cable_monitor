@@ -16,6 +16,7 @@
   </section>
 </template>
 <script>
+import { mapGetters } from 'vuex'
 import { copyObject } from '@/shared/util'
 export default {
   props: {
@@ -23,35 +24,29 @@ export default {
   },
   data() {
     return {
-      monitorTypes: [],
       selectDevice: null,
       cursePoint: null,
     }
   },
   computed: {
-    showDevices: {
-      get() {
-        let result = []
-        this.value && this.value.map(device => {
-          let monitorType = this.monitorTypes.find(item => !item.hideFlg && item['name'] == device['monitor_type'])
-          if (monitorType) {
-            let showDevice = copyObject(device)
-            showDevice['icon'] = monitorType['icon']
-            result.push(showDevice)
-          }
-        })
-        return result
-      },
-      set(newVal) {
-        console.log(newVal)
-        // this.$emit('input', newVal)
-      }
+    ...mapGetters({
+      allTypes: 'monitorTypes'
+    }),
+    monitorTypes() {
+      return this.allTypes.filter(item => item["type"] == 'WIRE_MONITOR')
+    },
+    showDevices() {
+      let result = []
+      this.value && this.value.map(device => {
+        let monitorType = this.monitorTypes.find(item => !item.hideFlg && item['name'] == device['monitor_type'])
+        if (monitorType) {
+          let showDevice = copyObject(device)
+          showDevice['icon'] = monitorType['icon']
+          result.push(showDevice)
+        }
+      })
+      return result
     }
-  },
-  mounted() {
-    this.axios.get('monitor-types').then(resp => {
-      this.monitorTypes = resp.data.filter(monitorType => monitorType['type'] == 'WIRE_MONITOR')
-    })
   },
   methods: {
     legendChange(monitorType) {
@@ -70,7 +65,7 @@ export default {
         this.selectDevice.positionX = parseFloat(this.selectDevice.positionX) + 100 * (e.clientX - this.cursePoint[0]) / wrapper.clientWidth
         this.selectDevice.positionY = parseFloat(this.selectDevice.positionY) + 100 * (e.clientY - this.cursePoint[1]) / wrapper.clientHeight
         this.cursePoint = [e.clientX, e.clientY]
-        
+
         let devices_copy = copyObject(this.value)
         devices_copy.map(device => {
           if (device.name == this.selectDevice.name) {

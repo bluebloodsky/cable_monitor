@@ -1,9 +1,11 @@
 <template>
   <article class="wrapper-box">
     <header>
-       <div>
+      <div>
         <span>监测设备选择：</span>
-        <ZlComboTree :treeData="treeDevice" v-model="selDevice"></ZlComboTree>
+         <select v-model="selDeviceName">
+          <option v-for="device in treeDevice" :value="device.name">{{device.name_cn}}</option>
+        </select>
       </div>
       <div>
         <span>开始时间:</span>
@@ -25,10 +27,10 @@
           </thead>
           <tbody>
             <tr v-for="(row,row_id) in data" :class="row.level==1?'warn':'bad'">
-        <td v-for="field in fields">
-          <span>{{row[field.name]}}</span>
-        </td>
-          </tr>
+              <td v-for="field in fields">
+                <span>{{row[field.name]}}</span>
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -53,16 +55,16 @@
     </section>
   </article>
 </template>
-
 <script>
 import DashboardBox from "../components/DashboardBox";
 import ZlDatePicker from "../components/ZlDatePicker";
 import ZlComboTree from "../components/ZlComboTree";
 
-import { WIRES, SECTIONS } from "../json/json_device_info";
+import { mapGetters } from 'vuex'
+
 import {
   ALARM_RECORDS
-    } from "@/json/json_event";
+} from "@/json/json_event";
 
 export default {
   components: {
@@ -73,8 +75,7 @@ export default {
   data() {
     return {
       key: 12,
-      treeDevice: [],
-      selDevice: null,
+      selDeviceName: "",
       startDate: (new Date).addMonths(-1),
       endDate: new Date(),
       fields: [
@@ -84,31 +85,44 @@ export default {
         { name: "level_desc", caption: "告警级别" },
         { name: "detail", caption: "详细描述" },
         { name: "state", caption: "状态" },
-      ] ,
-      data:ALARM_RECORDS
+      ],
+      data: ALARM_RECORDS
     };
   },
-  mounted() {
-    WIRES.map(wire => {
-      this.treeDevice.push({
-        name: wire.name,
-        label: wire.name_cn,
-        type: wire.type
-      });
-    });
-    SECTIONS.map(section => {
-      this.treeDevice.push({
-        name: section.name,
-        label: section.name_cn,
-        type: "SECTION"
-      });
-    });
-  },
-  methods: {
-  }
-};
-</script>
 
+  computed: {
+    ...mapGetters({
+      wires: 'wires',
+      sections: "sections",
+    }),
+    treeDevice() {
+      let ret = []
+      this.wires.map(wire => {
+        ret.push({
+          name: wire.name,
+          name_cn: wire.name_cn,
+          type: wire.type
+        });
+      });
+      this.sections.map(section => {
+        ret.push({
+          name: section.name,
+          name_cn: section.name_cn,
+          type: "SECTION"
+        });
+      });
+      if (ret && ret.length)
+        this.selDeviceName = ret[0]["name"]
+      return ret
+    }
+  },
+  mounted() {
+
+  },
+  methods: {}
+};
+
+</script>
 <style scoped>
 header {
   height: 40px;
@@ -118,9 +132,11 @@ header {
   margin-bottom: 10px;
   background-color: #132d48;
 }
-header > div {
+
+header>div {
   margin-right: 20px;
 }
+
 header select {
   width: 200px;
 }
@@ -168,11 +184,12 @@ tbody {
   line-height: 40px;
   text-align: center;
 }
-td:last-child{
+
+td:last-child {
   color: #28A646;
 }
 
-a{
+a {
   color: #28A646;
 }
 
@@ -199,4 +216,5 @@ footer input {
   width: 400px;
   background-color: #fff;
 }
+
 </style>

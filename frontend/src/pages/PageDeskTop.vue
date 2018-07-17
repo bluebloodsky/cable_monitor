@@ -3,9 +3,9 @@
 <!--     <DashboardBox title="概况信息">
       <GeneralInfo></GeneralInfo>
     </DashboardBox> -->
-    <DashboardBox title="视频监控">
+<!--     <DashboardBox title="视频监控">
       <Camera></Camera>
-    </DashboardBox>
+    </DashboardBox> -->
     <DashboardBox title="地理信息">
       <Gis></Gis>
     </DashboardBox>
@@ -31,15 +31,14 @@ export default {
 
 </script>
 <style scoped>
-.wrapper-box>article:nth-child(1) {
+/*.wrapper-box>article:nth-child(1) {
   position: absolute;
   left: 10px;
   top: 10px;
   right: 75%;
   bottom: 20px;
-  /* height: calc(50% + 10px); */
   width: auto;
-}
+}*/
 
 /* .wrapper-box>article:nth-child(2) {
   position: absolute;
@@ -51,9 +50,9 @@ export default {
   width: auto;
 } */
 
-.wrapper-box>article:nth-child(2) {
+.wrapper-box>article:nth-child(1) {
   position: absolute;
-  left: calc(25% + 10px);
+  left: 10px;
   top: 10px;
   bottom: 20px;
   right: calc(25% + 100px);
@@ -61,7 +60,7 @@ export default {
   height: auto;
 }
 
-.wrapper-box>article:nth-child(3) {
+.wrapper-box>article:nth-child(2) {
   position: absolute;
   left: calc(75% - 90px);
   top: 10px;
@@ -71,7 +70,7 @@ export default {
   width: auto;
 }
 
-.wrapper-box>article:nth-child(4) {
+.wrapper-box>article:nth-child(3) {
   position: absolute;
   left: calc(75% - 90px);
   top: 250px;

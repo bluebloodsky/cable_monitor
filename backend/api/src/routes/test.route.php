@@ -1,6 +1,7 @@
 <?php
 $app->group('/test', function () {
     $this->get('/real-data', function ($req, $resp, $args) {
+        $params = $req->getQueryParams();
         global $db;
         $f_data = $db->select("floatrealdata",[
             "[>]tbl_rel_dev_data"=>"measId" ,
@@ -8,15 +9,21 @@ $app->group('/test', function () {
         ],[
             "val" , "tm(data_time)" , "tbl_rel_dev_data.device_name" , "tbl_rel_dev_data.param_name"
         ],[
-            "tbl_monitor_param.data_type" => 'FLOAT'
+             "AND" => [
+            "tbl_monitor_param.data_type" => 'FLOAT' ,
+            "tbl_monitor_param.monitor_type" => $params["type"]
+        ]
         ]);
         $b_data = $db->select("boolrealdata",[
             "[>]tbl_rel_dev_data"=>"measId" ,
             "[>]tbl_monitor_param"=>["tbl_rel_dev_data.param_name"=>"name"] 
         ],[
-            "val" , "tm(data_time)" , "tbl_rel_dev_data.device_name" , "tbl_rel_dev_data.param_name"
+            "val" , "tm(data_time)" , "tbl_rel_dev_data.device_name" , "tbl_rel_dev_data.param_name" 
         ],[
-            "tbl_monitor_param.data_type" => 'BOOL'
+             "AND" => [
+            "tbl_monitor_param.data_type" => 'BOOL' ,
+            "tbl_monitor_param.monitor_type" => $params["type"]
+            ]
         ]);
         $data  = array_merge($f_data , $b_data);
 

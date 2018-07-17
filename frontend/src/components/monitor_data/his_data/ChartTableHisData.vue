@@ -62,6 +62,8 @@
 import ZlDatePicker from "../../ZlDatePicker";
 import echarts from "echarts";
 import Qs from "qs";
+
+import { mapGetters } from 'vuex'
 export default {
   props: {
     node: Object
@@ -75,8 +77,6 @@ export default {
       startDate: new Date().addMonths(-1).format("yyyy-MM-dd"),
       endDate: new Date().addDays(1).format("yyyy-MM-dd"),
       selDeviceName: "",
-      all_devices: [],
-      all_params: [],
       chartOption: null,
       his_data: [],
       cur_page: 1,
@@ -84,11 +84,18 @@ export default {
     };
   },
   computed: {
+    ...mapGetters({
+      all_devices: 'monitorDevices',
+      all_params: 'monitorParams',
+    }),
     devices() {
-      return this.all_devices.filter(device => {
+      let ret = this.all_devices.filter(device => {
         return device.monitor_type == this.node.monitor_type_name &&
           (this.node.type == "SECTION" ? device.section == this.node.name : device.wire == this.node.name)
       })
+      // this.selDeviceName = ret && ret.length ? ret[0].name : ''
+      this.queryData();
+      return ret
     },
     params() {
       return this.all_params.filter(
@@ -121,28 +128,21 @@ export default {
   },
   mounted() {
     this.chart = echarts.init(this.$refs["container"]);
-    this.axios("monitor-devices").then(response => {
-      this.all_devices = response.data
-      return this.axios("monitor-params")
-    }).then(response => {
-      this.all_params = response.data
-      this.selDeviceName = this.devices&&this.devices.length ?this.devices[0].name : ''
-      this.queryData();
-    })
+    this.selDeviceName = this.devices && this.devices.length ? this.devices[0].name : ''
     window.addEventListener("resize", () => {
       this.chart.resize();
     });
   },
   watch: {
     node(newVal) {
-      this.selDeviceName = this.devices&&this.devices.length ?this.devices[0].name : ''
+      this.selDeviceName = this.devices && this.devices.length ? this.devices[0].name : ''
       this.chart.clear()
       this.queryData();
     }
   },
   methods: {
     queryData() {
-      if(!this.selDeviceName){
+      if (!this.selDeviceName) {
         this.his_data = []
         return
       }
@@ -177,7 +177,7 @@ export default {
             };
           });
           let option = {
-            color:['#c23531', '#61a0a8', '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3'],
+            color: ['#c23531', '#61a0a8', '#ca8622', '#bda29a', '#6e7074', '#546570', '#c4ccd3'],
             tooltip: {
               trigger: "axis"
             },

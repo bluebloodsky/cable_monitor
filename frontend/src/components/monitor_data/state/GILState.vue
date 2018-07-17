@@ -1,70 +1,77 @@
 <template>
   <section class="wrapper">
-    <div v-for="phase in phases" class="state-box">
-      <ul>
-        <li v-for="section in sections" :style="{width: 100 / sections.length + '%'}">
-          <span>{{section.name_cn}}</span>
-          <template v-for="device in devices">
-            <button type="text" v-if="device.section == section.name && device.phase == phase" @click="showWave">
-              <i class="iconfont icon-circle good"></i>
-            </button>
-          </template>
-        </li>
-      </ul>
-    </div>
-    <hr>
-    <div class="wave-box">
-      <PDWave :points="waves[index]" :title="device.name_cn" type="PRPS" class="wave" v-for="(device,index) in waveDevices"></PDWave>
-    </div>
+    <h2>{{this.title}}</h2>
+    <section class="data-box">
+      <div v-for="(phase,phaseIndex) in phases" class="state-box">
+        <ul>
+          <li v-for="section in sections" :style="{width: 100 / sections.length + '%'}">
+            <span>{{section.name_cn}}</span>
+            <template v-for="device in devices">
+              <section v-if="device.section == section.name && device.phase == phaseIndex + 1" @click="chooseDevice(device)">
+                <i class="iconfont icon-circle" :class="device.state"></i>
+                <span>{{device.name_cn}}</span>
+              </section>
+            </template>
+          </li>
+        </ul>
+      </div>
+    </section>
   </section>
 </template>
 <script>
-import { MONITOR_DEVICES } from "../../../json/json_device_info";
-import { SECTIONS } from "../../../json/json_device_info";
-import PDWave from "@/components/PDWave";
-import { PD_WAVE, PD_WAVE1, PD_WAVE2 } from "@/json/json_pd";
+import { mapGetters } from 'vuex'
+import { CUR_STATE } from '@/json/json_monitor_status'
 export default {
-  components: { PDWave },
   props: {
     node: Object
   },
   data() {
     return {
-      currentState: [],
-      sections: SECTIONS,
+      currentState: CUR_STATE,
       phases: ["A相", "B相", "C相"],
-      waves: [PD_WAVE, PD_WAVE1, PD_WAVE2, PD_WAVE],
       showWaveFlg: false
     };
   },
   computed: {
+    ...mapGetters({
+      tunnels: 'tunnels',
+      wires: 'wires',
+      sections: "sections",
+      monitor_devices: "monitorDevices",
+      all_types: "monitorTypes"
+    }),
+    title() {
+      let type = this.all_types.find(type => type.name == this.node.monitor_type_name)
+      return this.node.label + '/' + (type ? type.name_cn : '')
+    },
     devices() {
       let l_devices = [];
       /*获取每个该线路该监测类型设备实时状态*/
-      MONITOR_DEVICES.map(device => {
+      this.monitor_devices.map(device => {
         if (
           device.wire == this.node.name &&
           device.monitor_type == this.node.monitor_type_name
         ) {
           l_devices.push(device);
-          let device_sate = this.currentState.find(
+          let device_state = this.currentState.find(
             state => state.device_name == device.name
           );
-          device.state = device_sate ? device_sate.state : null;
+          device.state = device_state ? device_state.state : 'good';
         }
       });
       return l_devices;
     },
     waveDevices() {
-      return this.devices.slice(0, 4)
+      if (this.devices && this.devices.length) {
+        return this.devices.slice(0, 3)
+      }
+
+      return []
     }
   },
   methods: {
-    showWave() {
-      this.showWaveFlg = true;
-    },
-    hideWave() {
-      this.showWaveFlg = false;
+    chooseDevice(device) {
+      this.$emit('choose-device', device)
     }
   }
 };
@@ -72,17 +79,30 @@ export default {
 </script>
 <style scoped>
 .wrapper {
+  height: 100%;
+  width: 100%;
+}
+
+h2 {
+  color: #3c3c3c;
+  font-size: 26px;
+  margin-bottom: 10px;
+  font-weight: normal;
+}
+
+.data-box {
   padding-left: 20px;
+  padding-right: 20px;
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
-  align-content: flex-start;
-  height: 100%;
+  align-content: center;
+  height: calc(100% - 100px);
 }
 
 .state-box {
   width: 100%;
-  height: 20%;
+  height: 25%;
   position: relative;
 }
 
@@ -125,6 +145,13 @@ export default {
 }
 
 
+
+
+
+
+
+
+
 /*.state-box:nth-child(3n) {
   margin-bottom: 100px;
 }*/
@@ -150,7 +177,7 @@ export default {
   top: auto;
 }
 
-.state-box li span {
+.state-box li>span {
   position: absolute;
   top: -50px;
   left: 50%;
@@ -158,25 +185,16 @@ export default {
   color: #3c3c3c;
 }
 
-.wave-box {
-  position: absolute;
-  top: 60%;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #fff;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  align-content: space-between;
+.state-box li>section {
+  position: relative;
+  cursor: pointer;
 }
 
-.wave {
-  width: calc(25% - 1px);
-  height: calc(100% - 1px);
-  background-color: #fff;
-  border-right: 1px solid #000;
+.state-box li>section>span {
+  position: absolute;
+  left: -10px;
+  width: 40px;
+  color: #3c3c3c;
 }
 
 </style>

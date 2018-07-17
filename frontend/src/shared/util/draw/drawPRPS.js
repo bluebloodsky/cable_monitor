@@ -35,7 +35,7 @@ function initMixin(DrawPRPS) {
         originX: this._width * 0.5,
         originY: this._height * 0.35,
         maxX: this._width / 2 - 10,
-        maxY: this._width / 2 ,
+        maxY: this._width / 2  - 20,
         maxZ: this._height * 0.35 - 35
       }
     },

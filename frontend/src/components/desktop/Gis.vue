@@ -45,6 +45,9 @@ export default {
       strokeWeight: 8,
       strokeOpacity: 0.8
     });
+     polyline.addEventListener("click", e => {
+        this.$router.push('data')
+      })
     this.map.addOverlay(polyline)
   }
 };
